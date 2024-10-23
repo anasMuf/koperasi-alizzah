@@ -37,7 +37,7 @@
                                 <th>No</th>
                                 <th>Tgl</th>
                                 <th>Invoice</th>
-                                <th>Produk</th>
+                                <th>Barang</th>
                                 <th>Price</th>
                                 <th>Aksi</th>
                             </tr>

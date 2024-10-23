@@ -19,12 +19,12 @@
                 @endif
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name_product">Nama Produk</label>
-                        <input type="text" name="name_product" id="name_product" class="form-control" placeholder="Masukkan Nama Produk" value="{{ $data ? $data->name : '' }}">
+                        <label for="name_product">Nama Barang</label>
+                        <input type="text" name="name_product" id="name_product" class="form-control" placeholder="Masukkan Nama Barang" value="{{ $data ? $data->name : '' }}">
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="is_variant" id="is_variant" {{ $is_variants ? 'checked' : '' }}>
-                        <label for="is_variant">Tambahkan varian produk</label>
+                        <label for="is_variant">Tambahkan varian barang</label>
                     </div>
                     <div class="product_variant_container" @if(!$is_variants) style="display: none;" @endif>
                         @if($data)
@@ -33,10 +33,10 @@
                                     <input type="hidden" name="product_variant_id[]" data-variant="{{ $key }}" value="{{ $product_variant->id }}" {{ !$is_variants ? 'disabled' : '' }}>
                                     <div class="col-11">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="name_product_variant">Nama Varian Produk</label>
-                                                    <input type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Nama Produk Variant" value="{{ $product_variant->name }}" {{ !$is_variants ? 'disabled' : '' }}>
+                                                    <label for="name_product_variant">Nama Varian Barang</label>
+                                                    <input type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Nama Barang Variant" value="{{ $product_variant->name }}" {{ !$is_variants ? 'disabled' : '' }}>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -45,7 +45,13 @@
                                                     <input type="number" name="stock[]" id="stock" min="0" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Stok" value="{{ $product_variant->stock }}" {{ !$is_variants ? 'disabled' : '' }}>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="purchase_price">Harga Beli Satuan</label>
+                                                    <input type="text" name="purchase_price[]" id="purchase_price" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ number_format($product_variant->purchase_price,0,',','.') }}" {{ !$is_variants ? 'disabled' : '' }}>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="price">Harga Jual Satuan</label>
                                                     <input type="text" name="price[]" id="price" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Jual Satuan" value="{{ number_format($product_variant->price,0,',','.') }}" {{ !$is_variants ? 'disabled' : '' }}>
@@ -66,10 +72,10 @@
                             <div class="product_variant row" data-variant="0">
                                 <div class="col-11">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="name_product_variant">Nama Varian Produk</label>
-                                                <input type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="0" placeholder="Masukkan Nama Produk Variant" disabled>
+                                                <label for="name_product_variant">Nama Varian Barang</label>
+                                                <input type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="0" placeholder="Masukkan Nama Barang Variant" disabled>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -78,7 +84,13 @@
                                                 <input type="number" name="stock[]" id="stock" min="0" class="form-control" data-variant="0" placeholder="Masukkan Stok" disabled>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="purchase_price">Harga Beli Satuan</label>
+                                                <input type="text" name="purchase_price[]" id="purchase_price" class="form-control" data-variant="0" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="price">Harga Jual Satuan</label>
                                                 <input type="text" name="price[]" id="price" class="form-control" data-variant="0" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Jual Satuan" disabled>
@@ -98,6 +110,10 @@
                             <input type="number" name="stock" id="stock" min="0" class="form-control" placeholder="Masukkan Stok" value="{{ $data ? $data->product_variants[0]->stock : '' }}" {{ $is_variants ? 'disabled' : '' }}>
                         </div>
                         <div class="form-group">
+                            <label for="purchase_price">Harga Beli Satuan</label>
+                            <input type="text" name="purchase_price" id="purchase_price" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ $data ? number_format($data->product_variants[0]->purchase_price,0,',','.') : '' }}" {{ $is_variants ? 'disabled' : '' }}>
+                        </div>
+                        <div class="form-group">
                             <label for="price">Harga Jual Satuan</label>
                             <input type="text" name="price" id="price" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Jual Satuan" value="{{ $data ? number_format($data->product_variants[0]->price,0,',','.') : '' }}" {{ $is_variants ? 'disabled' : '' }}>
                         </div>
@@ -106,7 +122,7 @@
                 <div class="card-footer">
                     <button type="button" class="btn btn-secondary" onclick="back()">Kembali</button>
                     <button type="button" class="btn btn-success" onclick="simpan($('.formData'))">Simpan</button>
-                    <button type="button" class="btn btn-success disabled" onclick="simpan($('.formData'),true)">Simpan dan Buat Pembelian</button>
+                    {{-- <button type="button" class="btn btn-success disabled" onclick="simpan($('.formData'),true)">Simpan dan Buat Pembelian</button> --}}
                 </div>
             </form>
         </div>
@@ -139,10 +155,10 @@
         `<div class="product_variant row" data-variant="${index}">
             <div class="col-11">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="name_product_variant">Nama Varian Produk</label>
-                            <input type="text" name="name_product_variant[]" id="name_product_variant" data-variant="${index}" class="form-control" placeholder="Masukkan Nama Varian Produk">
+                            <label for="name_product_variant">Nama Varian Barang</label>
+                            <input type="text" name="name_product_variant[]" id="name_product_variant" data-variant="${index}" class="form-control" placeholder="Masukkan Nama Varian Barang">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -151,7 +167,13 @@
                             <input type="number" name="stock[]" id="stock" data-variant="${index}" min="0" class="form-control" placeholder="Masukkan Stok">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="purchase_price">Harga Beli Satuan</label>
+                            <input type="text" name="purchase_price[]" id="purchase_price" data-variant="${index}" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="price">Harga Jual Satuan</label>
                             <input type="text" name="price[]" id="price" data-variant="${index}" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Jual Satuan">

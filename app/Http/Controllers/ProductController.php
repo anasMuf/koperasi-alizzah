@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    protected $menu = "produk";
+    protected $menu = "barang";
 
     public function __construct()
     {
@@ -141,7 +141,7 @@ class ProductController extends Controller
             }
 
             $attributes = [
-                'name_product' => 'Nama Produk',
+                'name_product' => 'Nama Barang',
                 'price' => 'Harga',
                 'stock' => 'Stok',
             ];
@@ -166,19 +166,23 @@ class ProductController extends Controller
             if($request->is_variant){
                 foreach($request->name_product_variant as $key => $name_product_variant){
                     $price = str_replace('.','',$request->price[$key]);
+                    $purchase_price = str_replace('.','',$request->purchase_price[$key]);
                     $productVariant = isset($request->product_variant_id) ? ProductVariant::find($request->product_variant_id[$key]) : new ProductVariant;
                     $productVariant->product_id = $product->id;
                     $productVariant->name = $name_product_variant;
                     $productVariant->price = (int)$price;
+                    $productVariant->purchase_price = (int)$purchase_price;
                     $productVariant->stock = (int)$request->stock[$key];
                     $productVariant->save();
                 }
             }else{
                 $price = str_replace('.','',$request->price);
+                $purchase_price = str_replace('.','',$request->purchase_price);
                 $productVariant = !empty($request->product_variant_id) ? ProductVariant::find($request->product_variant_id) : new ProductVariant;
                 $productVariant->product_id = $product->id;
                 $productVariant->name = ($request->is_variant) ? $request->name_product_variant : null ;
                 $productVariant->price = (int)$price;
+                $productVariant->purchase_price = (int)$purchase_price;
                 $productVariant->stock = (int)$request->stock;
                 $productVariant->save();
             }

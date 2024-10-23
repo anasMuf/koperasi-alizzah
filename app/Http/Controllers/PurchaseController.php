@@ -91,7 +91,7 @@ class PurchaseController extends Controller
                 }
 
                 $attributes = [
-                    'name_product' => 'Nama Produk',
+                    'name_product' => 'Nama Barang',
                     'price' => 'Harga',
                     'stock' => 'Stok',
                 ];

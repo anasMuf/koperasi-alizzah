@@ -44,23 +44,23 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Produk</h3>
+                    <h3 class="card-title">Barang</h3>
                 </div>
                 <div class="card-body data-product">
                     <input type="hidden" name="from_page" id="from_page">
                     <input type="hidden" name="id_product" id="id_product">
                     <div class="form-group" id="formProductName">
-                        <label for="name_product">Nama Produk</label>
-                        <input type="text" name="name_product" id="name_product" onkeyup="findProduct(this.value)" class="form-control" placeholder="Masukkan Nama Produk">
+                        <label for="name_product">Nama Barang</label>
+                        <input type="text" name="name_product" id="name_product" onkeyup="findProduct(this.value)" class="form-control" placeholder="Masukkan Nama Barang">
                     </div>
                     <div class="form-group d-flex">
                         <div class="is_variant mr-5">
                             <input type="checkbox" name="is_variant" id="is_variant">
-                            <label for="is_variant">Tambahkan varian produk</label>
+                            <label for="is_variant">Tambahkan varian barang</label>
                         </div>
                         <div class="is_old" style="display: none;">
                             <input type="checkbox" name="is_old" id="is_old">
-                            <label for="is_old">Produk Lama</label>
+                            <label for="is_old">Barang Lama</label>
                         </div>
                     </div>
                     <div class="product_variant_container" style="display: none;">
@@ -70,8 +70,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="name_product_variant">Nama Varian Produk</label>
-                                            <input type="text" name="name_product_variant[]" id="name_product_variant_0" class="form-control" data-variant="0" placeholder="Masukkan Nama Produk Variant" disabled>
+                                            <label for="name_product_variant">Nama Varian Barang</label>
+                                            <input type="text" name="name_product_variant[]" id="name_product_variant_0" class="form-control" data-variant="0" placeholder="Masukkan Nama Barang Variant" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
@@ -191,8 +191,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name_product_variant">Nama Varian Produk</label>
-                            <input type="text" name="name_product_variant[]" id="name_product_variant_${index}" data-variant="${index}" class="form-control" placeholder="Masukkan Nama Varian Produk">
+                            <label for="name_product_variant">Nama Varian Barang</label>
+                            <input type="text" name="name_product_variant[]" id="name_product_variant_${index}" data-variant="${index}" class="form-control" placeholder="Masukkan Nama Varian Barang">
                         </div>
                     </div>
                     <div class="col-md-2">

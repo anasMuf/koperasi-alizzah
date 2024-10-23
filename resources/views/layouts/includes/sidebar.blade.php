@@ -29,17 +29,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('product.main') }}" class="nav-link {{ $menu == 'produk' ? 'active' : '' }}">
+                <a href="{{ route('product.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-th"></i>
-                    <p>Produk</p>
+                    <p>Barang</p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('purchase.main') }}" class="nav-link {{ $menu == 'pembelian' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-truck-loading"></i>
                     <p>Pembelian</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon far fa-money-bill-alt"></i>
