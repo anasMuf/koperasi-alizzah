@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('invoice', 100);
             $table->bigInteger('product_variant_id');
+            $table->decimal('purchase_price')->comment('harga beli');
             $table->integer('qty');
-            $table->decimal('subtotal', 11, 2)->comment('harga beli');
+            $table->decimal('subtotal', 11, 2);
             $table->timestamps();
             $table->softDeletes();
         });

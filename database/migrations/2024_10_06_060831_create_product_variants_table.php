@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('product_id');
             $table->integer('stock');
             $table->decimal('price')->comment('harga jual');
+            $table->decimal('purchase_price')->comment('harga beli');
             $table->timestamps();
             $table->softDeletes();
         });

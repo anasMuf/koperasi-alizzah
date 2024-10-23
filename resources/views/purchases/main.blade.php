@@ -89,7 +89,7 @@
                 {data: 'tgl' , name: 'tgl'},
                 {data: 'invoice' , name: 'invoice'},
                 {data: 'product' , name: 'product'},
-                {data: 'total' , name: 'total'},
+                {data: 'total_' , name: 'total_'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
             ]
         });

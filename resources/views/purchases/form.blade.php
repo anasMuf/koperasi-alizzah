@@ -47,18 +47,25 @@
                     <h3 class="card-title">Produk</h3>
                 </div>
                 <div class="card-body data-product">
+                    <input type="hidden" name="from_page" id="from_page">
                     <input type="hidden" name="id_product" id="id_product">
                     <div class="form-group" id="formProductName">
                         <label for="name_product">Nama Produk</label>
                         <input type="text" name="name_product" id="name_product" onkeyup="findProduct(this.value)" class="form-control" placeholder="Masukkan Nama Produk">
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="is_variant" id="is_variant">
-                        <label for="is_variant">Tambahkan varian produk</label>
+                    <div class="form-group d-flex">
+                        <div class="is_variant mr-5">
+                            <input type="checkbox" name="is_variant" id="is_variant">
+                            <label for="is_variant">Tambahkan varian produk</label>
+                        </div>
+                        <div class="is_old" style="display: none;">
+                            <input type="checkbox" name="is_old" id="is_old">
+                            <label for="is_old">Produk Lama</label>
+                        </div>
                     </div>
                     <div class="product_variant_container" style="display: none;">
                         <div class="product_variant row" data-variant="0">
-                            <input type="hidden" name="product_variant_id[]" id="product_variant_id_0" data-variant="0">
+                            <input type="hidden" name="product_variant_id[]" id="product_variant_id_0" data-variant="0" disabled>
                             <div class="col-11">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -87,6 +94,7 @@
                         </div>
                     </div>
                     <div class="product">
+                        <input type="hidden" name="product_variant_id" id="product_variant_id">
                         <div class="form-group">
                             <label for="stock">Stok</label>
                             <input type="number" name="stock" id="stock" min="0" class="form-control" placeholder="Masukkan Stok">
@@ -150,12 +158,18 @@
 </div>
 
 <script>
+    var index = 0;
+    var subtotals = [];
+    var from_page = null;
+
+    noVariantEvent()
     $('#is_variant').change(function () {
         if(this.checked){
             $('.product_variant_container').show()
             $('.product_variant_container input, .product_variant_container button').removeAttr('disabled')
             $('.product').hide()
             $('.product input').prop('disabled',true)
+            isVariantEvent()
         }else{
             $('.product_variant_container').hide()
             $('.product_variant_container input, .product_variant_container button').prop('disabled',true)
@@ -168,11 +182,10 @@
         return el.value = el.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    var index = 0;
     function tambahVariant(){
         index += 1
         $('.product_variant_container').append(
-        `<div class="product_variant row" data-variant="${index}">
+        `<div class="product_variant appended row" data-variant="${index}">
             <input type="hidden" name="product_variant_id[]" id="product_variant_id_${index}" data-variant="${index}">
             <div class="col-11">
                 <div class="row">
@@ -201,6 +214,7 @@
             </div>
         </div>`
         )
+        isVariantEvent()
     }
 
     function hapusVariant(index){
@@ -268,54 +282,110 @@
         $.get("{{ route('product.selected') }}",{id})
         .done(function(result){
             fillProduct(result.data)
+            $('#is_old').show()
         })
         .fail(function (xhr,status,error) {
             Swal.fire('Error','Terjadi Kesalahan!','error')
         })
     }
 
+    function oldProduct(data){
+        var isVariants = data.is_variants
+        var product = data.product
+        $('.product_variant.appended').remove()
+        index = 0
+        subtotals = []
+        if(isVariants){
+            $('#is_variant').attr('checked',true)
+            $('#is_variant').trigger('change')
+            if(from_page){
+                $.each(product.product_variants, function (i, v) {
+                    tambahVariant()
+                    if(i === (product.product_variants.length-1)){
+                        hapusVariant(i+1)
+                    }
+                    $('#product_variant_id_'+i).val(v.id)
+                    $('#name_product_variant_'+i).val(v.name)
+                });
+            }
+            isVariantEvent()
+        }else{
+            $('#is_variant').attr('checked',false)
+            $('#is_variant').trigger('change')
+            if(from_page){
+                $.each(product.product_variants, function (i, v) {
+                    $('#product_variant_id').val(v.id)
+                })
+            }
+            noVariantEvent()
+        }
+    }
     function fillProduct(data){
         var isVariants = data.is_variants
         var product = data.product
         $('#id_product').val(product.id)
         $('#name_product').val(product.name)
-
-        if(isVariants){
-            $.each(product.product_variants, function (i, v) {
-                tambahVariant()
-                if(i === (product.product_variants.length-1)){
-                    hapusVariant(i+1)
-                }
-                $('#product_variant_id_'+i).val(v.name)
-                $('#name_product_variant_'+i).val(v.name)
-                $('#stock_'+i).val(v.stock)
-                // $('#price_'+i).val(String(parseInt(v.price)))
-                // formatNumber($('#price_'+i)[0])
-            });
-        }else{
-            $.each(product.product_variants, function (i, v) {
-                $('.product #stock').val(v.stock)
-                // $('.product #price').val(String(parseInt(v.price)))
-                // formatNumber($('.product #price')[0])
-            });
-        }
     }
 
-    function amountPurchases(stock,price){
+    // not_variant
+    function noVariantEvent(params) {
+        $('.product #stock').keyup(function () {
+            var stock = parseInt($(this).val())
+            var price = ($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
+            amountPurchases(stock,price)
+        })
+        $('.product #price').keyup(function () {
+            var stock = ($('.product #stock').val().length > 1) ? parseInt($('.product #stock').val()) : 0
+            var price = parseInt($(this).val().replaceAll('.',''))
+            amountPurchases(stock,price)
+        })
+    }
+    function amountPurchases(stock,price,isVariant=false){
         var amount = stock*price;
+        if(isVariant){
+            return amount;
+        }
         $('#amount').val(amount)
         formatNumber($('#amount')[0])
     }
-    $('.product #stock').keyup(function () {
-        var stock = parseInt($(this).val())
-        var price = ($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
-        amountPurchases(stock,price)
-    })
-    $('.product #price').keyup(function () {
-        var stock = ($('.product #stock').val().length > 1) ? parseInt($('.product #stock').val()) : 0
-        var price = parseInt($(this).val().replaceAll('.',''))
-        amountPurchases(stock,price)
-    })
+
+    // is_variant
+    function isVariantEvent(params) {
+        $.each($('.product_variant input[name="stock[]"]'), function (i, el) {
+            $(el).change(function () {
+                var stockVariant = parseInt($(this).val());
+                var priceVariant = parseInt($('.product_variant input[name="price[]"]')[i].value.replaceAll('.',''));
+                console.log(stockVariant,priceVariant);
+                var amountVariant = amountPurchases(stockVariant,priceVariant,true);
+                if(amountVariant>0){
+                    subtotals[i] = amountVariant;
+                    console.log(subtotals);
+                }
+                amountPurchaseVariant(subtotals);
+            })
+        });
+        $.each($('.product_variant input[name="price[]"]'), function (i, el) {
+            $(el).change(function () {
+                var stockVariant = parseInt($('.product_variant input[name="stock[]"]')[i].value);
+                var priceVariant = parseInt($(this).val().replaceAll('.',''));
+                console.log(stockVariant,priceVariant);
+                var amountVariant = amountPurchases(stockVariant,priceVariant,true);
+                if(amountVariant>0){
+                    subtotals[i] = amountVariant;
+                    console.log(subtotals);
+                }
+                amountPurchaseVariant(subtotals);
+            })
+        });
+    }
+    function amountPurchaseVariant(subtotals){
+        var sumAmount = 0
+        $.each(subtotals, function (i, v) {
+            sumAmount += v;
+        });
+        $('#amount').val(sumAmount)
+        formatNumber($('#amount')[0])
+    }
 
     function sisaBayar(terbayar,total){
         var sisaBayar = total-terbayar;

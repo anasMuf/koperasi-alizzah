@@ -13,4 +13,15 @@ class Purchase extends Model
     public function purchase_details(){
         return $this->hasMany(PurchaseDetail::class,'invoice','invoice');
     }
+    public static function generateInvoice(){
+        $lastKode = Purchase::select('invoice')->orderBy('id','desc')->first();
+        if($lastKode){
+            $lastNumber = (int) substr($lastKode->invoice, -5);
+            $newKode = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
+        }else{
+            $newKode = '00001';
+        }
+        $invoice = $newKode;
+        return $invoice;
+    }
 }

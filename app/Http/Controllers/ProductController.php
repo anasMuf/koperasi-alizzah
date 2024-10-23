@@ -60,6 +60,8 @@ class ProductController extends Controller
                         $arrPrice[] = 'Rp '.number_format($product_variant->price,0,',','.');
                     }
                 }
+                $arrPrice = array_unique($arrPrice);
+                sort($arrPrice);
                 $price = implode(' - ',$arrPrice);
                 return $price;
             })

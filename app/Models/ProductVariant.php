@@ -13,6 +13,9 @@ class ProductVariant extends Model
     public function order_detail() {
         return $this->hasOne(OrderDetail::class);
     }
+    public function purchase_detail() {
+        return $this->hasOne(PurchaseDetail::class);
+    }
 
     public function product(){
         return $this->belongsTo(Product::class);

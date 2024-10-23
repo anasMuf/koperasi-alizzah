@@ -13,4 +13,7 @@ class PurchaseDetail extends Model
     public function purchase(){
         return $this->belongsTo(Purchase::class,'invoice','invoice');
     }
+    public function product_variant(){
+        return $this->belongsTo(ProductVariant::class);
+    }
 }
