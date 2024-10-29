@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthContoroller;
+use App\Http\Controllers\CashierController;
 use App\Http\Controllers\DashboardContoroller;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::prefix('/product')->controller(ProductController::class)->as('product')->group(function(){
         Route::get('/','index')->name('.main');
+        Route::get('/products','getProduct')->name('.products');
+        Route::get('/product','getProductById')->name('.product');
         Route::get('/search','search')->name('.search');
         Route::get('/selected','selected')->name('.selected');
         Route::get('/form','form')->name('.form');
@@ -35,6 +39,20 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::prefix('/purchase')->controller(PurchaseController::class)->as('purchase')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/order')->controller(OrderController::class)->as('order')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/cashier')->controller(CashierController::class)->as('cashier')->group(function(){
         Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');

@@ -83,6 +83,37 @@ class ProductController extends Controller
         return view('products.main',$data);
     }
 
+    public function getProduct(Request $request){
+        $kw = $request->search_product;
+        try {
+            $products = Product::when($kw, function($q) use ($kw){
+                $q->whereRaw("lower(name) LIKE '%$kw%'");
+            })
+            ->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Product found',
+                'data' => $products,
+            ],200);
+        } catch (\Throwable $th) {
+            LogPretty::error($th);
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Internal Server Error!',
+            ],500);
+        }
+    }
+
+    public function getProductById(Request $request){
+        $product = Product::with('product_variants')->find($request->id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Product found',
+            'data' => $product,
+        ],200);
+    }
+
     public function search(Request $request){
         $key = $request->name;
         $products = Product::whereRaw("name LIKE '%$key%'")->get();

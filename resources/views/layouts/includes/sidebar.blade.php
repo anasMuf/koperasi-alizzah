@@ -16,7 +16,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-header">Kasir</li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('cashier.main') }}" class="nav-link {{ $menu == 'kasir' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cash-register"></i>
                     <p>Kasir</p>
                 </a>
@@ -41,7 +41,7 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('order.main') }}" class="nav-link {{ $menu == 'penjualan' ? 'active' : '' }}">
                     <i class="nav-icon far fa-money-bill-alt"></i>
                     <p>Penjualan</p>
                 </a>

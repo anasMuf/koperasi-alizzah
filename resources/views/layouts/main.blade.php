@@ -9,7 +9,7 @@
     @include('layouts.dependencies.stayles')
     @stack('append-styles')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed {{ $menu == 'kasir' ? 'sidebar-collapse' : '' }}">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
