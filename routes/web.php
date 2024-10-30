@@ -29,8 +29,6 @@ Route::middleware(['auth'])->group(function() {
 
     Route::prefix('/product')->controller(ProductController::class)->as('product')->group(function(){
         Route::get('/','index')->name('.main');
-        Route::get('/products','getProduct')->name('.products');
-        Route::get('/product','getProductById')->name('.product');
         Route::get('/search','search')->name('.search');
         Route::get('/selected','selected')->name('.selected');
         Route::get('/form','form')->name('.form');
@@ -54,6 +52,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::prefix('/cashier')->controller(CashierController::class)->as('cashier')->group(function(){
         Route::get('/','index')->name('.main');
+        Route::get('/products','getProduct')->name('.products');
+        Route::get('/product-variant','productVariant')->name('.product-variant');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
         Route::delete('/delete','delete')->name('.delete');
