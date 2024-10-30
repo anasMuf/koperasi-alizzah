@@ -13,14 +13,14 @@
                     @foreach ($product->product_variants as $product_variant)
                         @if($product_variant->name)
                             <div class="variant-choise">
-                                <input type="radio" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}|{{ $product_variant->name }}">
+                                <input type="radio" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}|{{ $product_variant->name }}" required>
                                 <label for="product_variant_{{ $product_variant->id }}">{{ $product_variant->name }}</label>
                             </div>
                         @else
                             <input type="hidden" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}">
                         @endif
                     @endforeach
-                    <input type="number" name="qty" id="qty" value="1" min="1" class="form-control">
+                    <input type="number" name="qty" id="qty" value="1" min="1" class="form-control" required>
                 </form>
             </div>
             <div class="modal-footer justify-content-between">

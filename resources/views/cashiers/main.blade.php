@@ -45,6 +45,14 @@
     .total #total{
         text-align: end;
     }
+    .form-transparent{
+        /* text-align: start; */
+        /* border: none; */
+        /* padding-left: 0; */
+    }
+    .form-transparent[readonly]{
+        background-color: transparent;
+    }
 </style>
 @endpush
 
@@ -69,8 +77,9 @@
             <div class="card-body">
                 <div class="student">
                     <div class="form-group">
-                        <label for="nama_siswa">Nama Siswa</label>
-                        <input type="search" name="nama_siswa" id="nama_siswa" class="form-control" placeholder="Tulis Nama Siswa">
+                        <label for="student_name">Nama Siswa</label>
+                        <input type="hidden" name="student_id" id="student_id" value="">
+                        <input type="search" name="student_name" id="student_name" class="form-control" placeholder="Tulis Nama Siswa">
                     </div>
                 </div>
                 <div class="details mb-5">
@@ -89,13 +98,13 @@
                         <input type="text" name="dibayar" id="dibayar" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="sisa">Sisa</label>
-                        <input type="text" name="sisa" id="sisa" class="form-control">
+                        <label for="sisa">Kembalian / Kurang</label>
+                        <input type="text" name="sisa" id="sisa" class="form-control form-transparent" readonly>
                     </div>
                 </div>
                 <div class="form-action">
                     <button type="button" class="btn btn-default">Batal</button>
-                    <button type="button" class="btn btn-success">Simpan</button>
+                    <button type="button" class="btn btn-success" onclick="simpan()">Simpan</button>
                 </div>
             </div>
         </div>
@@ -203,9 +212,9 @@
 
     function sisaBayar(dibayar,total){
         var sisa = total-dibayar;
-        if(sisa >= total || sisa < 0){
-            sisa = 0;
-        }
+        // if(sisa >= total || sisa < 0){
+        //     sisa = 0;
+        // }
         $('#sisa').val(sisa);
         formatNumber($('#sisa')[0])
     }
@@ -215,5 +224,36 @@
         formatNumber($(this)[0])
         sisaBayar(dibayar,total)
     })
+
+
+    function simpan(){
+        var data = {
+            student_id: $('#student_id').val(),
+            products: dataProducts
+        }
+
+        $.ajax({
+            type: "post",
+            url: "{{ route('cashier.store') }}",
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+            },
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                return console.log(response);
+            },
+            error: function (xhr,status,error) {
+                if(xhr.status == 422){
+                    var message = '';
+                    $.each(xhr.responseJSON.errors, function (i,msg) {
+                        message += msg[0]+', <br>';
+                    })
+                    return Swal.fire ( xhr.responseJSON.message , message, 'warning' )
+                }
+                Swal.fire('Error','Terjadi Kesalahan!','error')
+            }
+        });
+    }
 </script>
 @endpush

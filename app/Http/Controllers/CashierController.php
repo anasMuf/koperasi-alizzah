@@ -53,4 +53,8 @@ class CashierController extends Controller
             ],500);
         }
     }
+
+    public function store(Request $request){
+        return $request;
+    }
 }
