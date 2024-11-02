@@ -14,9 +14,10 @@
                         @if($product_variant->name)
                             <div class="variant-choise">
                                 <input type="radio" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}|{{ $product_variant->name }}" required>
-                                <label for="product_variant_{{ $product_variant->id }}">{{ $product_variant->name }}</label>
+                                <label for="product_variant_{{ $product_variant->id }}">{{ $product_variant->name }} <small>sisa:{{ $product_variant->stock }}</small></label>
                             </div>
                         @else
+                            <small>sisa:{{ $product_variant->stock }}</small>
                             <input type="hidden" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}">
                         @endif
                     @endforeach

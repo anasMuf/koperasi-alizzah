@@ -18,4 +18,16 @@ class Order extends Model
     public function order_details(){
         return $this->hasMany(OrderDetail::class,'invoice','invoice');
     }
+
+    public static function generateInvoice(){
+        $lastKode = Order::select('invoice')->orderBy('id','desc')->first();
+        if($lastKode){
+            $lastNumber = (int) substr($lastKode->invoice, -5);
+            $newKode = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
+        }else{
+            $newKode = '00001';
+        }
+        $invoice = 'OR'.$newKode;
+        return $invoice;
+    }
 }

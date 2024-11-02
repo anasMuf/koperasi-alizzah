@@ -53,6 +53,20 @@
     .form-transparent[readonly]{
         background-color: transparent;
     }
+
+    .backdrop-load {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 100000;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #00000061;
+        display: flex;
+        justify-content: center;
+        padding: 400px;
+    }
 </style>
 @endpush
 
@@ -103,7 +117,7 @@
                     </div>
                 </div>
                 <div class="form-action">
-                    <button type="button" class="btn btn-default">Batal</button>
+                    <button type="button" class="btn btn-default" onclick="reset()">Batal</button>
                     <button type="button" class="btn btn-success" onclick="simpan()">Simpan</button>
                 </div>
             </div>
@@ -206,6 +220,13 @@
         loadProductDetail()
     }
 
+    function reset() {
+        dataProducts = []
+        $('input').val('')
+        loadProduct()
+        loadProductDetail()
+    }
+
     function formatNumber(el) {
         return el.value = el.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
@@ -227,8 +248,14 @@
 
 
     function simpan(){
+        $('.form-action').append(`
+        <div class="backdrop-load">
+            <h4 style="font-weight: 700; color: #fff;">Proses...</h4>
+        </div>
+        `)
         var data = {
             student_id: $('#student_id').val(),
+            dibayar: $('#dibayar').val(),
             products: dataProducts
         }
 
@@ -241,9 +268,12 @@
             data: data,
             dataType: "json",
             success: function (response) {
-                return console.log(response);
+                $('.form-action .backdrop-load').remove()
+                Swal.fire('Success',response.message,'success')
+                reset()
             },
             error: function (xhr,status,error) {
+                $('.form-action .backdrop-load').remove()
                 if(xhr.status == 422){
                     var message = '';
                     $.each(xhr.responseJSON.errors, function (i,msg) {

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Helpers\LogPretty;
+use App\Models\OrderDetail;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CashierController extends Controller
 {
@@ -55,6 +60,73 @@ class CashierController extends Controller
     }
 
     public function store(Request $request){
-        return $request;
+        if(!isset($request->products)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Product belum dipilih',
+            ],422);
+        }
+        if(empty($request->dibayar)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Nominal dibayar belum tertulis',
+            ],422);
+        }
+
+        try {
+            $invoice = Order::generateInvoice();
+            $total = 0;
+
+            $order = new Order;
+            $order->invoice = $invoice;
+            $order->student_id = $request->student_id;
+            $order->user_id = Auth::getUser()->id;
+            $order->total = 0;
+            $order->terbayar = 0;
+            $order->save();
+
+            foreach($request->products as $product){
+                $productVariant = ProductVariant::find($product['product_variant_id']);
+                if((int)$productVariant->stock < (int)$product['qty']){
+                    DB::rollBack();
+                    $productName = ($product['product_variant_name']) ? $product['product_name'].'('.$productVariant->name.')' : $product['product_name'];
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Stok '.$productName.' tidak mencukupi',
+                    ],422);
+                }
+
+                $orderDetail = new OrderDetail;
+                $orderDetail->invoice = $invoice;
+                $orderDetail->product_variant_id = $product['product_variant_id'];
+                $orderDetail->qty = $product['qty'];
+                $orderDetail->subtotal = (int)$product['qty']*(int)$product['price'];
+                $orderDetail->save();
+
+                //update stok
+                $productVariant->stock = (int)$productVariant->stock-(int)$product['qty'];
+                $productVariant->save();
+
+
+                $total += $orderDetail->subtotal;
+            }
+
+            $order->total = (int)$total;
+            $order->terbayar = (int)str_replace('.','',$request->dibayar);
+            $order->save();
+
+            DB::commit();
+
+            return response()->json([
+                'success'=> true,
+                'message' => 'Order berhasil dibuat',
+            ],200);
+        } catch (\Throwable $th) {
+            LogPretty::error($th);
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Internal Server Error!',
+            ],500);
+        }
     }
 }
