@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Data</h3>
-                    <div class="aksi">
+                    {{-- <div class="aksi">
                         <button type="button" class="btn btn-primary btn-xs" onclick="openData()">Tambah</button>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="card-body">
                     <table id="table" class="table table-bordered table-striped table-hover" style="width: 100%">
@@ -109,20 +109,6 @@
     function loadPage(thisPage){
         thisPage.hide()
         preload.show();
-    }
-
-    function openData(id=null){
-        loadPage(mainPage)
-        $.get("{{ route('purchase.form') }}",{id})
-        .done(function (result) {
-            preload.hide();
-            return otherPage.html(result.content).fadeIn();
-        })
-        .fail(function (xhr,status,error) {
-            Swal.fire('Error','Terjadi Kesalahan!','error')
-            mainPage.show()
-            preload.hide()
-        })
     }
 
     function deleteData(id){

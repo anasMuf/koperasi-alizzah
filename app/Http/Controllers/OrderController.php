@@ -26,7 +26,7 @@ class OrderController extends Controller
                     $dateRange[] = date('Y-m-d',strtotime($date));
                 }
             }
-            $data = Order::with('purchase_details.product_variant.product')->
+            $data = Order::with('order_details.product_variant.product')->
             when($dateRange, function($q) use ($dateRange){
                 $q->whereBetween('created_at',$dateRange);
             })
@@ -37,7 +37,7 @@ class OrderController extends Controller
                 return Carbon::parse($row->created_at)->isoFormat('DD MMMM YYYY');
             })
             ->addColumn('product', function($row){
-                return $row->purchase_details[0]->product_variant->product->name;
+                return $row->order_details[0]->product_variant->product->name;
             })
             ->addColumn('total_', function($row){
                 return 'Rp '.number_format($row->total,0,',','.');

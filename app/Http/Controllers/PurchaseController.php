@@ -65,85 +65,80 @@ class PurchaseController extends Controller
         return view('purchases.main',$data);
     }
 
-    public function form(Request $request){
+    public function newItem(Request $request){
+        $data['menu'] = 'pembelian baru';
         $data['vendors'] = Vendor::all();
-        $data['data'] = $request->id ? Purchase::with('purchase_details')->find($request->id) : [];
-        $content = view('purchases.form',$data)->render();
-        return response()->json(['message' => 'oke', 'content' => $content],200);
+        $data['data'] = [];
+        return view('purchases.new-item',$data);
     }
 
-    public function store(Request $request){
-        // return $request->product_variant_id;
+    public function storeNewItem(Request $request){
+        // return $request;
         DB::beginTransaction();
         try {
-            $id_product = $request->id_product;
-            $id_product_variant = $request->product_variant_id;
-            if(!$request->id_product){
-                $rules = [
-                    'name_product' => 'required|unique:products,name',
-                ];
-                if($request->id){
-                    $rules['name_product'] = 'required';
-                }
-                if(!$request->is_variant){
-                    $rules['price'] = 'required';
-                    $rules['stock'] = 'required';
-                }
+            $rules = [
+                'name_product' => 'required|unique:products,name',
+            ];
+            if($request->id){
+                $rules['name_product'] = 'required';
+            }
+            if(!$request->is_variant){
+                $rules['price'] = 'required';
+                $rules['stock'] = 'required';
+            }
 
-                $attributes = [
-                    'name_product' => 'Nama Barang',
-                    'price' => 'Harga',
-                    'stock' => 'Stok',
-                ];
-                $messages = [
-                    'required' => 'Kolom :attribute harus terisi',
-                    'unique' => ':attribute sudah ada',
-                ];
-                $validator = Validator::make($request->all(), $rules, $messages, $attributes);
+            $attributes = [
+                'name_product' => 'Nama Barang',
+                'price' => 'Harga',
+                'stock' => 'Stok',
+            ];
+            $messages = [
+                'required' => 'Kolom :attribute harus terisi',
+                'unique' => ':attribute sudah ada',
+            ];
+            $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
-                if ($validator->fails()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Validation failed',
-                        'errors' => $validator->getMessageBag()
-                    ],422);
-                }
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Validation failed',
+                    'errors' => $validator->getMessageBag()
+                ],422);
+            }
 
-                $product = new Product;
-                $product->name = $request->name_product;
-                $product->save();
-                $id_product = $product->id;
+            $product = new Product;
+            $product->name = $request->name_product;
+            $product->save();
 
-                if($request->is_variant){
-                    $id_product_variant = [];
-                    foreach($request->name_product_variant as $key => $name_product_variant){
-                        $price = str_replace('.','',$request->price[$key]);
-                        $productVariant = new ProductVariant;
-                        $productVariant->product_id = $product->id;
-                        $productVariant->name = $name_product_variant;
-                        $productVariant->stock = $request->stock[$key];
-                        $productVariant->purchase_price = $price;
-                        $productVariant->save();
-                        $id_product_variant[] = $productVariant->id;
-                    }
-                    $request->merge([
-                        'product_variant_id' => $id_product_variant,
-                    ]);
-                }else{
-                    $price = str_replace('.','',$request->price);
+
+            $id_product_variant = null;#buat non variant
+
+            if($request->is_variant){# variant
+                $id_product_variant = [];#buat variant
+                foreach($request->name_product_variant as $key => $name_product_variant){
+                    $price = str_replace('.','',$request->price[$key]);
                     $productVariant = new ProductVariant;
                     $productVariant->product_id = $product->id;
-                    $productVariant->name = null;
-                    $productVariant->stock = $request->stock;
+                    $productVariant->name = $name_product_variant;
+                    $productVariant->stock = $request->stock[$key];
                     $productVariant->purchase_price = $price;
                     $productVariant->save();
-                    $id_product_variant = $productVariant->id;
+                    $id_product_variant[] = $productVariant->id;# variable(arr) variant
                 }
+            }else{# non variant
+                $price = str_replace('.','',$request->price);
+                $productVariant = new ProductVariant;
+                $productVariant->product_id = $product->id;
+                $productVariant->name = null;
+                $productVariant->stock = $request->stock;
+                $productVariant->purchase_price = $price;
+                $productVariant->save();
+                $id_product_variant = $productVariant->id;# variable(int) non variant
             }
 
             $total = str_replace('.','',$request->total);
             $terbayar = str_replace('.','',$request->terbayar);
-            $invoice = Purchase::generateInvoice();
+            $invoice = Purchase::generateInvoice();//new item
 
             $purchase = new Purchase;
             $purchase->invoice = $invoice;
@@ -154,21 +149,11 @@ class PurchaseController extends Controller
             $purchase->save();
 
             if($request->is_variant){
-                foreach($request->product_variant_id as $key => $product_variant_id){
-                    $id_product_variant = $product_variant_id;
+                foreach($id_product_variant as $key => $item){# karena variable(arr) maka ada looping
                     $price = str_replace('.','',$request->price[$key]);
-                    if($product_variant_id === null && $request->id_product){
-                        $productVariant = new ProductVariant;
-                        $productVariant->product_id = $id_product;
-                        $productVariant->name = $request->name_product_variant[$key];
-                        $productVariant->stock = $request->stock[$key];
-                        $productVariant->purchase_price = $price;
-                        $productVariant->save();
-                        $id_product_variant = $productVariant->id;
-                    }
                     $productVariant = new PurchaseDetail;
                     $productVariant->invoice = $invoice;
-                    $productVariant->product_variant_id = $id_product_variant;
+                    $productVariant->product_variant_id = $item;
                     $productVariant->purchase_price = $price;
                     $productVariant->qty = $request->stock[$key];
                     $productVariant->subtotal = $request->stock[$key]*$price;
@@ -176,54 +161,42 @@ class PurchaseController extends Controller
                 }
             }else{
                 $price = str_replace('.','',$request->price);
-                if($request->product_variant_id === null && $request->id_product){
-                    $productVariant = new ProductVariant;
-                    $productVariant->product_id = $id_product;
-                    $productVariant->name = null;
-                    $productVariant->stock = $request->stock;
-                    $productVariant->purchase_price = $price;
-                    $productVariant->save();
-                    $id_product_variant = $productVariant->id;
-                }
                 $productVariant = new PurchaseDetail;
                 $productVariant->invoice = $invoice;
-                $productVariant->product_variant_id = $id_product_variant;
+                $productVariant->product_variant_id = $id_product_variant;#variable bukan arr maka langsung pakai
                 $productVariant->purchase_price = $price;
                 $productVariant->qty = $request->stock;
                 $productVariant->subtotal = $request->stock*$price;
                 $productVariant->save();
             }
 
-            // update stock product
-            // if(
-            //     (gettype($request->product_variant_id) == 'array' && $request->product_variant_id[0] != null) ||
-            //     (gettype($request->product_variant_id) != 'array' && $request->product_variant_id != null)
-            // ){
-            //     if(!$request->from_page && $id_product){
-            //         $productVariants = ProductVariant::where('product_id',$id_product)->get();
-            //         if(count($productVariants) > 1){
-            //             foreach ($productVariants as $key => $productVariant) {
-            //                 $price = str_replace('.','',$request->price[$key]);
-            //                 $productVariant->stock = $productVariant->stock+$request->stock[$key];
-            //                 $productVariant->purchase_price = $price;
-            //                 $productVariant->save();
-            //             }
-            //         }else{
-            //             foreach ($productVariants as $key => $productVariant) {
-            //                 $price = str_replace('.','',$request->price);
-            //                 $productVariant->stock = $productVariant->stock+$request->stock;
-            //                 $productVariant->purchase_price = $price;
-            //                 $productVariant->save();
-            //             }
-            //         }
-            //     }
-            // }
-
             DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Product stored successfully',
             ],200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            LogPretty::error($th);
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Internal Server Error!',
+            ],500);
+        }
+    }
+
+    public function restock(Request $request){
+        $data['menu'] = 'penambahan stok';
+        $data['vendors'] = Vendor::all();
+        $data['data'] = [];
+        return view('purchases.restock',$data);
+    }
+
+    public function storeRestock(Request $request){
+        return $request;
+        DB::beginTransaction();
+        try{
+
         } catch (\Throwable $th) {
             DB::rollBack();
             LogPretty::error($th);

@@ -38,16 +38,20 @@ Route::middleware(['auth'])->group(function() {
 
     Route::prefix('/purchase')->controller(PurchaseController::class)->as('purchase')->group(function(){
         Route::get('/','index')->name('.main');
-        Route::get('/form','form')->name('.form');
-        Route::post('/store','store')->name('.store');
+        Route::get('/new-item','newItem')->name('.new-item');
+        Route::post('/store-new-item','storeNewItem')->name('.store-new-item');
+        Route::get('/restock','restock')->name('.restock');
+        Route::post('/store-restock','storeRestock')->name('.store-restock');
         Route::delete('/delete','delete')->name('.delete');
     });
 
-    Route::prefix('/order')->controller(OrderController::class)->as('order')->group(function(){
-        Route::get('/','index')->name('.main');
-        Route::get('/form','form')->name('.form');
-        Route::post('/store','store')->name('.store');
-        Route::delete('/delete','delete')->name('.delete');
+    Route::prefix('/order')->as('order')->group(function(){
+        Route::controller(OrderController::class)->group(function(){
+            Route::get('/','index')->name('.main');
+            Route::get('/form','form')->name('.form');
+            Route::post('/store','store')->name('.store');
+            Route::delete('/delete','delete')->name('.delete');
+        });
     });
 
     Route::prefix('/cashier')->controller(CashierController::class)->as('cashier')->group(function(){
