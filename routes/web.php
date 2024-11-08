@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/new-item','newItem')->name('.new-item');
         Route::post('/store-new-item','storeNewItem')->name('.store-new-item');
         Route::get('/restock','restock')->name('.restock');
+        Route::get('/product-variant','productVariant')->name('.product-variant');
         Route::post('/store-restock','storeRestock')->name('.store-restock');
         Route::delete('/delete','delete')->name('.delete');
     });

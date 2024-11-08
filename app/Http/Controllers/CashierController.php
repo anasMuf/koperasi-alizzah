@@ -72,7 +72,7 @@ class CashierController extends Controller
                 'message' => 'Nominal dibayar belum tertulis',
             ],422);
         }
-
+        DB::beginTransaction();
         try {
             $invoice = Order::generateInvoice();
             $total = 0;

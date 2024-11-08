@@ -189,14 +189,83 @@ class PurchaseController extends Controller
         $data['menu'] = 'penambahan stok';
         $data['vendors'] = Vendor::all();
         $data['data'] = [];
-        return view('purchases.restock',$data);
+        return view('purchases.restock.main',$data);
+    }
+
+    public function productVariant(Request $request){
+        try {
+            $data['product'] = Product::getProductById($request);
+            $content = view('purchases.restock.product-variant',$data)->render();
+
+            return response()->json([
+                'success' => true,
+                'content' => $content
+            ],200);
+        } catch (\Throwable $th) {
+            LogPretty::error($th);
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Internal Server Error!',
+            ],500);
+        }
     }
 
     public function storeRestock(Request $request){
-        return $request;
+        // return $request;
+        if(!isset($request->products)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Product belum dipilih',
+            ],422);
+        }
+        if(empty($request->dibayar)){
+            return response()->json([
+                'success' => false,
+                'message' => 'Nominal dibayar belum tertulis',
+            ],422);
+        }
         DB::beginTransaction();
         try{
+            $invoice = Purchase::generateInvoice(false);
+            $total = 0;
 
+            $purchase = new Purchase;
+            $purchase->invoice = $invoice;
+            $purchase->user_id = Auth::getUser()->id;
+            $purchase->vendor_id = $request->vendor_id;
+            $purchase->total = 0;
+            $purchase->terbayar = 0;
+            $purchase->save();
+
+            foreach($request->products as $product){
+                $purchaseDetail = new PurchaseDetail();
+                $purchaseDetail->invoice = $invoice;
+                $purchaseDetail->product_variant_id = $product['product_variant_id'];
+                $purchaseDetail->purchase_price = (int)$product['price'];
+                $purchaseDetail->qty = $product['qty'];
+                $purchaseDetail->subtotal = (int)$product['qty']*(int)$product['price'];
+                $purchaseDetail->save();
+
+                //update stok
+                $productVariant = ProductVariant::find($product['product_variant_id']);
+                $productVariant->stock = (int)$productVariant->stock+(int)$product['qty'];
+                $productVariant->purchase_price = (int)$product['price'];
+                $productVariant->save();
+
+
+                $total += $purchaseDetail->subtotal;
+            }
+
+            $purchase->total = (int)$total;
+            $purchase->terbayar = (int)str_replace('.','',$request->dibayar);
+            $purchase->save();
+
+            DB::commit();
+
+            return response()->json([
+                'success'=> true,
+                'message' => 'Penambahan Stok berhasil dibuat',
+            ],200);
         } catch (\Throwable $th) {
             DB::rollBack();
             LogPretty::error($th);
