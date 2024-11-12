@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('report.main') }}" class="nav-link  {{ $menu == 'laporan arus kas' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Lihat Arus Kas</p>
                 </a>

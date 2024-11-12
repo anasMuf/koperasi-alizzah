@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,11 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/logout/{id}', [AuthContoroller::class, 'logout'])->name('logout');
 
     Route::get('/', [DashboardContoroller::class, 'index'])->name('dashboard');
+
+    Route::prefix('/report')->controller(ReportController::class)->as('report')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::post('/export','export')->name('.export');
+    });
 
     Route::prefix('/product')->controller(ProductController::class)->as('product')->group(function(){
         Route::get('/','index')->name('.main');
