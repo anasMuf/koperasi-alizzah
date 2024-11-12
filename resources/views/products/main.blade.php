@@ -38,7 +38,7 @@
                                 <th>Nama</th>
                                 <th>Varian</th>
                                 <th>Stok</th>
-                                <th>Price</th>
+                                <th>Harga Jual</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

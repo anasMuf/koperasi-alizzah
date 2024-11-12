@@ -24,7 +24,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Lihat Laporan</p>
+                    <p>Lihat Arus Kas</p>
                 </a>
             </li>
             <li class="nav-header">TRANSAKSI</li>
