@@ -48,14 +48,14 @@
             </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
-                <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-th"></i>
+                <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'student' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Siswa</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('vendor.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-th"></i>
+                <a href="{{ route('vendor.main') }}" class="nav-link {{ $menu == 'vendor' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-hands-helping"></i>
                     <p>Data Vendor</p>
                 </a>
             </li>
