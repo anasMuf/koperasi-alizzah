@@ -48,6 +48,18 @@
             </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
+                <a href="{{ route('sturdent.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Data Siswa</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('vendor.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Data Vendor</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('product.main') }}" class="nav-link {{ $menu == 'barang' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Data Barang</p>
@@ -63,6 +75,13 @@
                 <a href="{{ route('order.main') }}" class="nav-link {{ $menu == 'penjualan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-store"></i>
                     <p>Data Penjualan</p>
+                </a>
+            </li>
+            <li class="nav-header">PENGATURAN</li>
+            <li class="nav-item">
+                <a href="{{ route('order.add-saldo') }}" class="nav-link {{ $menu == 'saldo awal' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-money-bill-wave"></i>
+                    <p>Saldo Awal</p>
                 </a>
             </li>
         </ul>

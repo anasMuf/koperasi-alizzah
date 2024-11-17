@@ -23,7 +23,7 @@
                         <input type="text" name="name_product" id="name_product" class="form-control" placeholder="Masukkan Nama Barang" value="{{ $data ? $data->name : '' }}">
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" name="is_variant" id="is_variant" {{ $is_variants ? 'checked' : '' }}>
+                        <input readonly type="checkbox" name="is_variant" id="is_variant" onclick="return false" {{ $is_variants ? 'checked' : '' }}>
                         <label for="is_variant">Tambahkan varian barang</label>
                     </div>
                     <div class="product_variant_container" @if(!$is_variants) style="display: none;" @endif>
@@ -36,19 +36,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="name_product_variant">Nama Varian Barang</label>
-                                                    <input type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Nama Barang Variant" value="{{ $product_variant->name }}" {{ !$is_variants ? 'disabled' : '' }}>
+                                                    <input readonly type="text" name="name_product_variant[]" id="name_product_variant" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Nama Barang Variant" value="{{ $product_variant->name }}" {{ !$is_variants ? 'disabled' : '' }}>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="stock">Stok</label>
-                                                    <input type="number" name="stock[]" id="stock" min="0" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Stok" value="{{ $product_variant->stock }}" {{ !$is_variants ? 'disabled' : '' }}>
+                                                    <input readonly type="number" name="stock[]" id="stock" min="0" class="form-control" data-variant="{{ $key }}" placeholder="Masukkan Stok" value="{{ $product_variant->stock }}" {{ !$is_variants ? 'disabled' : '' }}>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="purchase_price">Harga Beli Satuan</label>
-                                                    <input type="text" name="purchase_price[]" id="purchase_price" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ number_format($product_variant->purchase_price,0,',','.') }}" {{ !$is_variants ? 'disabled' : '' }}>
+                                                    <input readonly type="text" name="purchase_price[]" id="purchase_price" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ number_format($product_variant->purchase_price,0,',','.') }}" {{ !$is_variants ? 'disabled' : '' }}>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-1 aksi-variant">
+                                    <div class="col-1 aksi-variant" style="display: none">
                                         @if ($key == 0)
                                             <button type="button" class="btn btn-primary" onclick="tambahVariant()">+</button>
                                         @else
@@ -107,11 +107,11 @@
                     <div class="product" @if($is_variants) style="display: none;" @endif>
                         <div class="form-group">
                             <label for="stock">Stok</label>
-                            <input type="number" name="stock" id="stock" min="0" class="form-control" placeholder="Masukkan Stok" value="{{ $data ? $data->product_variants[0]->stock : '' }}" {{ $is_variants ? 'disabled' : '' }}>
+                            <input readonly type="number" name="stock" id="stock" min="0" class="form-control" placeholder="Masukkan Stok" value="{{ $data ? $data->product_variants[0]->stock : '' }}" {{ $is_variants ? 'disabled' : '' }}>
                         </div>
                         <div class="form-group">
                             <label for="purchase_price">Harga Beli Satuan</label>
-                            <input type="text" name="purchase_price" id="purchase_price" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ $data ? number_format($data->product_variants[0]->purchase_price,0,',','.') : '' }}" {{ $is_variants ? 'disabled' : '' }}>
+                            <input readonly type="text" name="purchase_price" id="purchase_price" class="form-control" onkeyup="formatNumber(this)" placeholder="Masukkan Harga Beli Satuan" value="{{ $data ? number_format($data->product_variants[0]->purchase_price,0,',','.') : '' }}" {{ $is_variants ? 'disabled' : '' }}>
                         </div>
                         <div class="form-group">
                             <label for="price">Harga Jual Satuan</label>

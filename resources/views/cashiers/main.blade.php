@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
 @push('append-styles')
+<!-- Select2 -->
+<link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <style>
     .products-body{
     }
@@ -92,8 +95,14 @@
                 <div class="student">
                     <div class="form-group">
                         <label for="student_name">Nama Siswa</label>
-                        <input type="hidden" name="student_id" id="student_id" value="">
-                        <input type="search" name="student_name" id="student_name" class="form-control" placeholder="Tulis Nama Siswa">
+                        {{-- <input type="hidden" name="student_id" id="student_id" value="">
+                        <input type="search" name="student_name" id="student_name" class="form-control" placeholder="Tulis Nama Siswa"> --}}
+                        <select name="student_id" id="student_id" class="form-control">
+                            <option value="">.:: Pilih Siswa ::.</option>
+                            @foreach ($students as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }} | {{ $item->no_induk }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="details mb-5">
@@ -128,11 +137,16 @@
 @endsection
 
 @push('append-scripts')
+<!-- Select2 -->
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
     var productsBody = $('.products-body')
     var dataProducts = []
 
     $(document).ready(function () {
+        $('#student_id').select2({
+            theme: 'bootstrap4'
+        })
         loadProduct()
     });
 

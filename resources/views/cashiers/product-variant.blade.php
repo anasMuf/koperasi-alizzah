@@ -14,10 +14,10 @@
                         @if($product_variant->name)
                             <div class="variant-choise">
                                 <input type="radio" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}|{{ $product_variant->name }}" required>
-                                <label for="product_variant_{{ $product_variant->id }}">{{ $product_variant->name }} <small>sisa:{{ $product_variant->stock }}</small></label>
+                                <label for="product_variant_{{ $product_variant->id }}">{{ $product_variant->name }} <small>sisa:{{ $product_variant->stock }}{{ ($product_variant->price == 0) ? ' | Barang ini belum memiliki harga jual' : '' }}</small></label>
                             </div>
                         @else
-                            <small>sisa:{{ $product_variant->stock }}</small>
+                            <small>sisa:{{ $product_variant->stock }}{{ ($product_variant->price == 0) ? ' | Barang ini belum memiliki harga jual' : '' }}</small>
                             <input type="hidden" name="product_variant" id="product_variant_{{ $product_variant->id }}" value="{{ $product_variant->id }}|{{ $product_variant->price }}">
                         @endif
                     @endforeach
@@ -25,7 +25,7 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Tupup</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                 <input type="submit" class="btn btn-primary" form="addVariant" value="Tambahkan">
             </div>
         </div>

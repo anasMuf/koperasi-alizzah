@@ -7,6 +7,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SIAKAD\StudentController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,20 @@ Route::middleware(['auth'])->group(function() {
     Route::prefix('/report')->controller(ReportController::class)->as('report')->group(function(){
         Route::get('/','index')->name('.main');
         Route::post('/export','export')->name('.export');
+    });
+
+    Route::prefix('/student')->controller(StudentController::class)->as('student')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/vendor')->controller(VendorController::class)->as('vendor')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
     });
 
     Route::prefix('/product')->controller(ProductController::class)->as('product')->group(function(){
@@ -58,6 +74,9 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/form','form')->name('.form');
             Route::post('/store','store')->name('.store');
             Route::delete('/delete','delete')->name('.delete');
+
+            Route::get('add-saldo','addSaldo')->name('.add-saldo');
+            Route::post('store-saldo','storeSaldo')->name('.store-saldo');
         });
     });
 

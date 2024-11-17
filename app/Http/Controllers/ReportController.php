@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ledger;
 use App\Models\Order;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
@@ -30,13 +31,30 @@ class ReportController extends Controller
                 }
             }
 
+            $saldoAwalPeriode = Ledger::
+            where('created_at','<',$dateRange[0])->
+            orderBy('created_at','desc')->
+            first()->final ?? 0;
+
+            $result = Ledger::selectRaw('SUM(debit) as total_pemasukan, SUM(credit) as total_pengeluaran')
+            ->whereBetween('created_at', $dateRange)
+            ->first();
+
+            $pergerakanKas = $result->total_pemasukan - $result->total_pengeluaran;
+
+            $saldoAkhirPeriode = $saldoAwalPeriode + $pergerakanKas;
+
             $reports['periode'] = $request->dates;
-            $reports['penerimaan'][0]['keterangan'] = 'Penerimaan dari siswa';
-            $reports['penerimaan'][0]['jumlah'] = Order::selectRaw("sum(total) as jumlah")->whereNotNull('student_id')->whereBetween('created_at',$dateRange)->first()->jumlah;
-            $reports['penerimaan'][1]['keterangan'] = 'Penerimaan dari non-siswa';
-            $reports['penerimaan'][1]['jumlah'] = Order::selectRaw("sum(total) as jumlah")->whereNull('student_id')->whereBetween('created_at',$dateRange)->first()->jumlah;
-            $reports['pengeluaran'][0]['keterangan'] = 'Pembelian Barang';
-            $reports['pengeluaran'][0]['jumlah'] = Purchase::selectRaw("sum(total) as jumlah")->whereBetween('created_at',$dateRange)->first()->jumlah;
+
+            $reports['saldo_awal_periode'] = (int)$saldoAwalPeriode;
+
+            $reports['arus_kas_operasional']['penerimaan'] = (int)$result->total_pemasukan;
+            $reports['arus_kas_operasional']['pengeluaran'] = (int)$result->total_pengeluaran;
+            $reports['arus_kas_operasional']['total_operasional'] = $pergerakanKas;
+
+            $reports['pergerakan_kas'] = $pergerakanKas;
+            $reports['saldo_akhir_periode'] = $saldoAkhirPeriode;
+
 
             return response()->json($reports,200);
         }

@@ -44,22 +44,6 @@
                         <tbody id="reportBody">
                         </tbody>
                         <tfoot id="reportFooter">
-                            <tr>
-                                <th><h5><strong>TOTAL ARUS KAS</strong></h5></th>
-                                <th class="money"></th>
-                            </tr>
-                            <tr>
-                                <th><h5><strong>SALDO AWAL PERIODE</strong></h5></th>
-                                <th class="money"></th>
-                            </tr>
-                            <tr>
-                                <th><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
-                                <th class="money"></th>
-                            </tr>
-                            <tr>
-                                <th><h5><strong>PERUBAHAN KAS</strong></h5></th>
-                                <th class="money"></th>
-                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -112,45 +96,63 @@
         </tr>`)
         $.get("{{ route('report.main') }}",{dates})
         .done(function(result){
-            console.log(result);
             var periode = result.periode
-            var dPenerimaan = result.penerimaan
-            var dPengeluaran = result.pengeluaran
+            var dPenerimaan = result.arus_kas_operasional.penerimaan
+            var dPengeluaran = result.arus_kas_operasional.pengeluaran
+            var dTotalOpr = result.arus_kas_operasional.total_operasional
 
             $('#periode').html('Periode '+periode)
 
-            var trDpm = `<tr>
-                <th colspan="2"><h5><strong>PENERIMAAN KAS</strong></h5></th>
+
+
+            var tr = `
+            <tr>
+                <th><h5><strong>SALDO AWAL PERIODE</strong></h5></th>
+                <th class="money">${formatRibu(result.saldo_awal_periode)}</th>
+            </tr>
+            `
+            tr += `<tr>
+                <th colspan="2"><h6><strong>A. Arus Kas Kegiatan Operasional</strong></h6></th>
             </tr>`
-            var dPmAvail = dPenerimaan.filter(val => val.jumlah != null)
-            var jumlahDpm
-            dPmAvail.forEach(function(element,i) {
-                jumlahDpm = parseInt(element.jumlah)
-                trDpm += `
+            if(dPenerimaan){
+                var jumlahDpm = parseInt(dPenerimaan)
+                tr += `
                 <tr>
-                    <td>${i+1}. ${element.keterangan}</td>
-                    <td class="money">${jumlahDpm.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan</td>
+                    <td class="money">${formatRibu(jumlahDpm)}</td>
                 </tr>
                 `
-            });
-
-            var trDpg = `<tr>
-                <th colspan="2"><h5><strong>PENGELUARAN KAS</strong></h5></th>
-            </tr>`
-            var dPgAvail = dPengeluaran.filter(val => val.jumlah != null)
-            var jumlahDpg
-            dPgAvail.forEach(function(element,i) {
-                jumlahDpg = parseInt(element.jumlah)
-                trDpg += `
+            }
+            if(dPengeluaran){
+                var jumlahDpg = parseInt(dPengeluaran)
+                tr += `
                 <tr>
-                    <td>${i+1}. ${element.keterangan}</td>
-                    <td class="money">${jumlahDpg.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengeluaran</td>
+                    <td class="money">${formatRibu(jumlahDpg)}</td>
                 </tr>
                 `
-            });
+            }
+            var totalOpr = parseInt(dTotalOpr)
+            tr += `
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Operasional</td>
+                <td class="money">${formatRibu(totalOpr)}</td>
+            </tr>
+            `
 
-            $('#reportBody').html(trDpm+trDpg)
+            $('#reportBody').html(tr)
 
+            var trTotal = `
+            <tr>
+                <th><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
+                <th class="money">${formatRibu(result.saldo_akhir_periode)}</th>
+            </tr>
+            <tr>
+                <th><h5><strong>PERGERAKAN KAS</strong></h5></th>
+                <th class="money">${formatRibu(result.pergerakan_kas)}</th>
+            </tr>
+            `
+            $('#reportFooter').html(trTotal)
         })
         .fail(function(xhr,status,error){
             Swal.fire('Error','Terjadi Kesalahan!','error')

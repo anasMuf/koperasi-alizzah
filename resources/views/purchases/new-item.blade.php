@@ -59,14 +59,10 @@
                         <h3 class="card-title">Barang</h3>
                     </div>
                     <div class="card-body data-product">
-                        {{-- <input type="hidden" name="from_page" id="from_page">
-                        <input type="hidden" name="id_product" id="id_product"> --}}
                         <div class="form-group"
-                        {{-- id="formProductName" --}}
                         >
                             <label for="name_product">Nama Barang</label>
                             <input type="text" name="name_product" id="name_product"
-                            {{-- onkeyup="findProduct(this.value)"  --}}
                             class="form-control" placeholder="Masukkan Nama Barang">
                         </div>
                         <div class="form-group d-flex">
@@ -74,14 +70,9 @@
                                 <input type="checkbox" name="is_variant" id="is_variant">
                                 <label for="is_variant">Tambahkan varian barang</label>
                             </div>
-                            {{-- <div class="is_old" style="display: none;">
-                                <input type="checkbox" name="is_old" id="is_old">
-                                <label for="is_old">Barang Lama</label>
-                            </div> --}}
                         </div>
                         <div class="product_variant_container" style="display: none;">
                             <div class="product_variant row" data-variant="0">
-                                {{-- <input type="hidden" name="product_variant_id[]" id="product_variant_id_0" data-variant="0" disabled> --}}
                                 <div class="col-11">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -110,7 +101,6 @@
                             </div>
                         </div>
                         <div class="product">
-                            {{-- <input type="hidden" name="product_variant_id" id="product_variant_id"> --}}
                             <div class="form-group">
                                 <label for="stock">Stok</label>
                                 <input type="number" name="stock" id="stock" min="0" class="form-control" placeholder="Masukkan Stok">
@@ -205,7 +195,6 @@
 
     function tambahVariant(){
         index += 1
-        // <input type="hidden" name="product_variant_id[]" id="product_variant_id_${index}" data-variant="${index}">
         $('.product_variant_container').append(
         `<div class="product_variant appended row" data-variant="${index}">
             <div class="col-11">
@@ -252,37 +241,6 @@
         $('#is_variant').attr('checked',false)
         $('#is_variant').trigger('change')
     }
-    // ==========================================
-    // function findProduct(value){
-    //     if(value.length < 2){
-    //         $.each($('.list-product'), function (i, v) {
-    //             v.remove()
-    //         });
-    //         return
-    //     }
-    //     $.each($('.list-product'), function (i, v) {
-    //         v.remove()
-    //     });
-    //     $.get("{{ route('product.search') }}",{name:value})
-    //     .done(function(result){
-    //         $('#formProductName').append(`<div class="list-product"><ul></ul></div>`)
-    //         if(result.success && result.data.length > 0){
-    //             $('.list-product>ul').html('')
-    //             var data='';
-    //             $.each(result.data, function (i, v) {
-    //                 data += `<li data-product="${v.id}" onclick="selectedProduct(${v.id})">${v.name}</li>`
-    //             });
-    //             $('.list-product>ul').append(data)
-    //         }else{
-    //             $.each($('.list-product'), function (i, v) {
-    //                 v.remove()
-    //             });
-    //         }
-    //     })
-    //     .fail(function (xhr,status,error) {
-    //         Swal.fire('Error','Terjadi Kesalahan!','error')
-    //     })
-    // }
 
     $('#terbayar').focusin(function (e) {
         e.preventDefault();
@@ -297,71 +255,16 @@
         }
     });
 
-    // function selectedProduct(id) {
-    //     $.each($('.list-product'), function (i, v) {
-    //         v.remove()
-    //     });
-    //     $.get("{{ route('product.selected') }}",{id})
-    //     .done(function(result){
-    //         fillProduct(result.data)
-    //         $('#is_old').show()
-    //     })
-    //     .fail(function (xhr,status,error) {
-    //         Swal.fire('Error','Terjadi Kesalahan!','error')
-    //     })
-    // }
-
-    // function oldProduct(data){
-    //     var isVariants = data.is_variants
-    //     var product = data.product
-    //     $('.product_variant.appended').remove()
-    //     index = 0
-    //     subtotals = []
-    //     if(isVariants){
-    //         $('#is_variant').attr('checked',true)
-    //         $('#is_variant').trigger('change')
-    //         if(from_page){
-    //             $.each(product.product_variants, function (i, v) {
-    //                 tambahVariant()
-    //                 if(i === (product.product_variants.length-1)){
-    //                     hapusVariant(i+1)
-    //                 }
-    //                 $('#product_variant_id_'+i).val(v.id)
-    //                 $('#name_product_variant_'+i).val(v.name)
-    //             });
-    //         }
-    //         isVariantEvent()
-    //     }else{
-    //         $('#is_variant').attr('checked',false)
-    //         $('#is_variant').trigger('change')
-    //         if(from_page){
-    //             $.each(product.product_variants, function (i, v) {
-    //                 $('#product_variant_id').val(v.id)
-    //             })
-    //         }
-    //         noVariantEvent()
-    //     }
-    // }
-    // function fillProduct(data){
-    //     var isVariants = data.is_variants
-    //     var product = data.product
-    //     $('#id_product').val(product.id)
-    //     $('#name_product').val(product.name)
-    // }
-
     // not_variant
     function noVariantEvent(params) {
-        console.log('noVariant');
         $('.product #stock').keyup(function () {
             var stock = parseInt($(this).val())
             var price = ($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
-            console.log(stock,price);
             amountPurchases(stock,price)
         })
         $('.product #price').keyup(function () {
             var stock = ($('.product #stock').val().length > 1) ? parseInt($('.product #stock').val()) : 0
             var price = parseInt($(this).val().replaceAll('.',''))
-            console.log(stock,price);
             amountPurchases(stock,price)
         })
     }
@@ -380,11 +283,9 @@
             $(el).change(function () {
                 var stockVariant = parseInt($(this).val());
                 var priceVariant = parseInt($('.product_variant input[name="price[]"]')[i].value.replaceAll('.',''));
-                console.log(stockVariant,priceVariant);
                 var amountVariant = amountPurchases(stockVariant,priceVariant,true);
                 if(amountVariant>0){
                     subtotals[i] = amountVariant;
-                    console.log(subtotals);
                 }
                 amountPurchaseVariant(subtotals);
             })
@@ -393,11 +294,9 @@
             $(el).change(function () {
                 var stockVariant = parseInt($('.product_variant input[name="stock[]"]')[i].value);
                 var priceVariant = parseInt($(this).val().replaceAll('.',''));
-                console.log(stockVariant,priceVariant);
                 var amountVariant = amountPurchases(stockVariant,priceVariant,true);
                 if(amountVariant>0){
                     subtotals[i] = amountVariant;
-                    console.log(subtotals);
                 }
                 amountPurchaseVariant(subtotals);
             })
@@ -439,7 +338,7 @@
             success: function (response) {
                 if(response.success){
                     Swal.fire('Success',response.message,'success')
-                    reset()
+                    location.reload()
                 }
             },
             error: function (xhr,status,error) {

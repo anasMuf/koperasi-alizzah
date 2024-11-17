@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Ledger;
 use App\Models\Product;
 use App\Helpers\LogPretty;
 use App\Models\OrderDetail;
-use App\Models\ProductVariant;
 use Illuminate\Http\Request;
+use App\Models\ProductVariant;
+use App\Models\SIAKAD\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +24,7 @@ class CashierController extends Controller
 
     public function index(Request $request){
         $data['menu'] = $this->menu;
+        $data['students'] = Student::all();
         return view('cashiers.main',$data);
     }
 
@@ -114,6 +117,23 @@ class CashierController extends Controller
             $order->total = (int)$total;
             $order->terbayar = (int)str_replace('.','',$request->dibayar);
             $order->save();
+
+
+            $lastLedgerEntry = Ledger::latest()->first();
+            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            $debit = $total;
+            $credit = 0;
+            $final = $current + $debit - $credit;
+            $request->merge([
+                'type' => 'pemasukan',
+                'refrence' => $invoice,
+                'current' => $current,
+                'debit' => $debit,
+                'credit' => $credit,
+                'final' => $final,
+            ]);
+
+            Ledger::store($request);
 
             DB::commit();
 

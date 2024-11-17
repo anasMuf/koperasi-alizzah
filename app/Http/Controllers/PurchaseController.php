@@ -6,6 +6,7 @@ use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Helpers\LogPretty;
+use App\Models\Ledger;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\PurchaseDetail;
@@ -67,6 +68,12 @@ class PurchaseController extends Controller
 
     public function newItem(Request $request){
         $data['menu'] = 'pembelian baru';
+        if(!$ledger = Ledger::where([
+            'type' => 'pemasukan',
+            'refrence' => 'SALDOAWAL'
+        ])->first()){
+            return view('errors.saldo-awal',$data);
+        }
         $data['vendors'] = Vendor::all();
         $data['data'] = [];
         return view('purchases.new-item',$data);
@@ -170,6 +177,22 @@ class PurchaseController extends Controller
                 $productVariant->save();
             }
 
+            $lastLedgerEntry = Ledger::latest()->first();
+            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            $debit = 0;
+            $credit = $total;
+            $final = $current + $debit - $credit;
+            $request->merge([
+                'type' => 'pengeluaran',
+                'refrence' => $invoice,
+                'current' => $current,
+                'debit' => $debit,
+                'credit' => $credit,
+                'final' => $final,
+            ]);
+
+            Ledger::store($request);
+
             DB::commit();
             return response()->json([
                 'success' => true,
@@ -187,6 +210,12 @@ class PurchaseController extends Controller
 
     public function restock(Request $request){
         $data['menu'] = 'penambahan stok';
+        if(!$ledger = Ledger::where([
+            'type' => 'pemasukan',
+            'refrence' => 'SALDOAWAL'
+        ])->first()){
+            return view('errors.saldo-awal',$data);
+        }
         $data['vendors'] = Vendor::all();
         $data['data'] = [];
         return view('purchases.restock.main',$data);
@@ -259,6 +288,23 @@ class PurchaseController extends Controller
             $purchase->total = (int)$total;
             $purchase->terbayar = (int)str_replace('.','',$request->dibayar);
             $purchase->save();
+
+
+            $lastLedgerEntry = Ledger::latest()->first();
+            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            $debit = 0;
+            $credit = $total;
+            $final = $current + $debit - $credit;
+            $request->merge([
+                'type' => 'pengeluaran',
+                'refrence' => $invoice,
+                'current' => $current,
+                'debit' => $debit,
+                'credit' => $credit,
+                'final' => $final,
+            ]);
+
+            Ledger::store($request);
 
             DB::commit();
 

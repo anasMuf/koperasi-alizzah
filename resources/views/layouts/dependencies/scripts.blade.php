@@ -10,3 +10,8 @@
 
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+<script>
+    function formatRibu(nominal){
+        return new Intl.NumberFormat('id-ID').format(nominal)
+    }
+</script>
