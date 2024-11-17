@@ -1,0 +1,2441 @@
+[
+  {
+    "id": 1,
+    "no_induk": "464",
+    "name": "AKMALUDIN HAMZAH TRAFANI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 2,
+    "no_induk": "459",
+    "name": "ALISYAH ALIFATUZ ZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 3,
+    "no_induk": "455",
+    "name": "BINTANG PUTRA WAHYU KURNIA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 4,
+    "no_induk": "457",
+    "name": "KAYYISAH HAWWA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 5,
+    "no_induk": "460",
+    "name": "MAHARDIKA RAESSA ANDANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 6,
+    "no_induk": "461",
+    "name": "MICHEL APRILIA AVANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 7,
+    "no_induk": "463",
+    "name": "MUHAMMAD HABLI HUKMA WA'ILMA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 8,
+    "no_induk": "458",
+    "name": "MUHAMMAD ZAFRAN AL ARKHAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 9,
+    "no_induk": "462",
+    "name": "RAISSA ALYSSA ERABANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 10,
+    "no_induk": "456",
+    "name": "ULIN NUHA AHSANA TAFSIRO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 11,
+    "no_induk": "466",
+    "name": "DWI ARYA MUHFIAN PUTRA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 12,
+    "no_induk": "472",
+    "name": "ELVANO ALFAREZI REYNDRA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 13,
+    "no_induk": "473",
+    "name": "ERLANGGA DENIZ PANCASENA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 14,
+    "no_induk": "467",
+    "name": "GAYUH KEYSA ZAKIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 15,
+    "no_induk": "470",
+    "name": "NAURA ZHAFIRA RAMDHANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 16,
+    "no_induk": "471",
+    "name": "PRANAWA PRASETYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 17,
+    "no_induk": "136",
+    "name": "PUTRI AYNA AZKAYRA AL GIRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 18,
+    "no_induk": "465",
+    "name": "QUEENSA FINTA ALVARISQI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 19,
+    "no_induk": "468",
+    "name": "RAHMAD HANIF ALBIANSYAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 20,
+    "no_induk": "474",
+    "name": "SYAFIRA AULIA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 21,
+    "no_induk": "469",
+    "name": "ZAIDAN AL FATIH IRSYAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 22,
+    "no_induk": "483",
+    "name": "AISYAH HABIBILLAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 23,
+    "no_induk": "491",
+    "name": "ARYASATYA ILYAS NURRACHMAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 24,
+    "no_induk": "488",
+    "name": "AYNA AL ALIFIZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 25,
+    "no_induk": "490",
+    "name": "GHINA SAYYIDAH DZAKIYAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 26,
+    "no_induk": "489",
+    "name": "KIANO AHMAD ALFARIZ",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 27,
+    "no_induk": "484",
+    "name": "MUHAMMAD ADZRIL HAIDAR",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 28,
+    "no_induk": "496",
+    "name": "MUHAMMAD ALTHAF ARBANI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 29,
+    "no_induk": "487",
+    "name": "MUHAMMAD ARSA AL HAFIDZ",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 30,
+    "no_induk": "480",
+    "name": "MUHAMMAD RAFA NIZAM",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 31,
+    "no_induk": "492",
+    "name": "NADIA PUTRI LESTARI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 32,
+    "no_induk": "482",
+    "name": "SALWANABILA CAHYANI PUTRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 33,
+    "no_induk": "510",
+    "name": "ABIDZAR AL AFNI PRINCE R.A",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 34,
+    "no_induk": "504",
+    "name": "ALVINO ARSYA AL AKBAR",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 35,
+    "no_induk": "503",
+    "name": "ANANTARA KHAIRAN RIZQI FIRMANSYAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 36,
+    "no_induk": "508",
+    "name": "AZKA ZYAN ASSEGAF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 37,
+    "no_induk": "501",
+    "name": "AZZALEA SHAQUEENA ARINDYA LATIF",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 38,
+    "no_induk": "505",
+    "name": "DELISHA ADINDA SYAFANIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 39,
+    "no_induk": "502",
+    "name": "EMIR DZAKY ZAKARIA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 40,
+    "no_induk": "507",
+    "name": "JIHAN TALITHA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 41,
+    "no_induk": "509",
+    "name": "MAULANA HABIBI ABHIMATA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 42,
+    "no_induk": "499",
+    "name": "MUHAMMAD SULTAN NARESWARA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 43,
+    "no_induk": "506",
+    "name": "NUR LATIFAH AN NASYA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 44,
+    "no_induk": "518",
+    "name": "AQILA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 45,
+    "no_induk": "512",
+    "name": "AYRA SANSA DEWAN SYA'RONI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 46,
+    "no_induk": "514",
+    "name": "ELLANO SHANKARA PRASETYO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 47,
+    "no_induk": "515",
+    "name": "JABBAR FARAS CAKRAWHARDANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 48,
+    "no_induk": "516",
+    "name": "M FARHAN RAFISQY ALFAREZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 49,
+    "no_induk": "513",
+    "name": "M FARREL GIBRAN PRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 50,
+    "no_induk": "517",
+    "name": "M IKHWAN ADAM MAULANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 51,
+    "no_induk": "511",
+    "name": "NELVINO SHAQUILLE KRISDIANTO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 52,
+    "no_induk": "519",
+    "name": "RYU SATRIA PUTRA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 53,
+    "no_induk": "530",
+    "name": "SAYYIDAH SYARIFAH KAMILA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 54,
+    "no_induk": "529",
+    "name": "SHAKEEL ABHIVANDYA ROFIQI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 55,
+    "no_induk": "539",
+    "name": "ALFIIN ZULFIKAR RIZKI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 56,
+    "no_induk": "535",
+    "name": "AMEERA MIKAYLA ZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 57,
+    "no_induk": "541",
+    "name": "ARSHAKA NATAN ADITYA AKBAR",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 58,
+    "no_induk": "534",
+    "name": "LINTANG ADREENA SHEZA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 59,
+    "no_induk": "538",
+    "name": "M ALVANO KENZIE PRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 60,
+    "no_induk": "531",
+    "name": "MUHAMMAD AKMAL ALFA RIZQI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 61,
+    "no_induk": "540",
+    "name": "MUHAMMAD MIFZAL RAFIF ABQARY",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 62,
+    "no_induk": "537",
+    "name": "ORION DEWANGGA PUTRA AHMAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 63,
+    "no_induk": "532",
+    "name": "THALIE PIRANTHIE CAHYANING",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 64,
+    "no_induk": "536",
+    "name": "VIAN ARJUNA AT TSABIT",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 65,
+    "no_induk": "533",
+    "name": "WIRDA RIZQIANA LAILATUS SURUR",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 66,
+    "no_induk": "427",
+    "name": "GUSTI ABU BANGKIT ASTAMARUN .S",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 67,
+    "no_induk": "428",
+    "name": "KEANO DWI ALFARIZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 68,
+    "no_induk": "426",
+    "name": "KEENANDRA MALIK ARDY ALMUZA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 69,
+    "no_induk": "424",
+    "name": "KHANZA ADZKIYA KHALISA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 70,
+    "no_induk": "434",
+    "name": "MUHAMMAD ABIL SIDQI ARSALAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 71,
+    "no_induk": "421",
+    "name": "MUHAMMAD ADZRIEL ALFARIZQI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 72,
+    "no_induk": "422",
+    "name": "MUHAMMAD AFIF FIRDAUS PRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 73,
+    "no_induk": "432",
+    "name": "MUHAMMAD HAZMI ALFARIZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 74,
+    "no_induk": "433",
+    "name": "RIZKI RAMADHAN PUTRA BASUKI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 75,
+    "no_induk": "431",
+    "name": "RUMAISHA ARSA GAURI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 76,
+    "no_induk": "425",
+    "name": "SAFANIYA GHEA ARISTA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 77,
+    "no_induk": "423",
+    "name": "SHANUM SHEZAN AZKAYRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 78,
+    "no_induk": "429",
+    "name": "SHINTA AYULIA HARIANA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 79,
+    "no_induk": "133",
+    "name": "ABDULLAH ALKAHFI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 80,
+    "no_induk": "138",
+    "name": "ANAGATA LEONORA SHANUM FIRMANSYAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 81,
+    "no_induk": "131",
+    "name": "DAFFA DZUHAIRI EVANO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 82,
+    "no_induk": "137",
+    "name": "ERLANGGA NADEO NARENDRA BARRY",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 83,
+    "no_induk": "140",
+    "name": "GAMILA NADHIFA ZAIDA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 84,
+    "no_induk": "142",
+    "name": "GRIZELLA QUIENZHA PUTRI ZAKARIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 85,
+    "no_induk": "134",
+    "name": "HAFIZH RAFFASYA AL FAHREZI ERDOGAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 86,
+    "no_induk": "141",
+    "name": "MARYAM HANA PRANATA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 87,
+    "no_induk": "132",
+    "name": "MUHAMMAD ABIZAR ZAYDAN AL FATTIH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 88,
+    "no_induk": "448",
+    "name": "MUHAMMAD ARTA NABIL MAUZA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 89,
+    "no_induk": "139",
+    "name": "MUHAMMAD IRSYAD JAMALUDIN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 90,
+    "no_induk": "449",
+    "name": "NAFIS RASENDRIYA FAHRUDDIN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 91,
+    "no_induk": "135",
+    "name": "SABRINA AULIA ZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 92,
+    "no_induk": "450",
+    "name": "ALVINO NAUVAL MUSTOFA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 93,
+    "no_induk": "153",
+    "name": "AZIZAH NAYYIRA ALFIDA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 94,
+    "no_induk": "148",
+    "name": "ELLENA QIANZY RATU PRASETYO",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 95,
+    "no_induk": "143",
+    "name": "FATHIAN ZIDAN ALFAREZI PRAYOGO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 96,
+    "no_induk": "151",
+    "name": "GAISHAN AHMED PRASETYO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 97,
+    "no_induk": "147",
+    "name": "MIKAYLA AZIZ AZ ZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 98,
+    "no_induk": "145",
+    "name": "MUHAMMAD AQIL ZHAFRAN ASSYARIF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 99,
+    "no_induk": "146",
+    "name": "MUHAMMAD ARKA SHAWQI FILARDHA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 100,
+    "no_induk": "149",
+    "name": "NADHIRA AYUNINDYA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 101,
+    "no_induk": "144",
+    "name": "NADIRA SHAFANA ALFARIZKY",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 102,
+    "no_induk": "152",
+    "name": "RAYYI SHABILLA HILYA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 103,
+    "no_induk": "154",
+    "name": "ZIDNA ILMAN NAFIAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 104,
+    "no_induk": "127",
+    "name": "ABDULLAH DANISH DHIAURRAHMAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 105,
+    "no_induk": "125",
+    "name": "ALEA SHANUM HUMAIRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 106,
+    "no_induk": "126",
+    "name": "ANINDYA KIRANA NUR ICHWAN",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 107,
+    "no_induk": "130",
+    "name": "ARSYILA DELVIA NAURA AHMAD",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 108,
+    "no_induk": "121",
+    "name": "CIELO VANDARA NAZEEA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 109,
+    "no_induk": "118",
+    "name": "IZZAN HARITH FAROKH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 110,
+    "no_induk": "120",
+    "name": "KAHEESHA RUBY NASYAUQI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 111,
+    "no_induk": "128",
+    "name": "KALYLA CHELSEA NUR AINI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 112,
+    "no_induk": "122",
+    "name": "MUHAMMAD FALIH AQMAR",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 113,
+    "no_induk": "124",
+    "name": "MUHAMMAD UWAIS AL FARIDZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 114,
+    "no_induk": "123",
+    "name": "RAFAEZA HADITAMA STYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 115,
+    "no_induk": "129",
+    "name": "SAQUEENA RIZQI RAMADHANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 116,
+    "no_induk": "119",
+    "name": "YURFINA ALIFA HERDRIAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 117,
+    "no_induk": "103",
+    "name": "ACHMAD RIZKY ABI ASWIN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 118,
+    "no_induk": "109",
+    "name": "ADIBA ATLTHAFUNNISA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 119,
+    "no_induk": "107",
+    "name": "AFRIN FAIHA CHISSY",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 120,
+    "no_induk": "101",
+    "name": "ALFARIZI MAHESA PUTRA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 121,
+    "no_induk": "102",
+    "name": "ARDIAZ MUHAMMAD FAUZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 122,
+    "no_induk": "106",
+    "name": "BERYLLI BRILIAN",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 123,
+    "no_induk": "104",
+    "name": "BILLQIS FAIHA RIFDA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 124,
+    "no_induk": "105",
+    "name": "HANUM CALISTA HANANIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 125,
+    "no_induk": "110",
+    "name": "KAILASH RAFQI HASAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 126,
+    "no_induk": "108",
+    "name": "KINARA ALZARINA RAMADHANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 127,
+    "no_induk": "411",
+    "name": "MUHAMMAD FAQIHUL HAKIM",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 128,
+    "no_induk": "111",
+    "name": "SYATIR AZFAR AL FARZANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 129,
+    "no_induk": "112",
+    "name": "WILDAN HAFIZH RAFISQI HARJUNO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 130,
+    "no_induk": "452",
+    "name": "AISYAH PUTRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 131,
+    "no_induk": "155",
+    "name": "ALFATH SYARIEF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 132,
+    "no_induk": "165",
+    "name": "ALISSA UFAIRASAKHI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 133,
+    "no_induk": "158",
+    "name": "AZKA ANUGRAH FILARDHA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 134,
+    "no_induk": "162",
+    "name": "AZKA RANIA ZHAFIRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 135,
+    "no_induk": "451",
+    "name": "HAIKAL AZRIL EL RUMI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 136,
+    "no_induk": "163",
+    "name": "KHANZA SHAFEA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 137,
+    "no_induk": "159",
+    "name": "M SULTAN OCTAVIANDI SUTRISNO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 138,
+    "no_induk": "166",
+    "name": "MAZIYAH KAMILAH RAMADHANI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 139,
+    "no_induk": "157",
+    "name": "MUHAMMAD ALFATAN LEONARDI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 140,
+    "no_induk": "156",
+    "name": "MUHAMMAD ARSAKHA SHIDDIQ ASSHAUQI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 141,
+    "no_induk": "160",
+    "name": "MUHAMMAD FAIZZUDIN ZYDAN PASHA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 142,
+    "no_induk": "161",
+    "name": "RAISYA ZAHRA SALSA BILLA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 143,
+    "no_induk": "001007",
+    "name": "ADILLA CAHYA KIRANA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 144,
+    "no_induk": "001005",
+    "name": "AL ZAVAIR YUFA REZVAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 145,
+    "no_induk": "114",
+    "name": "AZLAN RESCHA HIDAYAT",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 146,
+    "no_induk": "001006",
+    "name": "BENING ILLYA ALMAIS",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 147,
+    "no_induk": "453",
+    "name": "DEAN MERU DHAFIR",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 148,
+    "no_induk": "113",
+    "name": "KAIF HAIDAR HASAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 149,
+    "no_induk": "001004",
+    "name": "KAYLA RIZKI MAFAZA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 150,
+    "no_induk": "001012",
+    "name": "KHANZA NAYLA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 151,
+    "no_induk": "000991",
+    "name": "KIREI ZEA SHANUM",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 152,
+    "no_induk": "115",
+    "name": "KRISNA NARENDRA UTAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 153,
+    "no_induk": "116",
+    "name": "MUHAMMAD ALBI AL FARIZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 154,
+    "no_induk": "454",
+    "name": "NAVAS AHMAD ASKARABIRU",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 155,
+    "no_induk": "000914",
+    "name": "QIRANIA NUHA AZ ZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 156,
+    "no_induk": "445",
+    "name": "ADHWA ARZAQILLAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 157,
+    "no_induk": "446",
+    "name": "ADINDA VIRLI AZZANIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 158,
+    "no_induk": "441",
+    "name": "BRIGITA AULIA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 159,
+    "no_induk": "443",
+    "name": "DAMAR ATHARAZKA AGASA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 160,
+    "no_induk": "440",
+    "name": "ESHAL GHANIA NAHDA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 161,
+    "no_induk": "447",
+    "name": "MUHAMMAD KEENAN DEVAN ARRASYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 162,
+    "no_induk": "436",
+    "name": "MUHAMMAD SHOFAUL MUBARACK",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 163,
+    "no_induk": "435",
+    "name": "MUHAMMAD WAHYU IRSYAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 164,
+    "no_induk": "442",
+    "name": "MUHAMMAD YAHYA PITULUNGAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 165,
+    "no_induk": "444",
+    "name": "MUHAMMAD ZHIAN ALI RIDHO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 166,
+    "no_induk": "438",
+    "name": "NALA LAILATUL AFROKHAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 167,
+    "no_induk": "439",
+    "name": "YUSUF HANIF AZZAKI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 168,
+    "no_induk": "437",
+    "name": "ZICO ARSYA WIRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 169,
+    "no_induk": "000901",
+    "name": "AHMAD ALENDRA OEMAR ASY SYAZANI B.A",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 170,
+    "no_induk": "000990",
+    "name": "ANNISA INDRA SAPUTRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 171,
+    "no_induk": "000993",
+    "name": "AZKAYRA PUTRI ZASKIYA AZZAHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 172,
+    "no_induk": "000995",
+    "name": "DINARA EL RUNAKO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 173,
+    "no_induk": "000805",
+    "name": "EMIL DZIKRI FISABILILLAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 174,
+    "no_induk": "000992",
+    "name": "MOANA AMORA SUBAGYO",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 175,
+    "no_induk": "000899",
+    "name": "MUBASSYIRA NADZIRA ASSYAIBANIY",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 176,
+    "no_induk": "000917",
+    "name": "MUHAMMAD BAGUS VAN CAHYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 177,
+    "no_induk": "177",
+    "name": "MUHAMMAD FREY AL RASYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 178,
+    "no_induk": "000997",
+    "name": "MUHAMMAD MAHER ALI HIMAM",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 179,
+    "no_induk": "420",
+    "name": "NADHIRA TUNGGA DEWI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 180,
+    "no_induk": "000994",
+    "name": "SABIAN ALFARIZA SENARU",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 181,
+    "no_induk": "000996",
+    "name": "SHILNA SHAFIRA AZZAQIYAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 182,
+    "no_induk": "001000",
+    "name": "ARISHA ALMAHYRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 183,
+    "no_induk": "172",
+    "name": "ARSYILA ADZANADYA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 184,
+    "no_induk": "170",
+    "name": "DIRANDRA RIFQI PRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 185,
+    "no_induk": "168",
+    "name": "EL AZKA RIZQI MAULANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 186,
+    "no_induk": "001010",
+    "name": "FATHAR YUSUF RAFFASYA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 187,
+    "no_induk": "001013",
+    "name": "GENDHIS ELMYRA NUGROHO",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 188,
+    "no_induk": "001002",
+    "name": "JIHAN MAKAILAH FAKHIRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 189,
+    "no_induk": "171",
+    "name": "MOCHAMMAD AL FATHAN ABRAHAM",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 190,
+    "no_induk": "001011",
+    "name": "MUHAMMAD IKMALI ABDILLAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 191,
+    "no_induk": "001009",
+    "name": "MUHAMMAD IRFAN ZIDNY",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 192,
+    "no_induk": "167",
+    "name": "NALENDRA TISYA DESKA PRATAMA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 193,
+    "no_induk": "001003",
+    "name": "NARENDRA PANENGGAK KISWORO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 194,
+    "no_induk": "173",
+    "name": "SABIRA NUR RIZQI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 195,
+    "no_induk": "0001006",
+    "name": "FIORENZA VIRA FELICIA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 196,
+    "no_induk": "0001004",
+    "name": "IBRAHIM KHALIL ALFATIH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 197,
+    "no_induk": "0001005",
+    "name": "INATSA'ALAINA NASHIRO",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 198,
+    "no_induk": "0001002",
+    "name": "KHAYLA PUTRI ZAHIRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 199,
+    "no_induk": "0001009",
+    "name": "M ARHAB REYHAN ARDHANI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 200,
+    "no_induk": "0001003",
+    "name": "MOCH. ZAYAN AHNAF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 201,
+    "no_induk": "0001001",
+    "name": "MUHAMMAD AZIZUDDIN ZAHRONI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 202,
+    "no_induk": "500",
+    "name": "MUHAMMAD ZAFRAN AL RAFIF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 203,
+    "no_induk": "0001000",
+    "name": "MUHAMMAD ZEYHAN SHAUQILANO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 204,
+    "no_induk": "000905",
+    "name": "NOUREEN SYIFA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 205,
+    "no_induk": "0001008",
+    "name": "RORO NAWANG AYU",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 206,
+    "no_induk": "1221",
+    "name": "TASYA ANINDYA ZHAFIRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 207,
+    "no_induk": "0001007",
+    "name": "ZAHRA NUR APRILINA ANDRIANTO",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 208,
+    "no_induk": "000930",
+    "name": "ADHITAMA ELVAN SYAHREZA YAMAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 209,
+    "no_induk": "000929",
+    "name": "ALDEVARO RAFASYA RAQILLA LATIF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 210,
+    "no_induk": "000934",
+    "name": "ALEEYA FRANSTASYA AZKARAYYA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 211,
+    "no_induk": "000931",
+    "name": "ALI MUSYAFAK AHMAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 212,
+    "no_induk": "000925",
+    "name": "ALIFIA NAUFALYN AZIZAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 213,
+    "no_induk": "179",
+    "name": "ALMEER FAHREZA AHMAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 214,
+    "no_induk": "000927",
+    "name": "ASFIA NISA ALTAFURROHA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 215,
+    "no_induk": "000932",
+    "name": "ASYIFA KAYYISA SHATAR",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 216,
+    "no_induk": "000933",
+    "name": "HIKMAH INARA AQILA I",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 217,
+    "no_induk": "000928",
+    "name": "LUCAS BRAMASTA DANISWARA WIBAWAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 218,
+    "no_induk": "000924",
+    "name": "MUHAMMAD KHALIF RIZQI FIRMANSYAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 219,
+    "no_induk": "000923",
+    "name": "RAJA RUNAKO AL SAUQHI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 220,
+    "no_induk": "000926",
+    "name": "SAFFANA NASYA AL MAHYRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 221,
+    "no_induk": "000908",
+    "name": "ADZKIYA INARA ARUMIPUTRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 222,
+    "no_induk": "000942",
+    "name": "AHMAD SYARIFUDIN HAMKA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 223,
+    "no_induk": "000936",
+    "name": "AISYAH FARHANA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 224,
+    "no_induk": "000937",
+    "name": "AURELLIA NAURA PRATISTA ARIFIYANTI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 225,
+    "no_induk": "000943",
+    "name": "AZLAN ZAYDAN HIDAYAT",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 226,
+    "no_induk": "000939",
+    "name": "KHADIJAH PUTRI MARTHADITA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 227,
+    "no_induk": "1220",
+    "name": "M RAFI ILHAM KHOMARUDIN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 228,
+    "no_induk": "000946",
+    "name": "MAHREEN SYAZANI BANAFSHA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 229,
+    "no_induk": "000938",
+    "name": "MUHAMMAD ABIYU KEVIN HIBRIZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 230,
+    "no_induk": "000941",
+    "name": "MUHAMMAD IQBAL MAULANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 231,
+    "no_induk": "000935",
+    "name": "MUHAMMAD ZAIGHAM ARKHAN KHUSAINI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 232,
+    "no_induk": "000787",
+    "name": "NADHIFAH KHADIJAH AZ ZAHRAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 233,
+    "no_induk": "000944",
+    "name": "NAURA HAFIZA RAKHMAN",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 234,
+    "no_induk": "194",
+    "name": "ADIPATI RESTU BUMI ANDRIYANTO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 235,
+    "no_induk": "1202",
+    "name": "ASHALINA YUMNA NALADHIPA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 236,
+    "no_induk": "199",
+    "name": "AZKA BALYA RAMADHAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 237,
+    "no_induk": "1210",
+    "name": "GUSTI ARDANA MAHARDIKA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 238,
+    "no_induk": "1203",
+    "name": "KEYZHA NAYAKA KINANTI PUTRI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 239,
+    "no_induk": "1200",
+    "name": "KHANZALA NAHWA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 240,
+    "no_induk": "198",
+    "name": "KHANZIA KHAIRINA ABIDAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 241,
+    "no_induk": "1201",
+    "name": "MUHAMMAD ADAM ALFATIH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 242,
+    "no_induk": "197",
+    "name": "MUHAMMAD FADHILLAH MAULANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 243,
+    "no_induk": "1206",
+    "name": "MUHAMMAD JAMALUDIN AL HUSAIN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 244,
+    "no_induk": "1204",
+    "name": "MUHAMMAD KAFA AL KASYAFANI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 245,
+    "no_induk": "1205",
+    "name": "MUHAMMAD NABIL HAZIMI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 246,
+    "no_induk": "193",
+    "name": "MUHAMMAD SHOLAHUDIN AL AYYUBI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 247,
+    "no_induk": "188",
+    "name": "ABRISAM SHARIQUE AL ZUKHRUF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 248,
+    "no_induk": "186",
+    "name": "ACHMAD AL MUBAROQ",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 249,
+    "no_induk": "185",
+    "name": "AFFAN GIYATSA NUR RAMADHAN",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 250,
+    "no_induk": "190",
+    "name": "AMANDA ZELINA ZAKEISYHA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 251,
+    "no_induk": "180",
+    "name": "HUWAIDA SAFFANAH AZZUHRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 252,
+    "no_induk": "192",
+    "name": "KINANTI AZKADINA ESMID",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 253,
+    "no_induk": "189",
+    "name": "MUHAMMAD ILMAN NAJMUDIN AZHARI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 254,
+    "no_induk": "191",
+    "name": "NAURA AQILA JAHIDAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 255,
+    "no_induk": "184",
+    "name": "NAWANG WULANDARI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 256,
+    "no_induk": "182",
+    "name": "RETHA FARADINA MECCA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 257,
+    "no_induk": "187",
+    "name": "ULFA ABQORIYYAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 258,
+    "no_induk": "181",
+    "name": "ZULMI IKHWAN KHOIRI ARIF",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 259,
+    "no_induk": "176",
+    "name": "AGAM KHALIF ALFARIZI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 260,
+    "no_induk": "000912",
+    "name": "ANINDIA NAUFALYN AFIFAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 261,
+    "no_induk": "000921",
+    "name": "ANNISA ASYIFATUL ABIDIN",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 262,
+    "no_induk": "174",
+    "name": "AZKHA DILAN ALKHALIFI",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 263,
+    "no_induk": "175",
+    "name": "DZAKIR AHSAN MAULANA",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 264,
+    "no_induk": "000915",
+    "name": "FAZA NUR MUHAMMAD",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 265,
+    "no_induk": "000920",
+    "name": "KEISYA RIZKI ABQORI",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 266,
+    "no_induk": "000922",
+    "name": "MUHAMMAD ABRIZAM AL FATIH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 267,
+    "no_induk": "000918",
+    "name": "MUHAMMAD LINTANG ALTHAFARIZQI HANSO",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 268,
+    "no_induk": "000911",
+    "name": "RAIQA AIMASHYRA",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 269,
+    "no_induk": "000919",
+    "name": "RAKA LUQMAN ARDIANSYAH",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 270,
+    "no_induk": "000913",
+    "name": "RASYA ELLENO SYAQUILLE",
+    "gender": "L",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  },
+  {
+    "id": 271,
+    "no_induk": "000916",
+    "name": "ZAHIDA AS SHOFA MARWAH",
+    "gender": "P",
+    "created_at": "11/11/2024 15:43:02",
+    "updated_at": "11/11/2024 15:43:02",
+    "deleted_at": null
+  }
+]

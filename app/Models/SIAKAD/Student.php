@@ -11,7 +11,7 @@ class Student extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $connection = 'alizzah';
+    // protected $connection = 'alizzah';
 
     public function orders(){
         return $this->hasMany(Order::class);
