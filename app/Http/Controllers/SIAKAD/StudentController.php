@@ -112,7 +112,7 @@ class StudentController extends Controller
             DB::commit();
             return response()->json([
                 'success' => true,
-                'message' => 'Product deleted successfully',
+                'message' => 'Student deleted successfully',
             ],200);
         } catch (\Throwable $th) {
             DB::rollBack();

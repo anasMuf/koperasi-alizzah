@@ -48,7 +48,7 @@
             </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
-                <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'student' ? 'active' : '' }}">
+                <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'siswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Siswa</p>
                 </a>
