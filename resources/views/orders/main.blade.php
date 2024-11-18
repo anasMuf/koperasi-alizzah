@@ -35,6 +35,7 @@
                                 <th>No</th>
                                 <th>Tgl</th>
                                 <th>Invoice</th>
+                                <th>Siswa</th>
                                 <th>Barang</th>
                                 <th>Total</th>
                                 <th>Aksi</th>
@@ -86,6 +87,7 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
                 {data: 'tgl' , name: 'tgl'},
                 {data: 'invoice' , name: 'invoice'},
+                {data: 'student.name' , name: 'student.name', defaultContent: ''},
                 {data: 'product' , name: 'product'},
                 {data: 'total_' , name: 'total_'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},

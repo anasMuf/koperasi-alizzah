@@ -29,7 +29,7 @@ class OrderController extends Controller
                     $dateRange[] = date('Y-m-d',strtotime($date));
                 }
             }
-            $data = Order::with('order_details.product_variant.product')->
+            $data = Order::with(['student','order_details.product_variant.product'])->
             when($dateRange, function($q) use ($dateRange){
                 $q->whereBetween('created_at',$dateRange);
             })
@@ -43,7 +43,11 @@ class OrderController extends Controller
                 return $row->order_details[0]->product_variant->product->name;
             })
             ->addColumn('total_', function($row){
-                return 'Rp '.number_format($row->total,0,',','.');
+                $nominalAkhir = $row->total;
+                if($row->terbayar < $row->total){
+                    $nominalAkhir = $row->total - $row->terbayar;
+                }
+                return 'Rp '.number_format($nominalAkhir,0,',','.');
             })
             ->addColumn('action', function($row){
                 $btn = '';
