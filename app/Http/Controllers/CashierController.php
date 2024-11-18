@@ -114,14 +114,21 @@ class CashierController extends Controller
                 $total += $orderDetail->subtotal;
             }
 
+            $terbayar = str_replace('.','',$request->dibayar);
+
             $order->total = (int)$total;
-            $order->terbayar = (int)str_replace('.','',$request->dibayar);
+            $order->terbayar = (int)$terbayar;
             $order->save();
 
 
+            $nominalTotalAkhir = $total;
+            if($terbayar < $total){
+                $nominalTotalAkhir = $terbayar;
+            }
+
             $lastLedgerEntry = Ledger::latest()->first();
             $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
-            $debit = $total;
+            $debit = $nominalTotalAkhir;
             $credit = 0;
             $final = $current + $debit - $credit;
             $request->merge([

@@ -177,10 +177,15 @@ class PurchaseController extends Controller
                 $productVariant->save();
             }
 
+            $nominalTotalAkhir = $total;
+            if($terbayar < $total){
+                $nominalTotalAkhir = $terbayar;
+            }
+
             $lastLedgerEntry = Ledger::latest()->first();
             $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
             $debit = 0;
-            $credit = $total;
+            $credit = $nominalTotalAkhir;
             $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
@@ -285,15 +290,21 @@ class PurchaseController extends Controller
                 $total += $purchaseDetail->subtotal;
             }
 
+            $terbayar = str_replace('.','',$request->dibayar);
+
             $purchase->total = (int)$total;
             $purchase->terbayar = (int)str_replace('.','',$request->dibayar);
             $purchase->save();
 
+            $nominalTotalAkhir = $total;
+            if($terbayar < $total){
+                $nominalTotalAkhir = $terbayar;
+            }
 
             $lastLedgerEntry = Ledger::latest()->first();
             $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
             $debit = 0;
-            $credit = $total;
+            $credit = $nominalTotalAkhir;
             $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
