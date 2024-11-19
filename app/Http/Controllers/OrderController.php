@@ -39,9 +39,9 @@ class OrderController extends Controller
             ->addColumn('tgl', function($row){
                 return Carbon::parse($row->created_at)->isoFormat('DD MMMM YYYY');
             })
-            ->addColumn('product', function($row){
-                return $row->order_details[0]->product_variant->product->name;
-            })
+            // ->addColumn('product', function($row){
+            //     return $row->order_details[0]->product_variant->product->name;
+            // })
             ->addColumn('total_', function($row){
                 $nominalAkhir = $row->total;
                 if($row->terbayar < $row->total){
@@ -55,7 +55,7 @@ class OrderController extends Controller
             })
             ->rawColumns([
                 'tgl',
-                'product',
+                // 'product',
                 'total_',
                 'action'
             ])

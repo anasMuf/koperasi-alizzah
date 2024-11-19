@@ -36,7 +36,7 @@
                                 <th>Tgl</th>
                                 <th>Invoice</th>
                                 <th>Siswa</th>
-                                <th>Barang</th>
+                                {{-- <th>Barang</th> --}}
                                 <th>Total</th>
                                 <th>Aksi</th>
                             </tr>
@@ -88,7 +88,7 @@
                 {data: 'tgl' , name: 'tgl'},
                 {data: 'invoice' , name: 'invoice'},
                 {data: 'student.name' , name: 'student.name', defaultContent: ''},
-                {data: 'product' , name: 'product'},
+                // {data: 'product' , name: 'product'},
                 {data: 'total_' , name: 'total_'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
             ]

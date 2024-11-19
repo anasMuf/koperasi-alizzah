@@ -24,6 +24,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="saldo_awal">Saldo Awal</label>
+                            <small style="color: red">data sensitif, harap berhati-hati dalam menginputkan atau merubah data!</small>
                             <input type="text" name="saldo_awal" id="saldo_awal" class="form-control" placeholder="Masukkan nilai saldo awal" value="{{ $saldo_awal ? number_format($saldo_awal->final,0,',','.') : '' }}" onkeyup="formatNumber(this)">
                         </div>
                     </div>
