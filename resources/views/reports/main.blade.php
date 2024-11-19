@@ -98,7 +98,9 @@
         .done(function(result){
             var periode = result.periode
             var dPenerimaan = result.arus_kas_operasional.penerimaan
+            var dPiutang = result.arus_kas_operasional.piutang
             var dPengeluaran = result.arus_kas_operasional.pengeluaran
+            var dHutang = result.arus_kas_operasional.hutang
             var dTotalOpr = result.arus_kas_operasional.total_operasional
 
             $('#periode').html('Periode '+periode)
@@ -123,12 +125,30 @@
                 </tr>
                 `
             }
+            if(dPiutang){
+                var jumlahDpt = parseInt(dPiutang)
+                tr += `
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piutang</td>
+                    <td class="money">${formatRibu(jumlahDpt)}</td>
+                </tr>
+                `
+            }
             if(dPengeluaran){
                 var jumlahDpg = parseInt(dPengeluaran)
                 tr += `
                 <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pengeluaran</td>
-                    <td class="money">${formatRibu(jumlahDpg)}</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Pengeluaran)</td>
+                    <td class="money">-${formatRibu(jumlahDpg)}</td>
+                </tr>
+                `
+            }
+            if(dHutang){
+                var jumlahDht = parseInt(dHutang)
+                tr += `
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Hutang)</td>
+                    <td class="money">-${formatRibu(jumlahDht)}</td>
                 </tr>
                 `
             }
@@ -144,12 +164,12 @@
 
             var trTotal = `
             <tr>
-                <th><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
-                <th class="money">${formatRibu(result.saldo_akhir_periode)}</th>
-            </tr>
-            <tr>
                 <th><h5><strong>PERGERAKAN KAS</strong></h5></th>
                 <th class="money">${formatRibu(result.pergerakan_kas)}</th>
+            </tr>
+            <tr>
+                <th><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
+                <th class="money">${formatRibu(result.saldo_akhir_periode)}</th>
             </tr>
             `
             $('#reportFooter').html(trTotal)

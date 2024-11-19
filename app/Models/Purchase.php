@@ -13,6 +13,11 @@ class Purchase extends Model
     public function purchase_details(){
         return $this->hasMany(PurchaseDetail::class,'invoice','invoice');
     }
+
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
+
     public static function generateInvoice($newItem=true){
         $lastKode = Purchase::select('invoice')->orderBy('id','desc')->first();
         if($lastKode){

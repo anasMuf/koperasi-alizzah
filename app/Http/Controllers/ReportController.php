@@ -38,9 +38,20 @@ class ReportController extends Controller
 
             $result = Ledger::selectRaw('SUM(debit) as total_pemasukan, SUM(credit) as total_pengeluaran')
             ->whereBetween('created_at', $dateRange)
+            ->whereNull('description')
             ->first();
 
-            $pergerakanKas = $result->total_pemasukan - $result->total_pengeluaran;
+            $hutang = Ledger::selectRaw('SUM(credit) as total_hutang')
+            ->whereBetween('created_at', $dateRange)
+            ->where('description','bayar hutang')
+            ->first()->total_hutang;
+            $piutang = Ledger::selectRaw('SUM(debit) as total_piutang')
+            ->whereBetween('created_at', $dateRange)
+            ->where('description','bayar piutang')
+            ->first()->total_piutang;
+
+            $pergerakanKas = ($result->total_pemasukan+$piutang) - ($result->total_pengeluaran+$hutang);
+            // $pergerakanKas = $result->total_pemasukan - $result->total_pengeluaran;
 
             $saldoAkhirPeriode = $saldoAwalPeriode + $pergerakanKas;
 
@@ -49,7 +60,9 @@ class ReportController extends Controller
             $reports['saldo_awal_periode'] = (int)$saldoAwalPeriode;
 
             $reports['arus_kas_operasional']['penerimaan'] = (int)$result->total_pemasukan;
+            $reports['arus_kas_operasional']['piutang'] = (int)$piutang;
             $reports['arus_kas_operasional']['pengeluaran'] = (int)$result->total_pengeluaran;
+            $reports['arus_kas_operasional']['hutang'] = (int)$hutang;
             $reports['arus_kas_operasional']['total_operasional'] = $pergerakanKas;
 
             $reports['pergerakan_kas'] = $pergerakanKas;

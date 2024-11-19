@@ -69,7 +69,7 @@ class CashierController extends Controller
                 'message' => 'Product belum dipilih',
             ],422);
         }
-        if(empty($request->dibayar)){
+        if($request->dibayar == ''){
             return response()->json([
                 'success' => false,
                 'message' => 'Nominal dibayar belum tertulis',
@@ -133,6 +133,7 @@ class CashierController extends Controller
             $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pemasukan',
+                'description' => null,
                 'refrence' => $invoice,
                 'current' => $current,
                 'debit' => $debit,

@@ -12,6 +12,7 @@ class Ledger extends Model
     public static function store($request){
         $data = ($request->id_ledger) ? Ledger::find($request->id_ledger) : new Ledger;
         $data->type = $request->type;
+        $data->description = $request->description;
         $data->refrence = $request->refrence;
         $data->current = $request->current;
         $data->debit = $request->debit;

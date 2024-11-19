@@ -46,6 +46,24 @@
                     <p>Kasir</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('debt.main') }}" class="nav-link {{ $menu == 'hutang' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>Hutang</p>
+                    @isset($notifHutang)
+                    <span class="badge badge-danger">{{ $notifHutang }}</span>
+                    @endisset
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('receivables.main') }}" class="nav-link {{ $menu == 'piutang' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-sign-in-alt"></i>
+                    <p>Piutang</p>
+                    @isset($notifPiutang)
+                    <span class="badge badge-danger">{{ $notifPiutang }}</span>
+                    @endisset
+                </a>
+            </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
                 <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'siswa' ? 'active' : '' }}">

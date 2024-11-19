@@ -189,6 +189,7 @@ class PurchaseController extends Controller
             $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
+                'description' => null,
                 'refrence' => $invoice,
                 'current' => $current,
                 'debit' => $debit,
@@ -308,6 +309,7 @@ class PurchaseController extends Controller
             $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
+                'description' => null,
                 'refrence' => $invoice,
                 'current' => $current,
                 'debit' => $debit,

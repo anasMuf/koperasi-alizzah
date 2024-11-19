@@ -236,6 +236,7 @@
 
     function reset() {
         dataProducts = []
+        $('select').val('')
         $('input').val('')
         loadProduct()
         loadProductDetail()

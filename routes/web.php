@@ -1,15 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\AuthContoroller;
-use App\Http\Controllers\CashierController;
-use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\CashierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardContoroller;
+use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\SIAKAD\StudentController;
-use App\Http\Controllers\VendorController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +86,20 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/','index')->name('.main');
         Route::get('/products','getProduct')->name('.products');
         Route::get('/product-variant','productVariant')->name('.product-variant');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/debt')->controller(DebtController::class)->as('debt')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/receivables')->controller(ReceivablesController::class)->as('receivables')->group(function(){
+        Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
         Route::delete('/delete','delete')->name('.delete');
