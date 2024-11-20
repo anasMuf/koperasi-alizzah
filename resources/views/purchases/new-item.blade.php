@@ -121,7 +121,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="vendor_id">Pemasok</label>
-                            <select name="vendor_id" id="vendor_id" class="form-control">
+                            <select name="vendor_id" id="vendor_id" class="form-control" required>
                                 <option value="">.:: Pilih Pemasok ::.</option>
                                 @foreach ($vendors as $vendor)
                                     <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>

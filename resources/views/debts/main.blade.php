@@ -69,7 +69,7 @@
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
                 {data: 'invoice_' , name: 'invoice_'},
-                {data: 'vendor.name' , name: 'vendor.name'},
+                {data: 'vendor.name' , name: 'vendor.name', defaultContent: ''},
                 {data: 'total_' , name: 'total_'},
                 {data: 'terbayar_' , name: 'terbayar_'},
                 {data: 'sisa_' , name: 'sisa_'},

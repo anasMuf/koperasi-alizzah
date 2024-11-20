@@ -97,7 +97,7 @@
                         <label for="student_name">Nama Siswa</label>
                         {{-- <input type="hidden" name="student_id" id="student_id" value="">
                         <input type="search" name="student_name" id="student_name" class="form-control" placeholder="Tulis Nama Siswa"> --}}
-                        <select name="student_id" id="student_id" class="form-control">
+                        <select name="student_id" id="student_id" class="form-control" required>
                             <option value="">.:: Pilih Siswa ::.</option>
                             @foreach ($students as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }} | {{ $item->no_induk }}</option>
