@@ -75,7 +75,7 @@ class OrderController extends Controller
             $saldo_awal = str_replace('.','',$request->saldo_awal);
             $request->merge([
                 'type' => 'pemasukan',
-                'description' => 'Saldo Awal',
+                'description' => null,
                 'refrence' => 'SALDOAWAL',
                 'current' => 0,
                 'debit' => $saldo_awal,

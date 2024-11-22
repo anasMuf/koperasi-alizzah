@@ -23,13 +23,19 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <input type="text" name="tanggal" class="form-control filter">
+                    <form action="{{ route('report.export') }}" method="post" id="filterForm" target="_blank">
+                        @csrf
+                        <input type="text" name="dates" class="form-control filter">
+                    </form>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Laporan Arus Kas <span id="periode"></span></h3>
-                    <div class="aksi"></div>
+                    <div class="aksi">
+                        <button type="submit" name="export" value="excel" form="filterForm" class="btn btn-success btn-sm">Export</button>
+                        <button type="submit" name="export" value="print" form="filterForm" class="btn btn-danger btn-sm">PDF</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -72,11 +78,11 @@
     })
     $('.filter').change(function(){
         dataFilter[$(this).attr('name')] = $(this).val()
-        loadData(dataFilter['tanggal'])
+        loadData(dataFilter['dates'])
     })
 
     $(document).ready(function () {
-        $('input[name="tanggal"]').daterangepicker({
+        $('input[name="dates"]').daterangepicker({
             locale: {
                 // format: 'DD/MM/YYYY',
                 format: 'DD MMM YYYY',

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ledger;
 use App\Models\Order;
+use App\Models\Ledger;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use App\Exports\CashFlowExport;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -19,58 +22,22 @@ class ReportController extends Controller
     public function index(Request $request){
         $data['menu'] = $this->menu;
         if($request->ajax()){
-            $dateRange = [];
-            if(isset($request->dates) && $request->dates != ''){
-                $dates = explode(' - ',$request->dates);
-                $time = ' 00:00:00';
-                foreach($dates as $key => $date){
-                    if($key === 1){
-                        $time = ' 23:59:59';
-                    }
-                    $dateRange[] = date('Y-m-d H:i:s',strtotime($date.$time));
-                }
-            }
-
-            $saldoAwalPeriode = Ledger::
-            where('created_at','<',$dateRange[0])->
-            orderBy('created_at','desc')->
-            first()->final ?? 0;
-
-            $result = Ledger::selectRaw('SUM(debit) as total_pemasukan, SUM(credit) as total_pengeluaran')
-            ->whereBetween('created_at', $dateRange)
-            ->whereNull('description')
-            ->first();
-
-            $hutang = Ledger::selectRaw('SUM(credit) as total_hutang')
-            ->whereBetween('created_at', $dateRange)
-            ->where('description','bayar hutang')
-            ->first()->total_hutang;
-            $piutang = Ledger::selectRaw('SUM(debit) as total_piutang')
-            ->whereBetween('created_at', $dateRange)
-            ->where('description','bayar piutang')
-            ->first()->total_piutang;
-
-            $pergerakanKas = ($result->total_pemasukan+$piutang) - ($result->total_pengeluaran+$hutang);
-            // $pergerakanKas = $result->total_pemasukan - $result->total_pengeluaran;
-
-            $saldoAkhirPeriode = $saldoAwalPeriode + $pergerakanKas;
-
-            $reports['periode'] = $request->dates;
-
-            $reports['saldo_awal_periode'] = (int)$saldoAwalPeriode;
-
-            $reports['arus_kas_operasional']['penerimaan'] = (int)$result->total_pemasukan;
-            $reports['arus_kas_operasional']['piutang'] = (int)$piutang;
-            $reports['arus_kas_operasional']['pengeluaran'] = (int)$result->total_pengeluaran;
-            $reports['arus_kas_operasional']['hutang'] = (int)$hutang;
-            $reports['arus_kas_operasional']['total_operasional'] = $pergerakanKas;
-
-            $reports['pergerakan_kas'] = $pergerakanKas;
-            $reports['saldo_akhir_periode'] = $saldoAkhirPeriode;
-
-
+            $reports = Ledger::cashFlow($request);
             return response()->json($reports,200);
         }
         return view('reports.main',$data);
+    }
+
+    public function export(Request $request){
+        $data['data'] = Ledger::cashFlow($request);
+        $namaFile = "Laporan_Arus_Kas_Periode_$request->dates.xlsx";
+        if($request->export == 'excel'){
+            return Excel::download(new CashFlowExport($data),$namaFile);
+        }elseif($request->export == 'print'){
+            $data['title'] = $namaFile;
+            return view('reports.print',$data);
+        }else{
+            return response()->json("Invalid Request",404);
+        }
     }
 }
