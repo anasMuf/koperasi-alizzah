@@ -76,7 +76,7 @@ class OrderController extends Controller
             $request->merge([
                 'type' => 'pemasukan',
                 'description' => null,
-                'refrence' => 'SALDOAWAL',
+                'refrence' => 'SALDO',
                 'current' => 0,
                 'debit' => $saldo_awal,
                 'credit' => 0,

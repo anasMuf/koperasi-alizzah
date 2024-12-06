@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Data</h3>
+                    <h3 class="card-title">Data Hutang ke Vendor</h3>
                 </div>
                 <div class="card-body">
                     <table id="table" class="table table-bordered table-striped table-hover" style="width: 100%">

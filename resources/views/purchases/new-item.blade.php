@@ -120,9 +120,9 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="vendor_id">Pemasok</label>
+                            <label for="vendor_id">Vendor</label>
                             <select name="vendor_id" id="vendor_id" class="form-control" required>
-                                <option value="">.:: Pilih Pemasok ::.</option>
+                                <option value="">.:: Pilih Vendor ::.</option>
                                 @foreach ($vendors as $vendor)
                                     <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
                                 @endforeach
@@ -338,7 +338,11 @@
             success: function (response) {
                 if(response.success){
                     Swal.fire('Success',response.message,'success')
-                    location.reload()
+                    .then((result) => {
+                        if(result.isConfirmed){
+                            location.reload()
+                        }
+                    })
                 }
             },
             error: function (xhr,status,error) {

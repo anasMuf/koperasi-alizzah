@@ -12,17 +12,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\SIAKAD\StudentController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\TeacherController;
 
 Route::get('/login', [AuthContoroller::class, 'index'])->name('login');
 Route::post('/login', [AuthContoroller::class, 'login'])->name('authenticated');
@@ -38,6 +28,13 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::prefix('/student')->controller(StudentController::class)->as('student')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/teacher')->controller(TeacherController::class)->as('teacher')->group(function(){
         Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
@@ -99,9 +96,17 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::prefix('/receivables')->controller(ReceivablesController::class)->as('receivables')->group(function(){
+        // siswa
         Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
         Route::delete('/delete','delete')->name('.delete');
+
+        // other
+        Route::get('/member','member')->name('.member');
+        Route::get('/createMember','createMember')->name('.createMember');
+        Route::post('/newReceivables','newReceivables')->name('.newReceivables');
+        Route::get('/paymentMember','paymentMember')->name('.paymentMember');
+        Route::post('/payReceivables','payReceivables')->name('.payReceivables');
     });
 });

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Member;
+use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +23,16 @@ class DatabaseSeeder extends Seeder
             'password' => 'koperasi',
             'email' => 'test@example.com',
         ]);
+
+        $teachers = Teacher::all();
+        if($teachers){
+            foreach($teachers as $teacher){
+                Member::create([
+                    'reference' => $teacher->id,
+                    'type' => 'teacher',
+                    'name' => $teacher->name,
+                ]);
+            }
+        }
     }
 }

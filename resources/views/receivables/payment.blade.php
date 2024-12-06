@@ -2,22 +2,17 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Detail Penjualan yg Belum Lunas</h3>
+                <h3 class="card-title">Riwayat Pembayaran Piutang Anggota</h3>
             </div>
             <div class="card-body">
                 <table style="with: 100%">
                     <tr>
-                        <td>Siswa</td>
+                        <td>Anggota</td>
                         <td>:</td>
-                        <td>{{ $data ? $data->student->name : '' }}</td>
+                        <td>{{ $data ? $data->member->name : '' }}</td>
                     </tr>
                     <tr>
-                        <td>Invoice</td>
-                        <td>:</td>
-                        <td>{{ $data ? $data->invoice : '' }}</td>
-                    </tr>
-                    <tr>
-                        <td>Tgl Penjualan</td>
+                        <td>Tgl Piutang</td>
                         <td>:</td>
                         <td>{{ $data ? date('d-m-Y',strtotime($data->created_at)) : '' }}</td>
                     </tr>
@@ -25,37 +20,33 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Nama Barang</th>
-                            <th>Harga</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
+                            <th>Tanggal</th>
+                            <th>Nominal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($data->order_details as $item)
+                        @forelse ($data->receivables_member_payments as $item)
                             <tr>
-                                <td>{{ $item->product_variant->product->name }}{{ ($item->product_variant->name) ? ' | '.$item->product_variant->name :'' }}</td>
-                                <td>{{ number_format($item->product_variant->price,0,',','.') }}</td>
-                                <td>{{ $item->qty }}</td>
-                                <td style="text-align: end">{{ number_format($item->subtotal,0,',','.') }}</td>
+                                <td>{{ date('d-m-Y',strtotime($data->created_at)) }}</td>
+                                <td style="text-align: end">{{ number_format($item->amount,0,',','.') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" style="text-align: center">Kosong</td>
+                                <td colspan="2" style="text-align: center">Kosong</td>
                             </tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3">Total</td>
+                            <td>Total</td>
                             <td style="text-align: end;">{{ $data ? number_format($data->total,0,',','.') : '' }}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">Terbayar</td>
+                            <td>Terbayar</td>
                             <td style="text-align: end;">{{ $data ? number_format($data->terbayar,0,',','.') : '' }}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">Belum Dibayar</td>
+                            <td>Belum Dibayar</td>
                             <td style="text-align: end;">{{ $data ? number_format($data->total - $data->terbayar,0,',','.') : '' }}</td>
                         </tr>
                     </tfoot>
@@ -126,7 +117,7 @@
         const data = new FormData(formData[0]);
         $.ajax({
             type: "post",
-            url: "{{ route('receivables.store') }}",
+            url: "{{ route('receivables.payReceivables') }}",
             data: data,
             dataType: "json",
             processData: false,
@@ -135,7 +126,7 @@
                 if(response.success){
                     Swal.fire('Success',response.message,'success')
                     back()
-                    tableSiswa.ajax.reload()
+                    tableMember.ajax.reload()
                 }
             },
             error: function (xhr,status,error) {
