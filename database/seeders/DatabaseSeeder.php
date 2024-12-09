@@ -17,21 +17,23 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        // \App\Models\User::factory()->create([
+        //     'name' => 'koperasi',
+        //     'username' => 'koperasi',
+        //     'password' => 'koperasi',
+        //     'email' => 'test@example.com',
+        //     'role' => 'admin',
+        // ]);
         \App\Models\User::factory()->create([
-            'name' => 'koperasi',
-            'username' => 'koperasi',
-            'password' => 'koperasi',
-            'email' => 'test@example.com',
-        ]);
-        \App\Models\User::factory()->create([
-            'name' => 'adam',
-            'username' => 'adam',
-            'password' => 'adam',
-            'email' => 'test@example.com',
+            'name' => 'yayasan',
+            'username' => 'yayasan',
+            'password' => 'yayasan',
+            'role' => 'yayasan',
         ]);
 
         $teachers = Teacher::all();
-        if($teachers){
+        $members = Member::all();
+        if($teachers && !$members){
             foreach($teachers as $teacher){
                 Member::create([
                     'reference' => $teacher->id,

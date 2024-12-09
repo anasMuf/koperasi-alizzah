@@ -13,7 +13,11 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
+        @php
+            $role = Auth::getUser()->role;
+        @endphp
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if ($role == 'superadmin' || $role == 'admin' || $role == 'yayasan')
             <li class="nav-header">RINGKASAN</li>
             <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link {{ $menu == 'dashboard' ? 'active' : '' }}">
@@ -27,6 +31,7 @@
                     <p>Lihat Arus Kas</p>
                 </a>
             </li>
+            @if($role == 'superadmin' || $role == 'admin')
             <li class="nav-header">TRANSAKSI</li>
             <li class="nav-item">
                 <a href="{{ route('purchase.new-item') }}" class="nav-link {{ $menu == 'pembelian baru' ? 'active' : '' }}">
@@ -101,15 +106,15 @@
                     <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>Saldo</p>
                 </a>
-                <a href="#
-                {{-- {{ route('order.add-saldo') }} --}}
-                " class="nav-link
-                {{-- {{ $menu == 'saldo awal' ? 'active' : '' }} --}}
-                ">
+            </li>
+            {{-- <li class="nav-item">
+                <a href="{{ route('user.main') }}" class="nav-link {{ $menu == 'akun pengguna' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-users"></i>
                     <p>Akun</p>
                 </a>
-            </li>
+            </li> --}}
+            @endif
+            @endif
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

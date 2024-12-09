@@ -8,7 +8,7 @@
         <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Saldo awal belum diisi</h3>
 
         <p>
-           Segera lakukan input saldo awal untuk menggunakan aplikasi ini, pergi ke halaman <a href="{{ route('order.add-saldo') }}">Saldo Awal</a>
+           Segera lakukan input saldo awal untuk menggunakan aplikasi ini, pergi ke halaman <a href="{{ route('order.add-saldo') }}">Saldo</a>
         </p>
 
     </div>

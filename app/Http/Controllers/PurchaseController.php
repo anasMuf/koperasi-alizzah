@@ -70,7 +70,7 @@ class PurchaseController extends Controller
         $data['menu'] = 'pembelian baru';
         if(!$ledger = Ledger::where([
             'type' => 'pemasukan',
-            'refrence' => 'SALDOAWAL'
+            'refrence' => 'SALDO'
         ])->first()){
             return view('errors.saldo-awal',$data);
         }
@@ -218,7 +218,7 @@ class PurchaseController extends Controller
         $data['menu'] = 'penambahan stok';
         if(!$ledger = Ledger::where([
             'type' => 'pemasukan',
-            'refrence' => 'SALDOAWAL'
+            'refrence' => 'SALDO'
         ])->first()){
             return view('errors.saldo-awal',$data);
         }
