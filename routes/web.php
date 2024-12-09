@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\SIAKAD\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 
 Route::get('/login', [AuthContoroller::class, 'index'])->name('login');
 Route::post('/login', [AuthContoroller::class, 'login'])->name('authenticated');
@@ -25,6 +26,13 @@ Route::middleware(['auth'])->group(function() {
     Route::prefix('/report')->controller(ReportController::class)->as('report')->group(function(){
         Route::get('/','index')->name('.main');
         Route::post('/export','export')->name('.export');
+    });
+
+    Route::prefix('/user')->controller(UserController::class)->as('user')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
     });
 
     Route::prefix('/student')->controller(StudentController::class)->as('student')->group(function(){

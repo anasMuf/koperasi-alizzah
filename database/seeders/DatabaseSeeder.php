@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'password' => 'koperasi',
             'email' => 'test@example.com',
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'adam',
+            'username' => 'adam',
+            'password' => 'adam',
+            'email' => 'test@example.com',
+        ]);
 
         $teachers = Teacher::all();
         if($teachers){

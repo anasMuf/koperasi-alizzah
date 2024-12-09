@@ -99,7 +99,15 @@
             <li class="nav-item">
                 <a href="{{ route('order.add-saldo') }}" class="nav-link {{ $menu == 'saldo awal' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-money-bill-wave"></i>
-                    <p>Saldo Awal</p>
+                    <p>Saldo</p>
+                </a>
+                <a href="#
+                {{-- {{ route('order.add-saldo') }} --}}
+                " class="nav-link
+                {{-- {{ $menu == 'saldo awal' ? 'active' : '' }} --}}
+                ">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>Akun</p>
                 </a>
             </li>
         </ul>
