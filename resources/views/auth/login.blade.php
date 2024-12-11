@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>Koperasi Al-Izzah | Log In</title>
 
     @include('layouts.dependencies.stayles')
 </head>

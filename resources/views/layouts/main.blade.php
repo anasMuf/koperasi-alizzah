@@ -52,7 +52,7 @@
 
     @stack('prepend-scripts')
     @include('layouts.dependencies.scripts')
-    <!-- AdminLTE for demo purposes -->
+
     <script src="{{ asset('assets/dist/js/demo.js') }}"></script>
     @stack('append-scripts')
 
