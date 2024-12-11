@@ -20,7 +20,7 @@
             @if ($role == 'superadmin' || $role == 'admin' || $role == 'yayasan')
             <li class="nav-header">RINGKASAN</li>
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link {{ $menu == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ route('dashboard.main') }}" class="nav-link {{ $menu == 'dashboard' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
                 </a>
@@ -102,7 +102,7 @@
             </li>
             <li class="nav-header">PENGATURAN</li>
             <li class="nav-item">
-                <a href="{{ route('order.add-saldo') }}" class="nav-link {{ $menu == 'saldo awal' ? 'active' : '' }}">
+                <a href="{{ route('saldo.main') }}" class="nav-link {{ $menu == 'saldo awal' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>Saldo</p>
                 </a>

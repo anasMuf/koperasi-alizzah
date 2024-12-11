@@ -41,7 +41,7 @@ class AuthContoroller extends Controller
             }
 
             if (Auth::attempt(['username' => $request->username, 'password' => $request->password], $request->filled('remember'))) {
-                return redirect()->route('dashboard')->with(['success' => 'Login Berhasil']);
+                return redirect()->route('dashboard.main')->with(['success' => 'Login Berhasil']);
             }
 
             return redirect()->route('login')->withErrors(['warning' => 'Login gagal, periksa kembali username dan password.']);

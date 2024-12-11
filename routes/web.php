@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\ReceivablesController;
+use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SIAKAD\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -21,7 +22,10 @@ Route::post('/login', [AuthContoroller::class, 'login'])->name('authenticated');
 Route::middleware(['auth'])->group(function() {
     Route::get('/logout/{id}', [AuthContoroller::class, 'logout'])->name('logout');
 
-    Route::get('/', [DashboardContoroller::class, 'index'])->name('dashboard');
+    Route::prefix('/')->controller(DashboardContoroller::class)->as('dashboard')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/data','data')->name('.data');
+    });
 
     Route::prefix('/report')->controller(ReportController::class)->as('report')->group(function(){
         Route::get('/','index')->name('.main');
@@ -81,9 +85,6 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/form','form')->name('.form');
             Route::post('/store','store')->name('.store');
             Route::delete('/delete','delete')->name('.delete');
-
-            Route::get('add-saldo','addSaldo')->name('.add-saldo');
-            Route::post('store-saldo','storeSaldo')->name('.store-saldo');
         });
     });
 
@@ -116,5 +117,12 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/newReceivables','newReceivables')->name('.newReceivables');
         Route::get('/paymentMember','paymentMember')->name('.paymentMember');
         Route::post('/payReceivables','payReceivables')->name('.payReceivables');
+    });
+
+    Route::prefix('/saldo')->controller(SaldoController::class)->as('saldo')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
     });
 });
