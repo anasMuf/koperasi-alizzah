@@ -22,7 +22,7 @@ const getData = async function(param) {
 async function penjualanPiutangChart() {
     var penjualanPiutang = $('#penjualanPiutang').get(0).getContext('2d');
 
-    const data = await getData({ data: 'penjualanPiutang', tahun: $('#tahun').val() });
+    const data = await getData({ data: 'penjualanPiutang', tahun: $('#tahunPenjualanPiutang').val() });
     if (!data) return;
 
     var data_penjualanPiutang = {
