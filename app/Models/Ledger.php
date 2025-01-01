@@ -9,6 +9,16 @@ class Ledger extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'type',
+        'description',
+        'refrence',
+        'current',
+        'debit',
+        'credit',
+        'final'
+    ];
+
     public static function store($request){
         $data = ($request->id_ledger) ? Ledger::find($request->id_ledger) : new Ledger;
         $data->type = $request->type;
@@ -43,7 +53,10 @@ class Ledger extends Model
 
         $result = Ledger::selectRaw('SUM(debit) as total_pemasukan, SUM(credit) as total_pengeluaran')
         ->whereBetween('created_at', $dateRange)
-        ->whereNull('description')
+        ->where(function($q) {
+            $q->whereNotIN('description',['bayar hutang','bayar piutang'])
+            ->orWhereNull('description');
+        })
         ->first();
 
         $hutang = Ledger::selectRaw('SUM(credit) as total_hutang')

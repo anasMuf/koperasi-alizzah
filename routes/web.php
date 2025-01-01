@@ -14,6 +14,7 @@ use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\SIAKAD\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 
 Route::get('/login', [AuthContoroller::class, 'index'])->name('login');
@@ -117,6 +118,13 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/newReceivables','newReceivables')->name('.newReceivables');
         Route::get('/paymentMember','paymentMember')->name('.paymentMember');
         Route::post('/payReceivables','payReceivables')->name('.payReceivables');
+    });
+
+    Route::prefix('/transaction')->controller(TransactionController::class)->as('transaction')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
     });
 
     Route::prefix('/saldo')->controller(SaldoController::class)->as('saldo')->group(function(){

@@ -87,6 +87,7 @@ async function posisiSaldoChart() {
     var maxSaldo = Math.max(...saldoValues);
     var maxY = Math.ceil(maxSaldo) + Math.ceil(maxSaldo)*20/100;
 
+
     var data_posisiSaldo = {
         labels: data.map(value => value.month_name),
         datasets: [
@@ -193,7 +194,9 @@ async function piutangAnggotaChart() {
                     max: maxX,
                     callback: function(value) {
                         return formatRibu(value);
-                    }
+                    },
+                    maxRotation: 60,
+                    minRotation: 30,
                 },
                 // stacked: true
             }],

@@ -69,6 +69,12 @@
                     @endisset
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('transaction.main') }}" class="nav-link {{ $menu == 'transaksi umum' ? 'active' : '' }}">
+                    <i class="nav-icon fab fa-slack-hash"></i>
+                    <p>Transaksi Umum</p>
+                </a>
+            </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
                 <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'siswa' ? 'active' : '' }}">

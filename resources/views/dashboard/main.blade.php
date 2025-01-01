@@ -6,7 +6,7 @@
 
 @section('contents')
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Penjualan dan Piutang</h3>
@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Posisi Saldo</h3>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Piutang Anggota</h3>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Stok barang</h3>

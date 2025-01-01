@@ -30,10 +30,16 @@ class DashboardContoroller extends Controller
             ->whereYear('created_at', date('Y'))
             ->first();
         }elseif($request->data == 'posisiSaldo'){
-            $dataAvailable = Ledger::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, SUM(final) as saldo')
-            ->where('refrence', 'SALDO')
+            $dataAvailable = Ledger::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, final as saldo')
+            // ->where('refrence', 'SALDO')
             ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
+            // ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
+            ->whereRaw('ledgers.created_at = (
+                SELECT MAX(l2.created_at)
+                FROM ledgers as l2
+                WHERE MONTH(ledgers.created_at) = MONTH(l2.created_at)
+                  AND YEAR(ledgers.created_at) = YEAR(l2.created_at)
+            )')
             ->orderByRaw('YEAR(created_at),MONTH(created_at)')
             ->get();
 
