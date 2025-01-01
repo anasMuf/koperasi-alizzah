@@ -22,7 +22,7 @@ const getData = async function(param) {
 async function penjualanPiutangChart() {
     var penjualanPiutang = $('#penjualanPiutang').get(0).getContext('2d');
 
-    const data = await getData({ data: 'penjualanPiutang' });
+    const data = await getData({ data: 'penjualanPiutang', tahun: $('#tahun').val() });
     if (!data) return;
 
     var data_penjualanPiutang = {
@@ -80,7 +80,7 @@ async function penjualanPiutangChart() {
 async function posisiSaldoChart() {
     var posisiSaldo = $('#posisiSaldo').get(0).getContext('2d');
 
-    const data = await getData({ data: 'posisiSaldo' });
+    const data = await getData({ data: 'posisiSaldo', tahun: $('#tahunPosisiSaldo').val() });
     if (!data) return;
 
     var saldoValues = data.map(value => value.saldo)

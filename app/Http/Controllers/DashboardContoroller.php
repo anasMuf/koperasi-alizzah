@@ -27,12 +27,12 @@ class DashboardContoroller extends Controller
         $data = null;
         if($request->data == 'penjualanPiutang'){
             $data = Order::selectRaw('SUM(total) as penjualan, SUM(total - terbayar) as piutang')
-            ->whereYear('created_at', date('Y'))
+            ->whereYear('created_at', $request->tahun)
             ->first();
         }elseif($request->data == 'posisiSaldo'){
             $dataAvailable = Ledger::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, final as saldo')
             // ->where('refrence', 'SALDO')
-            ->whereYear('created_at', date('Y'))
+            ->whereYear('created_at', $request->tahun)
             // ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
             ->whereRaw('ledgers.created_at = (
                 SELECT MAX(l2.created_at)
@@ -65,14 +65,14 @@ class DashboardContoroller extends Controller
                     $data[] = [
                         'month' => $month,
                         'month_name' => $monthNames[$month],
-                        'year' => date('Y'),
+                        'year' => $request->tahun,
                         'saldo' => $dataForMonth->saldo
                     ];
                 } else {
                     $data[] = [
                         'month' => $month,
                         'month_name' => $monthNames[$month],
-                        'year' => date('Y'),
+                        'year' => $request->tahun,
                         'saldo' => 0
                     ];
                 }
