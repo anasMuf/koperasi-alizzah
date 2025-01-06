@@ -85,6 +85,7 @@ class DashboardContoroller extends Controller
         }elseif($request->data == 'piutangAnggota'){
             $data = ReceivablesMember::select('receivables_members.total', 'receivables_members.terbayar', DB::raw('(receivables_members.total - receivables_members.terbayar) as sisa'), 'm.name')
             ->leftJoin('members as m', 'receivables_members.member_id', '=', 'm.id')
+            ->where('status','BELUM LUNAS')
             ->orderBy('sisa', 'desc')
             ->get();
         }elseif($request->data == 'stokBarang'){

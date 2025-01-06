@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Ledger;
 use App\Helpers\LogPretty;
 use Illuminate\Http\Request;
@@ -25,6 +26,9 @@ class TransactionController extends Controller
 
             return DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('trx_date_', function($row){
+                return Carbon::parse($row->trx_date)->isoFormat('DD MMMM YYYY');
+            })
             ->addColumn('nominal', function($row){
                 $nominal = 0;
                 if($row->type == 'pemasukan'){

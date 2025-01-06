@@ -68,7 +68,7 @@
             scrollX: true,
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
-                {data: 'created_at' , name: 'created_at'},
+                {data: 'trx_date_' , name: 'trx_date_'},
                 {data: 'type' , name: 'type'},
                 {data: 'nominal' , name: 'nominal'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},

@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="date">Tanggal</label>
-                        <input type="date" name="date" id="date" class="form-control" placeholder="Masukkan taggal bayar" value="{{ date('Y-m-d') }}">
+                        <input type="date" name="date" id="date" class="form-control" placeholder="Masukkan taggal bayar" value="{{ $data ? date('Y-m-d',strtotime($data->date)) : date('Y-m-d') }}">
                     </div>
                     <div class="form-group">
                         <label for="member">Anggota</label>

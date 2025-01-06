@@ -9,8 +9,8 @@
                 <input type="hidden" name="id" value="{{ $data ? $data->id : '' }}">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="paid_at">Tanggal Transaksi</label>
-                        <input type="date" name="paid_at" id="paid_at" class="form-control" placeholder="Masukkan taggal" value="{{ date('Y-m-d') }}">
+                        <label for="trx_date">Tanggal Transaksi</label>
+                        <input type="date" name="trx_date" id="trx_date" class="form-control" placeholder="Masukkan taggal" value="{{ $data ? date('Y-m-d',strtotime($data->trx_date)) : date('Y-m-d') }}">
                     </div>
                     <div class="form-group">
                         <label for="type">Tipe Transaksi</label>
