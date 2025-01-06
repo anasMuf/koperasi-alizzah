@@ -56,6 +56,7 @@
             </div>
             <!-- /.card -->
         </div>
+        {{-- <div class="col"><h1>Dalam Manitenance</h1></div> --}}
     </div>
 </div>
 <div class="other-page"></div>

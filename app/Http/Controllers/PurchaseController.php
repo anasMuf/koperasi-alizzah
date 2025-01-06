@@ -153,6 +153,7 @@ class PurchaseController extends Controller
             $purchase->vendor_id = $request->vendor_id;
             $purchase->total = $total;
             $purchase->terbayar = $terbayar;
+            $purchase->purchase_at = $request->purchase_at;
             $purchase->save();
 
             if($request->is_variant){
@@ -182,19 +183,23 @@ class PurchaseController extends Controller
                 $nominalTotalAkhir = $terbayar;
             }
 
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->purchase_at));
+
             $debit = 0;
             $credit = $nominalTotalAkhir;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
                 'description' => null,
                 'refrence' => $invoice,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);
@@ -270,6 +275,7 @@ class PurchaseController extends Controller
             $purchase->vendor_id = $request->vendor_id;
             $purchase->total = 0;
             $purchase->terbayar = 0;
+            $purchase->purchase_at = $request->purchase_at;
             $purchase->save();
 
             foreach($request->products as $product){
@@ -302,19 +308,23 @@ class PurchaseController extends Controller
                 $nominalTotalAkhir = $terbayar;
             }
 
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->purchase_at));
+
             $debit = 0;
             $credit = $nominalTotalAkhir;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
                 'description' => null,
                 'refrence' => $invoice,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);

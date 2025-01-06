@@ -78,6 +78,7 @@
             </div>
         </div>
     </div>
+    {{-- <div class="col"><h1>Dalam Manitenance</h1></div> --}}
 </div>
 @endsection
 

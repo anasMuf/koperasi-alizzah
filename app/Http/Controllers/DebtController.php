@@ -139,19 +139,23 @@ class DebtController extends Controller
             $purchase->save();
 
             //ledger
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->paid_at));
+
             $debit = 0;
             $credit = $amount;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
                 'description' => 'bayar hutang',
                 'refrence' => $payment->id,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);

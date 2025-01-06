@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Ledger;
+use App\Models\ViewLedger;
+use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\ReceivablesMember;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardContoroller extends Controller
@@ -30,17 +30,15 @@ class DashboardContoroller extends Controller
             ->whereYear('created_at', $request->tahun)
             ->first();
         }elseif($request->data == 'posisiSaldo'){
-            $dataAvailable = Ledger::selectRaw('MONTH(created_at) as month, YEAR(created_at) as year, final as saldo')
-            // ->where('refrence', 'SALDO')
-            ->whereYear('created_at', $request->tahun)
-            // ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
-            ->whereRaw('ledgers.created_at = (
-                SELECT MAX(l2.created_at)
-                FROM ledgers as l2
-                WHERE MONTH(ledgers.created_at) = MONTH(l2.created_at)
-                  AND YEAR(ledgers.created_at) = YEAR(l2.created_at)
+            $dataAvailable = ViewLedger::selectRaw('MONTH(trx_date) as month, YEAR(trx_date) as year, final as saldo')
+            ->whereYear('trx_date', $request->tahun)
+            ->whereRaw('view_ledgers.trx_date = (
+                SELECT MAX(l2.trx_date)
+                FROM view_ledgers as l2
+                WHERE MONTH(view_ledgers.trx_date) = MONTH(l2.trx_date)
+                AND YEAR(view_ledgers.trx_date) = YEAR(l2.trx_date)
             )')
-            ->orderByRaw('YEAR(created_at),MONTH(created_at)')
+            ->orderByRaw('YEAR(trx_date),MONTH(trx_date)')
             ->get();
 
             $monthNames = [
@@ -58,24 +56,31 @@ class DashboardContoroller extends Controller
                 12 => 'Desember'
             ];
             $data = [];
+            $lastSaldo = 0;
+
             foreach (range(1, 12) as $month) {
                 $dataForMonth = $dataAvailable->firstWhere('month', $month);
 
-                if ($dataForMonth) {
-                    $data[] = [
-                        'month' => $month,
-                        'month_name' => $monthNames[$month],
-                        'year' => $request->tahun,
-                        'saldo' => $dataForMonth->saldo
-                    ];
-                } else {
-                    $data[] = [
-                        'month' => $month,
-                        'month_name' => $monthNames[$month],
-                        'year' => $request->tahun,
-                        'saldo' => 0
-                    ];
+                if(date('m') <= $month){
+                    if ($dataForMonth) {
+                        $lastSaldo = $dataForMonth->saldo;
+                        $data[] = [
+                            'month' => $month,
+                            'month_name' => $monthNames[$month],
+                            'year' => $request->tahun,
+                            'saldo' => $lastSaldo
+                        ];
+                    }
                 }
+                // else {
+
+                //     // $data[] = [
+                //     //     'month' => $month,
+                //     //     'month_name' => $monthNames[$month],
+                //     //     'year' => $request->tahun,
+                //     //     'saldo' => $lastSaldo
+                //     // ];
+                // }
             }
         }elseif($request->data == 'piutangAnggota'){
             $data = ReceivablesMember::select('receivables_members.total', 'receivables_members.terbayar', DB::raw('(receivables_members.total - receivables_members.terbayar) as sisa'), 'm.name')

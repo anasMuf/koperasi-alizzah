@@ -120,6 +120,10 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="purchase_at">Tanggal Pembelian</label>
+                            <input type="date" name="purchase_at" id="purchase_at" class="form-control" value="{{ date('Y-m-d') }}">
+                        </div>
+                        <div class="form-group">
                             <label for="vendor_id">Vendor</label>
                             <select name="vendor_id" id="vendor_id" class="form-control" required>
                                 <option value="">.:: Pilih Vendor ::.</option>

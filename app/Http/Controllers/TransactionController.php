@@ -66,14 +66,14 @@ class TransactionController extends Controller
         try {
             $rules = [
                 'amount' => 'required|min:1',
-                'paid_at' => 'nullable|date',
+                'trx_date' => 'nullable|date',
                 'type' => 'required',
                 'description' => 'nullable|string',
             ];
 
             $attributes = [
                 'amount' => 'Nominal Dibayar',
-                'paid_at' => 'Tanggal Bayar',
+                'trx_date' => 'Tanggal Bayar',
                 'type' => 'Tipe Transaksi',
                 'description' => 'Deskripsi',
             ];
@@ -93,48 +93,50 @@ class TransactionController extends Controller
             }
 
             $amount = str_replace('.','',$request->amount);
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->trx_date));
 
             //ledger
-            if($request->id){
-                $request->merge([
-                    'id_ledger' => $request->id,
-                ]);
-                $lastLedgerEntry = Ledger::find($request->id);
-            }else{
-                $lastLedgerEntry = Ledger::latest()->first();
-            }
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // if($request->id){
+            //     $request->merge([
+            //         'id_ledger' => $request->id,
+            //     ]);
+            //     $lastLedgerEntry = Ledger::find($request->id);
+            // }else{
+            //     $lastLedgerEntry = Ledger::latest()->first();
+            // }
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
             $debit = $request->type == 'pemasukan' ? $amount : 0;
             $credit = $request->type == 'pengeluaran' ? $amount : 0;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'refrence' => 'transaksi umum',
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);
 
             //recalculate jika edit
-            if($request->id){
-                $previousFinal = $final;
-                $ledgersLatestEdit = Ledger::where('created_at','>', $lastLedgerEntry->created_at)->get();
-                foreach($ledgersLatestEdit as $ledger){
-                    $currentNew = $previousFinal;
-                    $finalNew = $currentNew + $ledger->debit - $ledger->credit;
+            // if($request->id){
+            //     $previousFinal = $final;
+            //     $ledgersLatestEdit = Ledger::where('created_at','>', $lastLedgerEntry->created_at)->get();
+            //     foreach($ledgersLatestEdit as $ledger){
+            //         $currentNew = $previousFinal;
+            //         $finalNew = $currentNew + $ledger->debit - $ledger->credit;
 
-                    // Update record
-                    Ledger::where('id', $ledger->id)
-                        ->update([
-                            'current' => $currentNew,
-                            'final' => $finalNew,
-                        ]);
+            //         // Update record
+            //         Ledger::where('id', $ledger->id)
+            //             ->update([
+            //                 'current' => $currentNew,
+            //                 'final' => $finalNew,
+            //             ]);
 
-                    $previousFinal = $finalNew;
-                }
-            }
+            //         $previousFinal = $finalNew;
+            //     }
+            // }
 
             DB::commit();
 

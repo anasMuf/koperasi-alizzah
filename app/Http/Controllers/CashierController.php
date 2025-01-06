@@ -86,6 +86,7 @@ class CashierController extends Controller
             $order->user_id = Auth::getUser()->id;
             $order->total = 0;
             $order->terbayar = 0;
+            $order->order_at = $request->order_at;
             $order->save();
 
             foreach($request->products as $product){
@@ -126,19 +127,23 @@ class CashierController extends Controller
                 $nominalTotalAkhir = $terbayar;
             }
 
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->order_at));
+
             $debit = $nominalTotalAkhir;
             $credit = 0;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pemasukan',
                 'description' => null,
                 'refrence' => $invoice,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);

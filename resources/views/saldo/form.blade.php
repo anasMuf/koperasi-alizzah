@@ -8,6 +8,10 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
+                        <label for="trx_date">Tanggal</label>
+                        <input type="date" name="trx_date" id="trx_date" class="form-control" value="{{ date('Y-m-d') }}">
+                    </div>
+                    <div class="form-group">
                         <label for="tambah_saldo">Saldo</label>
                         <input type="text" name="tambah_saldo" id="tambah_saldo" class="form-control" placeholder="Masukkan nilai saldo" onkeyup="formatNumber(this)">
                     </div>

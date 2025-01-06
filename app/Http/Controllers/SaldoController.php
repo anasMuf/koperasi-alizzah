@@ -30,13 +30,13 @@ class SaldoController extends Controller
             }
             $data = Ledger::where('refrence','SALDO')->
             when($dateRange, function($q) use ($dateRange){
-                $q->whereBetween('created_at',$dateRange);
+                $q->whereBetween('trx_date',$dateRange);
             })
             ->get();
             return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('tgl', function($row){
-                return Carbon::parse($row->created_at)->isoFormat('DD MMMM YYYY');
+                return Carbon::parse($row->trx_date)->isoFormat('DD MMMM YYYY');
             })
             ->addColumn('saldo_awal', function($row){
                 $nominalAkhir = $row->current;
@@ -75,8 +75,9 @@ class SaldoController extends Controller
 
     public function store(Request $request){
         try {
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->trx_date));
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
             $tambah_saldo = str_replace('.','',$request->tambah_saldo);
             $debit = $tambah_saldo;
             $credit = 0;
@@ -84,10 +85,11 @@ class SaldoController extends Controller
                 'type' => 'pemasukan',
                 'description' => null,
                 'refrence' => 'SALDO',
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $current + $debit - $credit,
+                // 'final' => $current + $debit - $credit,
             ]);
 
             Ledger::store($request);

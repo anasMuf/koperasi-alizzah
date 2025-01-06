@@ -39,6 +39,29 @@
                     </table>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h3 class="card-title">Data Hutang ke luar</h3>
+                    <div class="aksi">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="openDataOther()">Tambah</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="tableMember" class="table table-bordered table-striped table-hover" style="width: 100%">
+                        <thead class="">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Total</th>
+                                <th>Terbayar</th>
+                                <th>Sisa</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
             <!-- /.card -->
         </div>
     </div>

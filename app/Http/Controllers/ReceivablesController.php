@@ -144,19 +144,23 @@ class ReceivablesController extends Controller
             $order->save();
 
             //ledger
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->paid_at));
+
             $debit = $amount;
             $credit = 0;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pemasukan',
                 'description' => 'bayar piutang',
                 'refrence' => $payment->id,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);
@@ -266,19 +270,23 @@ class ReceivablesController extends Controller
             $receivablesMember->save();
 
             //ledger
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->date));
+
             $debit = 0;
             $credit = $amount;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pengeluaran',
                 'description' => 'piutang anggota',
                 'refrence' => $receivablesMember->id,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);
@@ -371,19 +379,23 @@ class ReceivablesController extends Controller
             $receivablesMember->save();
 
             //ledger
-            $lastLedgerEntry = Ledger::latest()->first();
-            $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+            // $lastLedgerEntry = Ledger::latest()->first();
+            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+
+            $trx_date = date('Y-m-d H:i:s',strtotime($request->paid_at));
+
             $debit = $amount;
             $credit = 0;
-            $final = $current + $debit - $credit;
+            // $final = $current + $debit - $credit;
             $request->merge([
                 'type' => 'pemasukan',
                 'description' => 'bayar piutang',
                 'refrence' => $payment->id,
-                'current' => $current,
+                // 'current' => $current,
+                'trx_date' => $trx_date,
                 'debit' => $debit,
                 'credit' => $credit,
-                'final' => $final,
+                // 'final' => $final,
             ]);
 
             Ledger::store($request);

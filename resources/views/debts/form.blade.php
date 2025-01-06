@@ -72,7 +72,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="paid_at">Tanggal Bayar</label>
-                        <input type="date" name="paid_at" id="paid_at" class="form-control" placeholder="Masukkan taggal bayar">
+                        <input type="date" name="paid_at" id="paid_at" class="form-control" placeholder="Masukkan taggal bayar" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="form-group">
                         <label for="amount">Nominal yg dibayarkan</label>

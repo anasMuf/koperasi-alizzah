@@ -113,7 +113,7 @@ async function posisiSaldoChart() {
             yAxes: [{
                 ticks: {
                     beginAtZero: false,
-                    max: maxY,
+                    // max: maxY,
                     callback: function(value) {
                         return formatRibu(value);
                     }
@@ -130,6 +130,9 @@ async function posisiSaldoChart() {
                     weight: 'bold',
                     size: 12
                 },
+                backgroundColor: 'rgb(42, 193, 120)', // Warna background label
+                borderRadius: 4,
+                padding: 4,
                 anchor: 'end',
                 align: 'top',
             }
@@ -222,6 +225,9 @@ async function piutangAnggotaChart() {
                     weight: 'bold',
                     size: 12
                 },
+                backgroundColor: 'rgb(42, 193, 120)', // Warna background label
+                borderRadius: 4,
+                padding: 4,
                 anchor: 'end',
                 align: 'right'
             }
@@ -276,7 +282,7 @@ async function stokBarangChart() {
         responsive: true,
         scales: {
             yAxes: [{
-                max: maxY,
+                // max: maxY,
                 ticks: {
                     beginAtZero: false,
                     callback: function(value) {

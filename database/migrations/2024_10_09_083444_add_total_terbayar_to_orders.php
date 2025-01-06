@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->decimal('total', 11, 2)->after('student_id');
             $table->decimal('terbayar', 11, 2)->after('total');
+            $table->date('order_at')->after('terbayar')->nullable();
             $table->bigInteger('user_id');
         });
     }
@@ -26,6 +27,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('total');
             $table->dropColumn('terbayar');
+            $table->dropColumn('order_at');
             $table->dropColumn('user_id');
         });
     }

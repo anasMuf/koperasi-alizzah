@@ -92,6 +92,10 @@
     <div class="col-md-4 details">
         <div class="card">
             <div class="card-body">
+                <div class="form-group">
+                    <label for="order_at">Tanggal Transaksi</label>
+                    <input type="date" name="order_at" id="order_at" class="form-control" value="{{ date('Y-m-d') }}">
+                </div>
                 <div class="student">
                     <div class="form-group">
                         <label for="student_name">Nama Siswa</label>

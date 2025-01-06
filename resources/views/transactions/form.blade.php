@@ -8,9 +8,9 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ $data ? $data->id : '' }}">
                 <div class="card-body">
-                    <div class="form-group" style="display: none">
+                    <div class="form-group">
                         <label for="paid_at">Tanggal Transaksi</label>
-                        <input type="hidden" name="paid_at" id="paid_at" class="form-control" placeholder="Masukkan taggal">
+                        <input type="date" name="paid_at" id="paid_at" class="form-control" placeholder="Masukkan taggal" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="form-group">
                         <label for="type">Tipe Transaksi</label>

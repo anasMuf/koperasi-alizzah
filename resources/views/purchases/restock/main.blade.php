@@ -89,6 +89,10 @@
     <div class="col-md-4 details">
         <div class="card">
             <div class="card-body">
+                <div class="form-group">
+                    <label for="purchase_at">Tanggal Pembelian</label>
+                    <input type="date" name="purchase_at" id="purchase_at" class="form-control" value="{{ date('Y-m-d') }}">
+                </div>
                 <div class="student">
                     <div class="form-group">
                         <label for="vendor_id">Vendor</label>
@@ -96,7 +100,7 @@
                             <option value="">.:: Pilih Vendor ::.</option>
                             @foreach ($vendors as $vendor)
                                 <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
-                            @endforeach)
+                            @endforeach
                         </select>
                     </div>
                 </div>

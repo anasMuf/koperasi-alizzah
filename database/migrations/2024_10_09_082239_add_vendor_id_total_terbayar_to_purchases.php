@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigInteger('vendor_id')->nullable()->after('user_id');
             $table->decimal('total', 11, 2)->after('vendor_id')->comment('harga beli');
             $table->decimal('terbayar', 11, 2)->after('total');
+            $table->date('purchase_at')->after('terbayar');
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->dropColumn('vendor_id');
             $table->dropColumn('total');
             $table->dropColumn('terbayar');
+            $table->dropColumn('purchase_at');
         });
     }
 };
