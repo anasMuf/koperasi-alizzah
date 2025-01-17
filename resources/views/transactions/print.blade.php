@@ -80,6 +80,9 @@
         table .keterangan {
             text-align: left;
         }
+        table .tipe {
+            text-align: center;
+        }
 
         table .total {
             text-align: right;
@@ -98,61 +101,46 @@
 </head>
 <body>
     <div class="report">
-        <h1>Laporan <span>Arus Kas</span></h1>
+        <h1>Data <span>Transaksi Umum</span></h1>
         <h2>Kopersai Al-Izzah</h2>
-        <p>Periode {{ $data['periode'] }}</p>
+        <p>Periode {{ $periode }}</p>
         <table>
             <thead>
                 <tr>
+                    <th style="width: 15%;">Tanggal</th>
                     <th>Keterangan</th>
-                    <th>Jumlah</th>
+                    <th>Tipe</th>
+                    <th>Nominal</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th class="keterangan"><h5><strong>SALDO AWAL PERIODE</strong></h5></th>
-                    <th class="total">{{ (int)$data['saldo_awal_periode'] }}</th>
+                @php
+                    $debit = 0;
+                    $credit = 0;
+                @endphp
+                @foreach ($data as $key => $item)
+                @php
+                    $debit += $item->debit;
+                    $credit += $item->credit;
+                @endphp
+                <tr style="{{ ($key === 23) ? 'page-break-after: auto' : '' }}">
+                    <td>{{ \Carbon\Carbon::parse($item->trx_date)->isoFormat('DD MMM YYYY') }}</td>
+                    <td class="keterangan">{{ $item->description }}</td>
+                    <td class="tipe">{{ ucfirst($item->type) }}</td>
+                    @if ($item->debit == 'pemasukan')
+                    <td class="total">{{ $item->debit }}</td>
+                    @else
+                    <td class="total min">{{ $item->credit }}</td>
+                    @endif
                 </tr>
+                @endforeach
                 <tr>
-                    <th class="section" colspan="2"><h6><strong>A. Arus Kas Kegiatan Operasional</strong></h6></th>
-                </tr>
-                @if ($data['arus_kas_operasional']['penerimaan'])
-                <tr>
-                    <td class="keterangan">Penerimaan</td>
-                    <td class="total">{{ (int)$data['arus_kas_operasional']['penerimaan'] }}</td>
-                </tr>
-                @endif
-                @if ($data['arus_kas_operasional']['piutang'])
-                <tr>
-                    <td class="keterangan">Piutang</td>
-                    <td class="total">{{ (int)$data['arus_kas_operasional']['penerimaan'] }}</td>
-                </tr>
-                @endif
-                @if ($data['arus_kas_operasional']['pengeluaran'])
-                <tr>
-                    <td class="keterangan">(Pengeluaran)</td>
-                    <td class="total">{{ -1 * (int)$data['arus_kas_operasional']['pengeluaran'] }}</td>
-                </tr>
-                @endif
-                @if ($data['arus_kas_operasional']['hutang'])
-                <tr>
-                    <td class="keterangan">(Hutang)</td>
-                    <td class="total">{{ -1 * (int)$data['arus_kas_operasional']['hutang'] }}</td>
-                </tr>
-                @endif
-                <tr>
-                    <td class="keterangan">Total Operasional</td>
-                    <td class="total">{{ (int)$data['arus_kas_operasional']['total_operasional'] }}</td>
-                </tr>
-                <tr>
-                    <th class="keterangan"><h5><strong>PERGERAKAN KAS</strong></h5></th>
-                    <th class="total">{{ (int)$data['pergerakan_kas'] }}</th>
-                </tr>
-                <tr>
-                    <th class="keterangan"><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
-                    <th class="total">{{ (int)$data['saldo_akhir_periode'] }}</th>
+                    <th style="text-align: end" colspan="3">TOTAL</th>
+                    <td class="total">{{ $total = $debit-$credit }}</td>
                 </tr>
             </tbody>
+            <tfoot>
+            </tfoot>
         </table>
     </div>
     <script>
@@ -161,6 +149,11 @@
         Array.from(totalEl).forEach(element => {
             let amount = element.innerHTML
             element.innerHTML = formatRibu(amount)
+        });
+
+        Array.from(document.getElementsByClassName('min')).forEach(element => {
+            let amount = element.innerHTML
+            element.innerHTML = '('+amount+')'
         });
 
         function formatRibu(nominal){

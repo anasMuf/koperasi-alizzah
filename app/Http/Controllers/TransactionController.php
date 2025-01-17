@@ -22,7 +22,26 @@ class TransactionController extends Controller
     public function index(Request $request){
         $data['menu'] = $this->menu;
         if($request->ajax()){
-            $data = Ledger::where('refrence','transaksi umum')->get();
+            $dateRange = [];
+            if(isset($request->tanggal) && $request->tanggal != ''){
+                $dates = explode(' - ',$request->tanggal);
+                $time = ' 00:00:00';
+                foreach($dates as $key => $date){
+                    if($key === 1){
+                        $time = ' 23:59:59';
+                    }
+                    $modifyDate = str_replace('/','-',$date);
+                    $dateRange[] = date('Y-m-d H:i:s',strtotime($modifyDate.$time));
+                }
+            }
+
+            $data = Ledger::
+            when($dateRange, function($q) use ($dateRange){
+                $q->whereBetween('trx_date',$dateRange);
+            })->
+            where('refrence','transaksi umum')->
+            orderBy('trx_date','asc')->
+            get();
 
             return DataTables::of($data)
             ->addIndexColumn()
@@ -32,17 +51,17 @@ class TransactionController extends Controller
             ->addColumn('nominal', function($row){
                 $nominal = 0;
                 if($row->type == 'pemasukan'){
-                    $nominal = 'Rp '.number_format($row->debit,0,',','.');
+                    $nominal = number_format($row->debit,0,',','.');
                 }elseif($row->type == 'pengeluaran'){
-                    $nominal = '(Rp '.number_format($row->credit,0,',','.').')';
+                    $nominal = '('.number_format($row->credit,0,',','.').')';
                 }
                 return $nominal;
             })
             ->addColumn('action', function($row){
                 $btn = '
                 <button type="button" class="btn btn-warning btn-xs" onclick="openData('.$row->id.')" title="Edit"><i class="fa fa-edit"></i></button>
+                <button type="button" class="btn btn-danger btn-xs" onclick="deleteData('.$row->id.')"><i class="fa fa-trash"></i></button>
                 ';
-                // <button type="button" class="btn btn-danger btn-xs" onclick="deleteData('.$row->id.')"><i class="fa fa-trash"></i></button>
                 return $btn;
             })
             ->rawColumns([
@@ -100,12 +119,13 @@ class TransactionController extends Controller
             $trx_date = date('Y-m-d H:i:s',strtotime($request->trx_date));
 
             //ledger
-            // if($request->id){
-            //     $request->merge([
-            //         'id_ledger' => $request->id,
-            //     ]);
+            if($request->id){
+                $request->merge([
+                    'id_ledger' => $request->id,
+                ]);
             //     $lastLedgerEntry = Ledger::find($request->id);
-            // }else{
+            }
+            // else{
             //     $lastLedgerEntry = Ledger::latest()->first();
             // }
             // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
@@ -155,6 +175,64 @@ class TransactionController extends Controller
                 'success'=> false,
                 'message'=> 'Internal Server Error!',
             ],500);
+        }
+    }
+
+    public function delete(Request $request){
+        DB::beginTransaction();
+        try{
+            $ledger = Ledger::findOrFail($request->id);
+            $ledger->delete();
+
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Transaction deleted successfully',
+            ],200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            LogPretty::error($th);
+            return response()->json([
+                'success'=> false,
+                'message'=> 'Internal Server Error!',
+            ],500);
+        }
+    }
+
+
+    public function export(Request $request){
+        $dateRange = [];
+        if(isset($request->tanggal) && $request->tanggal != ''){
+            $dates = explode(' - ',$request->tanggal);
+            $time = ' 00:00:00';
+            foreach($dates as $key => $date){
+                if($key === 1){
+                    $time = ' 23:59:59';
+                }
+                $modifyDate = str_replace('/','-',$date);
+                $dateRange[] = date('Y-m-d H:i:s',strtotime($modifyDate.$time));
+            }
+        }
+
+        $data['data'] = Ledger::
+        when($dateRange, function($q) use ($dateRange){
+            $q->whereBetween('trx_date',$dateRange);
+        })->
+        where('refrence','transaksi umum')->
+        orderBy('trx_date','asc')->
+        get();
+
+        $data['periode'] = $request->tanggal;
+
+        $namaFile = 'data Transaksi periode'.$request->tanggal;
+
+        if($request->export == 'excel'){
+            return;// Excel::download(new Export($data),$namaFile);
+        }elseif($request->export == 'print'){
+            $data['title'] = $namaFile;
+            return view('transactions.print',$data);
+        }else{
+            return response()->json("Invalid Request",404);
         }
     }
 }

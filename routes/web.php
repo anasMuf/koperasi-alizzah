@@ -125,6 +125,7 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
         Route::delete('/delete','delete')->name('.delete');
+        Route::post('/export','export')->name('.export');
     });
 
     Route::prefix('/saldo')->controller(SaldoController::class)->as('saldo')->group(function(){
