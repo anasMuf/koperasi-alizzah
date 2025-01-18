@@ -127,7 +127,7 @@
                     <td>{{ \Carbon\Carbon::parse($item->trx_date)->isoFormat('DD MMM YYYY') }}</td>
                     <td class="keterangan">{{ $item->description }}</td>
                     <td class="tipe">{{ ucfirst($item->type) }}</td>
-                    @if ($item->debit == 'pemasukan')
+                    @if ($item->type == 'pemasukan')
                     <td class="total">{{ $item->debit }}</td>
                     @else
                     <td class="total min">{{ $item->credit }}</td>

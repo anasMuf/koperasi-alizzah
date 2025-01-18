@@ -94,7 +94,7 @@
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
                 {data: 'trx_date_' , name: 'trx_date_'},
-                {data: 'description' , name: 'description'},
+                {data: 'description' , name: 'description', orderable: false},
                 {data: 'type' , name: 'type'},
                 {data: 'nominal' , name: 'nominal', className: 'nominal'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
