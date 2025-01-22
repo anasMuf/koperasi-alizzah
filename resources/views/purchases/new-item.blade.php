@@ -260,20 +260,30 @@
     });
 
     // not_variant
-    function noVariantEvent(params) {
-        $('.product #stock').keyup(function () {
-            var stock = parseInt($(this).val())
-            var price = ($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
-            amountPurchases(stock,price)
+    function noVariantEvent() {
+        $('.product #stock').on({
+            keyup: function(){
+                var stock = parseInt($(this).val())
+                var price = parseInt($('.product #price').val().replaceAll('.','')) //($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
+                amountPurchases(stock,price)
+            },
+            change: function(){
+                var stock = parseInt($(this).val())
+                var price = parseInt($('.product #price').val().replaceAll('.','')) //($('.product #price').val().length > 1) ? parseInt($('.product #price').val().replaceAll('.','')) : 0
+                amountPurchases(stock,price)
+            }
         })
+
         $('.product #price').keyup(function () {
-            var stock = ($('.product #stock').val().length > 1) ? parseInt($('.product #stock').val()) : 0
+            var stock = parseInt($('.product #stock').val()) //($('.product #stock').val().length > 1) ? parseInt($('.product #stock').val()) : 0
             var price = parseInt($(this).val().replaceAll('.',''))
             amountPurchases(stock,price)
         })
     }
     function amountPurchases(stock,price,isVariant=false){
         var amount = stock*price;
+        console.log(stock,price);
+        console.log('total',amount);
         if(isVariant){
             return amount;
         }
@@ -282,7 +292,7 @@
     }
 
     // is_variant
-    function isVariantEvent(params) {
+    function isVariantEvent() {
         $.each($('.product_variant input[name="stock[]"]'), function (i, el) {
             $(el).change(function () {
                 var stockVariant = parseInt($(this).val());

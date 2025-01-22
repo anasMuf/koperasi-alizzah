@@ -273,6 +273,7 @@
         </div>
         `)
         var data = {
+            order_at: $('#order_at').val(),
             student_id: $('#student_id').val(),
             dibayar: $('#dibayar').val(),
             products: dataProducts

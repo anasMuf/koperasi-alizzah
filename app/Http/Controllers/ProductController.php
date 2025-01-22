@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Helpers\LogPretty;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
+use App\Models\PurchaseDetail;
+use App\Models\PurchasePayment;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -206,8 +209,34 @@ class ProductController extends Controller
         DB::beginTransaction();
         try{
             $product = Product::findOrFail($request->id);
-            $productVariant = ProductVariant::where('product_id',$request->id)->delete();
+            $productVariants = ProductVariant::where('product_id', $request->id)->get();
+
+            foreach ($productVariants as $variant) {
+                $purchaseDetails = PurchaseDetail::where('product_variant_id', $variant->id)->get();
+                foreach ($purchaseDetails as $detail) {
+                    // Hapus PurchasePayment
+                    $purchasePayment = PurchasePayment::where('purchase_id', $detail->id)->first();
+                    if ($purchasePayment) {
+                        $purchasePayment->delete();
+                    }
+
+                    // Hapus Purchase
+                    $purchase = Purchase::where('id', $detail->id)->first();
+                    if ($purchase) {
+                        $purchase->delete();
+                    }
+
+                    // Hapus PurchaseDetail
+                    $detail->delete();
+                }
+
+                // Hapus ProductVariant
+                $variant->delete();
+            }
+
+            // Hapus Product
             $product->delete();
+
 
             DB::commit();
             return response()->json([

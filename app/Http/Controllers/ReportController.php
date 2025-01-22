@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\ViewLedger;
 use Illuminate\Http\Request;
 use App\Exports\CashFlowExport;
@@ -27,9 +28,11 @@ class ReportController extends Controller
 
     public function export(Request $request){
         $data['data'] = ViewLedger::cashFlow($request);
-        $namaFile = "Laporan_Arus_Kas_Periode_$request->dates.xlsx";
+
+        $periode = Carbon::parse($request->start_date)->isoFormat('MMMM YYYY').' - '.Carbon::parse($request->start_date)->isoFormat('MMMM YYYY');
+        $namaFile = "Laporan_Arus_Kas_Periode_$periode.xlsx";
         if($request->export == 'excel'){
-            return Excel::download(new CashFlowExport($data),$namaFile);
+            return 'maintenance'; #Excel::download(new CashFlowExport($data),$namaFile);
         }elseif($request->export == 'print'){
             $data['title'] = $namaFile;
             return view('reports.print',$data);

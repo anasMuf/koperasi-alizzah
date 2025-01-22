@@ -41,6 +41,13 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4" style="text-align:right !important;">Total:</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -81,7 +88,7 @@
                 }
             },
             processing: true,
-            serverSide: true,
+            serverSide: false,
             scrollX: true,
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
@@ -91,7 +98,35 @@
                 // {data: 'product' , name: 'product'},
                 {data: 'total_' , name: 'total_'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
-            ]
+            ],
+            footerCallback: function(row, data, start, end, display) {
+                let api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                let intVal = function (i) {
+                    return typeof i === 'string'
+                        ? i.replace(/[^\d-]/g, '') * 1
+                        : typeof i === 'number'
+                        ? i
+                        : 0;
+                };
+
+                // Total over all pages
+                let total = api
+                    .column(4)
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Total over this page
+                let pageTotal = api
+                    .column(4, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Update footer
+                api.column(4).footer().innerHTML =
+                'total perhalaman '+formatRibu(pageTotal) + ', total keseluruhan '+ formatRibu(total);
+            },
         });
 
         $('input[name="tanggal"]').daterangepicker({

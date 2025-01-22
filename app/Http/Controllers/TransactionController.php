@@ -36,6 +36,9 @@ class TransactionController extends Controller
             }
 
             $data = Ledger::
+            when(!empty($request->type_transaksi), function($q) use ($request){
+                $q->where('type',$request->type_transaksi);
+            })->
             when($dateRange, function($q) use ($dateRange){
                 $q->whereBetween('trx_date',$dateRange);
             })->

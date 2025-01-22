@@ -31,6 +31,12 @@
                     <p>Lihat Arus Kas</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('jurnal.main') }}" class="nav-link  {{ $menu == 'jurnal' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-exchange-alt"></i>
+                    <p>Jurnal</p>
+                </a>
+            </li>
             @if($role == 'superadmin' || $role == 'admin')
             <li class="nav-header">TRANSAKSI</li>
             <li class="nav-item">

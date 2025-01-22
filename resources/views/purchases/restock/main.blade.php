@@ -262,10 +262,12 @@
         </div>
         `)
         var data = {
+            purchase_at: $('#purchase_at').val(),
             vendor_id: $('#vendor_id').val(),
             dibayar: $('#dibayar').val(),
             products: dataProducts
         }
+
 
         $.ajax({
             type: "post",

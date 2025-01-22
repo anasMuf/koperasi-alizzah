@@ -36,6 +36,16 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" style="text-align:right !important;">Total:</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -59,6 +69,16 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2" style="text-align:right !important;">Total:</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -87,7 +107,7 @@
                 url: url,
             },
             processing: true,
-            serverSide: true,
+            serverSide: false,
             scrollX: true,
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
@@ -98,7 +118,55 @@
                 {data: 'sisa_' , name: 'sisa_'},
                 {data: 'status' , name: 'status'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
-            ]
+            ],
+            footerCallback: function(row, data, start, end, display) {
+                let api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                let intVal = function (i) {
+                    return typeof i === 'string'
+                        ? i.replace(/[^\d-]/g, '') * 1
+                        : typeof i === 'number'
+                        ? i
+                        : 0;
+                };
+
+                // Total over all pages
+                let total3 = api
+                    .column(3)
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+                let total4 = api
+                    .column(4)
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+                let total5 = api
+                    .column(5)
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Total over this page
+                let pageTotal3 = api
+                    .column(3, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+                let pageTotal4 = api
+                    .column(4, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+                let pageTotal5 = api
+                    .column(5, { page: 'current' })
+                    .data()
+                    .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                // Update footer
+                api.column(3).footer().innerHTML =
+                'total per halaman '+formatRibu(pageTotal3) + ', total keseluruhan ' + formatRibu(total3);
+                api.column(4).footer().innerHTML =
+                'total per halaman '+formatRibu(pageTotal4) + ', total keseluruhan ' + formatRibu(total4);
+                api.column(5).footer().innerHTML =
+                'total per halaman '+formatRibu(pageTotal5) + ', total keseluruhan ' + formatRibu(total5);
+            },
         });
     });
 

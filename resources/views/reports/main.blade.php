@@ -25,7 +25,17 @@
                 <div class="card-body">
                     <form action="{{ route('report.export') }}" method="post" id="filterForm" target="_blank">
                         @csrf
-                        <input type="text" name="dates" class="form-control filter">
+                        {{-- <input type="text" name="dates" class="form-control filter"> --}}
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="start_date">Tanggal Awal</label>
+                                <input type="month" name="start_date" class="form-control filter" value="{{ date('Y-m') }}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="end_date">Tanggal Akhir</label>
+                                <input type="month" name="end_date" class="form-control filter" value="{{ date('Y-m') }}">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -79,21 +89,22 @@
     })
     $('.filter').change(function(){
         dataFilter[$(this).attr('name')] = $(this).val()
-        loadData(dataFilter['dates'])
+        loadData({ ...dataFilter })
     })
 
     $(document).ready(function () {
-        $('input[name="dates"]').daterangepicker({
-            locale: {
-                // format: 'DD/MM/YYYY',
-                format: 'DD MMM YYYY',
-                weekLabel: "M",
-                daysOfWeek: ["Mg","Sen","Sel","Rab","Kam","Jum","Sab"],
-                monthNames: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Augustus","September","Oktober","November","Desember"],
-            },
-            startDate: moment().subtract(1, 'M'),
-            endDate: moment()
-        })
+        loadData({ ...dataFilter })
+        // $('input[name="dates"]').daterangepicker({
+        //     locale: {
+        //         // format: 'DD/MM/YYYY',
+        //         format: 'DD MMM YYYY',
+        //         weekLabel: "M",
+        //         daysOfWeek: ["Mg","Sen","Sel","Rab","Kam","Jum","Sab"],
+        //         monthNames: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Augustus","September","Oktober","November","Desember"],
+        //     },
+        //     startDate: moment().subtract(1, 'M'),
+        //     endDate: moment()
+        // })
     });
 
     function loadData(dates){
@@ -101,7 +112,7 @@
         <tr>
             <th colspan="2" style="text-align: center"><h5>Menunggu ...</h5></th>
         </tr>`)
-        $.get("{{ route('report.main') }}",{dates})
+        $.get("{{ route('report.main') }}",dates)
         .done(function(result){
             var periode = result.periode
             var dPenerimaan = result.arus_kas_operasional.penerimaan

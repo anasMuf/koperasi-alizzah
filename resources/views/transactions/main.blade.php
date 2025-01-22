@@ -26,6 +26,11 @@
                     <form action="{{ route('transaction.export') }}" method="post" id="filterForm" target="_blank">
                         @csrf
                         <input type="text" name="tanggal" class="form-control filter">
+                        <select name="type_transaksi" id="type_transaksi" class="form-control filter">
+                            <option value="">Semua</option>
+                            <option value="pemasukan">Pemasukan</option>
+                            <option value="pengeluaran">Pengeluaran</option>
+                        </select>
                     </form>
                 </div>
             </div>
@@ -49,6 +54,13 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
+                        {{-- <tfoot>
+                            <tr>
+                                <th colspan="4" style="text-align:right !important;">Total:</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot> --}}
                     </table>
                 </div>
             </div>
@@ -89,7 +101,6 @@
                 }
             },
             processing: true,
-            serverSide: true,
             scrollX: true,
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
@@ -98,7 +109,53 @@
                 {data: 'type' , name: 'type'},
                 {data: 'nominal' , name: 'nominal', className: 'nominal'},
                 {data: 'action' , name: 'action', orderable: false, searchable: false},
-            ]
+            ],
+            // footerCallback: function(row, data, start, end, display) {
+            //     let api = this.api();
+
+            //     // Remove the formatting to get integer data for summation
+            //     let intVal = function (i) {
+            //         return typeof i === 'string'
+            //             ? i.replace(/[^\d]/g, '') * 1
+            //             : typeof i === 'number'
+            //             ? i
+            //             : 0;
+            //     };
+
+            //     // Hitung total pemasukan dan pengeluaran untuk semua halaman
+            //     let totalPemasukan = api
+            //         .rows()
+            //         .data()
+            //         .toArray()
+            //         .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.nominal) : sum, 0);
+
+            //     let totalPengeluaran = api
+            //         .rows()
+            //         .data()
+            //         .toArray()
+            //         .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.nominal) : sum, 0);
+
+            //     let total = totalPemasukan - totalPengeluaran;
+
+            //     // Hitung total pemasukan dan pengeluaran untuk halaman saat ini
+            //     let pagePemasukan = api
+            //         .rows({ page: 'current' })
+            //         .data()
+            //         .toArray()
+            //         .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.nominal) : sum, 0);
+
+            //     let pagePengeluaran = api
+            //         .rows({ page: 'current' })
+            //         .data()
+            //         .toArray()
+            //         .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.nominal) : sum, 0);
+
+            //     let pageTotal = pagePemasukan - pagePengeluaran;
+
+            //     // Update footer
+            //     api.column(4).footer().innerHTML =
+            //     formatRibu(pageTotal) + ' (' + formatRibu(total) + ' total)';
+            // },
         });
 
         $('input[name="tanggal"]').daterangepicker({

@@ -1,21 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthContoroller;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CashierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DashboardContoroller;
 use App\Http\Controllers\ReceivablesController;
-use App\Http\Controllers\SaldoController;
-use App\Http\Controllers\SIAKAD\StudentController;
-use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SIAKAD\StudentController;
+
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    return "Cleared!";
+});
 
 Route::get('/login', [AuthContoroller::class, 'index'])->name('login');
 Route::post('/login', [AuthContoroller::class, 'login'])->name('authenticated');
@@ -29,6 +40,11 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::prefix('/report')->controller(ReportController::class)->as('report')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::post('/export','export')->name('.export');
+    });
+
+    Route::prefix('/jurnal')->controller(JurnalController::class)->as('jurnal')->group(function(){
         Route::get('/','index')->name('.main');
         Route::post('/export','export')->name('.export');
     });
@@ -54,7 +70,7 @@ Route::middleware(['auth'])->group(function() {
         Route::delete('/delete','delete')->name('.delete');
     });
 
-    Route::prefix('/vendor')->controller(VendorController::class)->as('vendor')->group(function(){
+    Route::prefix('/supplier')->controller(VendorController::class)->as('vendor')->group(function(){
         Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');

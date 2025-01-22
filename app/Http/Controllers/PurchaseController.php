@@ -251,7 +251,6 @@ class PurchaseController extends Controller
     }
 
     public function storeRestock(Request $request){
-        // return $request;
         if(!isset($request->products)){
             return response()->json([
                 'success' => false,

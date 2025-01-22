@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ViewLedger extends Model
 {
@@ -12,17 +13,17 @@ class ViewLedger extends Model
     protected $table = "view_ledgers";
 
     public static function cashFlow($request){
-        $dateRange = [];
-        if(isset($request->dates) && $request->dates != ''){
-            $dates = explode(' - ',$request->dates);
-            $time = ' 00:00:00';
-            foreach($dates as $key => $date){
-                if($key === 1){
-                    $time = ' 23:59:59';
-                }
-                $dateRange[] = date('Y-m-d H:i:s',strtotime($date.$time));
-            }
-        }
+        // $dateRange = [];
+        // if(isset($request->dates) && $request->dates != ''){
+        //     $dates = explode(' - ',$request->dates);
+        //     $time = ' 00:00:00';
+        //     foreach($dates as $key => $date){
+        //         if($key === 1){
+        //             $time = ' 23:59:59';
+        //         }
+        //         $dateRange[] = date('Y-m-d H:i:s',strtotime($date.$time));
+        //     }
+        // }
 
         // $saldoAwalPeriode = ViewLedger::
         // where('trx_date','<',$dateRange[0])->
@@ -30,7 +31,10 @@ class ViewLedger extends Model
         // first()->final ?? 0;
 
         $saldoAwalPeriode = ViewLedger::select('current')
-        ->whereBetween('trx_date', $dateRange)
+        ->whereBetween('trx_date', [
+            Carbon::parse($request->start_date)->startOfMonth(),
+            Carbon::parse($request->end_date)->endOfMonth()
+        ])
         // ->where(function($q) {
         //     $q->whereNotIN('description',['bayar hutang','bayar piutang'])
         //     ->orWhereNull('description');
@@ -39,7 +43,10 @@ class ViewLedger extends Model
         ->first()->current ?? 0;
 
         $result = ViewLedger::selectRaw('SUM(debit) as total_pemasukan, SUM(credit) as total_pengeluaran')
-        ->whereBetween('trx_date', $dateRange)
+        ->whereBetween('trx_date', [
+            Carbon::parse($request->start_date)->startOfMonth(),
+            Carbon::parse($request->end_date)->endOfMonth()
+        ])
         ->where(function($q) {
             $q->whereNotIN('description',['bayar hutang','bayar piutang'])
             ->orWhereNull('description');
@@ -49,11 +56,17 @@ class ViewLedger extends Model
         // $saldoAwalPeriode =
 
         $hutang = ViewLedger::selectRaw('SUM(credit) as total_hutang')
-        ->whereBetween('trx_date', $dateRange)
+        ->whereBetween('trx_date', [
+            Carbon::parse($request->start_date)->startOfMonth(),
+            Carbon::parse($request->end_date)->endOfMonth()
+        ])
         ->where('description','bayar hutang')
         ->first()->total_hutang;
         $piutang = ViewLedger::selectRaw('SUM(debit) as total_piutang')
-        ->whereBetween('trx_date', $dateRange)
+        ->whereBetween('trx_date', [
+            Carbon::parse($request->start_date)->startOfMonth(),
+            Carbon::parse($request->end_date)->endOfMonth()
+        ])
         ->where('description','bayar piutang')
         ->first()->total_piutang;
 
