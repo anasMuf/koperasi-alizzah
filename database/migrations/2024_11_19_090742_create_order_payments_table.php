@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('order_id');
-            $table->decimal('amount', 15, 2);
+            $table->decimal('amount', 15, 2)->default(0);
             $table->date('paid_at');
             $table->timestamps();
         });

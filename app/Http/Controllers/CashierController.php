@@ -130,7 +130,7 @@ class CashierController extends Controller
             // $lastLedgerEntry = Ledger::latest()->first();
             // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
 
-            $trx_date = date('Y-m-d H:i:s',strtotime($request->order_at));
+            $trx_date = date('Y-m-d',strtotime($request->order_at)).' '.date('H:i:s');
 
             $debit = $nominalTotalAkhir;
             $credit = 0;

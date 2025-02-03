@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('refrence');
             // $table->decimal('current', 11, 2);
             $table->dateTime('trx_date')->nullable();
-            $table->decimal('debit', 11, 2);
-            $table->decimal('credit', 11, 2);
+            $table->decimal('debit', 11, 2)->default(0);
+            $table->decimal('credit', 11, 2)->default(0);
             // $table->decimal('final', 11, 2);
             $table->timestamps();
             $table->softDeletes();

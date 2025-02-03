@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('product_id');
             $table->integer('stock');
-            $table->decimal('price')->comment('harga jual');
-            $table->decimal('purchase_price')->comment('harga beli');
+            $table->decimal('price')->comment('harga jual')->default(0);
+            $table->decimal('purchase_price')->comment('harga beli')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

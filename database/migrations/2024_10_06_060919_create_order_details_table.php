@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('invoice', 100);
             $table->bigInteger('product_variant_id');
             $table->integer('qty');
-            $table->decimal('subtotal', 11, 2);
+            $table->decimal('subtotal', 11, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

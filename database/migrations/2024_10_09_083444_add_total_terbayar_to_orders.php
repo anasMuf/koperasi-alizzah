@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->decimal('total', 11, 2)->after('student_id');
-            $table->decimal('terbayar', 11, 2)->after('total');
+            $table->decimal('total', 11, 2)->after('student_id')->default(0);
+            $table->decimal('terbayar', 11, 2)->after('total')->default(0);
             $table->date('order_at')->after('terbayar')->nullable();
             $table->bigInteger('user_id');
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Ledger;
 use App\Helpers\LogPretty;
+use App\Models\ViewLedger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -28,7 +29,7 @@ class SaldoController extends Controller
                     $dateRange[] = date('Y-m-d',strtotime($date));
                 }
             }
-            $data = Ledger::where('refrence','SALDO')->
+            $data = ViewLedger::where('refrence','SALDO')->
             when($dateRange, function($q) use ($dateRange){
                 $q->whereBetween('trx_date',$dateRange);
             })
@@ -75,7 +76,7 @@ class SaldoController extends Controller
 
     public function store(Request $request){
         try {
-            $trx_date = date('Y-m-d H:i:s',strtotime($request->trx_date));
+            $trx_date = date('Y-m-d',strtotime($request->trx_date)).' '.date('H:i:s');
             // $lastLedgerEntry = Ledger::latest()->first();
             // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
             $tambah_saldo = str_replace('.','',$request->tambah_saldo);

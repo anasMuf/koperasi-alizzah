@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('purchases', function (Blueprint $table) {
             $table->bigInteger('vendor_id')->nullable()->after('user_id');
-            $table->decimal('total', 11, 2)->after('vendor_id')->comment('harga beli');
-            $table->decimal('terbayar', 11, 2)->after('total');
+            $table->decimal('total', 11, 2)->after('vendor_id')->comment('harga beli')->default(0);
+            $table->decimal('terbayar', 11, 2)->after('total')->default(0);
             $table->date('purchase_at')->after('terbayar');
         });
     }

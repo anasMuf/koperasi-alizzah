@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('receivables_member_payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('receivables_member_id');
-            $table->decimal('amount', 11, 2);
+            $table->decimal('amount', 11, 2)->default(0);
             $table->timestamps();
         });
     }

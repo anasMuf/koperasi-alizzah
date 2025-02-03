@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Helpers\LogPretty;
+use App\Models\Ledger;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\PurchaseDetail;
@@ -214,21 +215,20 @@ class ProductController extends Controller
             foreach ($productVariants as $variant) {
                 $purchaseDetails = PurchaseDetail::where('product_variant_id', $variant->id)->get();
                 foreach ($purchaseDetails as $detail) {
-                    // Hapus PurchasePayment
-                    $purchasePayment = PurchasePayment::where('purchase_id', $detail->id)->first();
-                    if ($purchasePayment) {
-                        $purchasePayment->delete();
-                    }
-
-                    // Hapus Purchase
-                    $purchase = Purchase::where('id', $detail->id)->first();
+                    $purchase = Purchase::where('invoice', $detail->invoice)->first();
                     if ($purchase) {
+                        Ledger::where('refrence', $detail->invoice)->delete();
+                        // Hapus PurchasePayment
+                        PurchasePayment::where('purchase_id', $purchase->id)->delete();
+
+                        // Hapus Purchase
                         $purchase->delete();
                     }
 
                     // Hapus PurchaseDetail
                     $detail->delete();
                 }
+
 
                 // Hapus ProductVariant
                 $variant->delete();

@@ -88,8 +88,10 @@ Route::middleware(['auth'])->group(function() {
 
     Route::prefix('/purchase')->controller(PurchaseController::class)->as('purchase')->group(function(){
         Route::get('/','index')->name('.main');
+        Route::get('/edit','edit')->name('.edit');
         Route::get('/new-item','newItem')->name('.new-item');
         Route::post('/store-new-item','storeNewItem')->name('.store-new-item');
+        Route::post('/update','update')->name('.update');
         Route::get('/restock','restock')->name('.restock');
         Route::get('/product-variant','productVariant')->name('.product-variant');
         Route::post('/store-restock','storeRestock')->name('.store-restock');
@@ -101,6 +103,8 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/','index')->name('.main');
             Route::get('/form','form')->name('.form');
             Route::post('/store','store')->name('.store');
+            Route::get('/edit','edit')->name('.edit');
+            Route::post('/update','update')->name('.update');
             Route::delete('/delete','delete')->name('.delete');
         });
     });

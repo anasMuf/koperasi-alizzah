@@ -29,6 +29,7 @@ class JurnalController extends Controller
         if($request->ajax()){
 
             $data = Ledger::select([
+                'id',
                 'type',
                 'description',
                 'refrence',
@@ -91,22 +92,64 @@ class JurnalController extends Controller
                     }else{
                         if($row->description === 'bayar hutang'){
                             $textArr = [];
+                            $invoice = '';
                             foreach (PurchasePayment::where('id',$row->refrence)->with(['purchase.vendor'])->get() as $value) {
                                 $textArr[] = $value->purchase->vendor->name;
+                                if(!empty($invoice)){
+                                    continue;
+                                }else{
+                                    $invoice = ', ref: '.$value->purchase->invoice;
+                                }
                             }
-                            return 'Bayar hutang ke: '.implode(',',$textArr);
+                            return 'Bayar hutang ke: '.implode(',',$textArr).''.$invoice;
                         }elseif($row->description === 'piutang anggota'){
                             $textArr = [];
+                            $invoice = '';
                             foreach (ReceivablesMember::where('id',$row->refrence)->with(['member'])->get() as $value) {
                                 $textArr[] = $value->member->name;
+                                if(!empty($invoice)){
+                                    continue;
+                                }else{
+                                    $invoice = ', ref: '.$value->purchase->invoice;
+                                }
                             }
-                            return 'Piutang Anggota: '.implode(',',$textArr);
+                            return 'Piutang Anggota: '.implode(',',$textArr).''.$invoice;
                         }elseif($row->description === 'bayar piutang'){
                             $textArr = [];
+                            $invoice = '';
                             foreach (ReceivablesMemberPayment::where('id',$row->refrence)->with(['receivables_member.member'])->get() as $value) {
                                 $textArr[] = $value->receivables_member->member->name;
+                                if(!empty($invoice)){
+                                    continue;
+                                }else{
+                                    $invoice = ', ref: '.$value->purchase->invoice;
+                                }
                             }
-                            return 'Bayar Piutang: '.implode(',',$textArr);
+                            return 'Bayar Piutang: '.implode(',',$textArr).''.$invoice;
+                        }
+                    }
+                }
+            })
+            ->addColumn('refrence_', function($row){
+                if($row->refrence === 'transaksi umum'){
+                    return '<a href="javascript:void(0);">'.$row->refrence.'</a>';
+                }elseif($row->refrence === 'SALDO'){
+                    return '<a href="javascript:void(0);">'.$row->refrence.'</a>';
+                }else{
+                    if(ctype_alpha(substr($row->refrence, 0, 1))){
+                        $prefix = substr($row->refrence, 0, 2);
+                        if($prefix === 'PN' || $prefix === 'PS'){
+                            return '<a href="'.route('purchase.edit',['from' => 'jurnal','invoice' => $row->refrence]).'">'.$row->refrence.'</a>';
+                        }elseif($prefix === 'OR'){
+                            return '<a href="'.route('order.edit',['from' => 'jurnal','invoice' => $row->refrence]).'">'.$row->refrence.'</a>';
+                        }
+                    }else{
+                        if($row->description === 'bayar hutang'){
+                            return '<a href="javascript:void(0);">'.$row->refrence.'</a>';
+                        }elseif($row->description === 'piutang anggota'){
+                            return '<a href="javascript:void(0);">'.$row->refrence.'</a>';
+                        }elseif($row->description === 'bayar piutang'){
+                            return '<a href="javascript:void(0);">'.$row->refrence.'</a>';
                         }
                     }
                 }
@@ -125,6 +168,7 @@ class JurnalController extends Controller
             })
             ->rawColumns([
                 'keterangan',
+                'refrence_',
                 'debit',
                 'credit',
                 'final'

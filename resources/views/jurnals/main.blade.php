@@ -9,6 +9,9 @@
     table .nominal {
         text-align: end;
     }
+    #table tr {
+        cursor: pointer;
+    }
 </style>
 @endpush
 
@@ -57,6 +60,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Keterangan</th>
+                                <th>Referensi</th>
                                 <th>Tipe Transaksi</th>
                                 <th>Debit</th>
                                 <th>Kredit</th>
@@ -110,12 +114,14 @@
                     return $.extend({}, d, dataFilter);
                 }
             },
+            lengthMenu: [10, 25, 50, 100, 500],
             processing: true,
             scrollX: true,
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-center', orderable: false, searchable: false},
                 {data: 'trx_date_' , name: 'trx_date_'},
                 {data: 'keterangan' , name: 'keterangan', orderable: false},
+                {data: 'refrence_' , name: 'refrence_'},
                 {data: 'type' , name: 'type'},
                 {data: 'debit' , name: 'debit', className: 'nominal'},
                 {data: 'credit' , name: 'credit', className: 'nominal'},
@@ -180,6 +186,13 @@
         //     startDate: moment().subtract(1, 'Y'),
         //     endDate: moment()
         // })
+        // table.on('click','tbody tr', function () {
+        //     let data = table.row(this).data();
+
+        //     let param = data.refrence;
+        //     if(param)
+        //     alert('You clicked on ' + param + "'s row");
+        // });
     });
 
     function loadPage(thisPage){

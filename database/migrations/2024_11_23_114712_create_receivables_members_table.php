@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('member_id');
             $table->text('description')->nullable();
-            $table->decimal('total', 11, 2);
-            $table->decimal('terbayar', 11, 2);
+            $table->decimal('total', 11, 2)->default(0);
+            $table->decimal('terbayar', 11, 2)->default(0);
             $table->string('status')->nullable();
             $table->timestamps();
         });
