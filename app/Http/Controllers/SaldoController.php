@@ -6,8 +6,11 @@ use Carbon\Carbon;
 use App\Models\Ledger;
 use App\Helpers\LogPretty;
 use App\Models\ViewLedger;
+use App\Models\YearPeriod;
+use App\Models\MonthPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\TransactionCategory;
 use Yajra\DataTables\Facades\DataTables;
 
 class SaldoController extends Controller
@@ -68,6 +71,10 @@ class SaldoController extends Controller
     }
 
     public function form(Request $request){
+        $data['transaction_categories'] = TransactionCategory::where(function($q){
+            $q->whereRaw("name like '%KAS%'")
+            ->orWhereRaw("name like '%Lain-lain%'");
+        })->where('type','pemasukan')->get();
         $data['menu'] = 'saldo';
         $data['data'] = [];
         $content = view('saldo.form',$data)->render();
@@ -76,6 +83,25 @@ class SaldoController extends Controller
 
     public function store(Request $request){
         try {
+
+            $purchase_date = date('Y-m-d', strtotime($request->trx_date));
+            $purchase_month = date('m', strtotime($request->trx_date));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
+
             $trx_date = date('Y-m-d',strtotime($request->trx_date)).' '.date('H:i:s');
             // $lastLedgerEntry = Ledger::latest()->first();
             // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
@@ -91,6 +117,9 @@ class SaldoController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $current + $debit - $credit,
+                'transaction_category_id' => $request->transaction_category_id,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);

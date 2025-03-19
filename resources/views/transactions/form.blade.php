@@ -21,6 +21,15 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="transaction_category_id">Kategori</label>
+                        <select name="transaction_category_id" id="transaction_category_id" class="form-control" required>
+                            <option value="">.:: Pilih Kategori ::.</option>
+                            @foreach ($transaction_categories as $transaction_category)
+                                <option value="{{ $transaction_category->id }}">{{ $transaction_category->type }} || {{ $transaction_category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="description">Deskripsi</label>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ $data ? $data->description : '' }}</textarea>
                     </div>

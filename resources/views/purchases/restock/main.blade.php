@@ -93,6 +93,15 @@
                     <label for="purchase_at">Tanggal Pembelian</label>
                     <input type="date" name="purchase_at" id="purchase_at" class="form-control" value="{{ date('Y-m-d') }}">
                 </div>
+                <div class="form-group">
+                    <label for="transaction_category_id">Kategori</label>
+                    <select name="transaction_category_id" id="transaction_category_id" class="form-control" required>
+                        <option value="">.:: Pilih Kategori ::.</option>
+                        @foreach ($transaction_categories as $transaction_category)
+                            <option value="{{ $transaction_category->id }}">{{ $transaction_category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="student">
                     <div class="form-group">
                         <label for="vendor_id">Vendor</label>

@@ -83,6 +83,18 @@
             </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
+                <a href="#" class="nav-link ">
+                    <i class="nav-icon fas fa-tags"></i>
+                    <p>Data Kategori Barang</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link ">
+                    <i class="nav-icon fas fa-hashtag"></i>
+                    <p>Data Kategori Transaksi</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('student.main') }}" class="nav-link {{ $menu == 'siswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Siswa</p>

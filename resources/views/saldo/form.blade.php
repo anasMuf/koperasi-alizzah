@@ -12,6 +12,15 @@
                         <input type="date" name="trx_date" id="trx_date" class="form-control" value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="form-group">
+                        <label for="transaction_category_id">Kategori</label>
+                        <select name="transaction_category_id" id="transaction_category_id" class="form-control" required>
+                            <option value="">.:: Pilih Kategori ::.</option>
+                            @foreach ($transaction_categories as $transaction_category)
+                                <option value="{{ $transaction_category->id }}">{{ $transaction_category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="tambah_saldo">Saldo</label>
                         <input type="text" name="tambah_saldo" id="tambah_saldo" class="form-control" placeholder="Masukkan nilai saldo" onkeyup="formatNumber(this)">
                     </div>

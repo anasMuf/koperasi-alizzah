@@ -84,7 +84,7 @@
             text-align: center;
         }
 
-        table .total {
+        table .total,.text-end {
             text-align: right;
         }
 
@@ -104,19 +104,38 @@
         <h1>Data <span>Jurnal Transaksi</span></h1>
         <h2>Kopersai Al-Izzah</h2>
         <p>Periode {{ $periode }}</p>
+        {{-- <pre>
+            @php
+                var_dump($params['type_transaksi'])
+            @endphp
+        </pre> --}}
         <table>
             <thead>
                 <tr>
                     <th style="width: 15%;">Tanggal</th>
                     <th>Keterangan</th>
                     <th>Tipe Transaksi</th>
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pemasukan')
                     <th>Debit</th>
+                    @endif
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pengeluaran')
                     <th>Kredit</th>
+                    @endif
+                    @if ($params['type_transaksi'] !== 'pemasukan' && $params['type_transaksi'] !== 'pengeluaran')
                     <th>Saldo</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $debit = 0;
+                    $credit = 0;
+                @endphp
                 @foreach ($data as $key => $item)
+                @php
+                    $debit+=$item->debit;
+                    $credit+=$item->credit;
+                @endphp
                 <tr style="{{ ($key === 23) ? 'page-break-after: auto' : '' }}">
                     <td>{{ \Carbon\Carbon::parse($item->trx_date)->isoFormat('DD MMM YYYY') }}</td>
                     <td class="keterangan">
@@ -166,15 +185,29 @@
                         @endphp
                     </td>
                     <td class="tipe">{{ ucfirst($item->type) }}</td>
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pemasukan')
                     <td class="total">{{ $item->debit > 0 ? $item->debit : '' }}</td>
+                    @endif
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pengeluaran')
                     <td class="total min">{{ $item->credit > 0 ? $item->credit : '' }}</td>
+                    @endif
+                    @if ($params['type_transaksi'] !== 'pemasukan' && $params['type_transaksi'] !== 'pengeluaran')
                     <td class="total {{ $item->final < 0 ? 'min' : '' }}">{{ $item->final }}</td>
+                    @endif
                 </tr>
                 @endforeach
-                {{-- <tr>
+                <tr>
                     <th style="text-align: end" colspan="3">TOTAL</th>
-                    <td class="total">{{ $total = $debit-$credit }}</td>
-                </tr> --}}
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pemasukan')
+                    <td class="{{ ($debit == 0) ? 'text-end' : 'total' }}">{{ ($debit == 0) ? '-' : $debit }}</td>
+                    @endif
+                    @if (empty($params['type_transaksi']) || $params['type_transaksi'] === 'pengeluaran')
+                    <td class="{{ ($credit == 0) ? 'text-end' : 'total' }}">{{ ($credit == 0) ? '-' : $credit }}</td>
+                    @endif
+                    @if ($params['type_transaksi'] !== 'pemasukan' && $params['type_transaksi'] !== 'pengeluaran')
+                    <td class="{{ ($debit == 0 || $credit == 0) ? 'text-end' : 'total' }}">{{ ($debit == 0 || $credit == 0) ? '-' : $total = $debit-$credit }}</td>
+                    @endif
+                </tr>
             </tbody>
             <tfoot>
             </tfoot>

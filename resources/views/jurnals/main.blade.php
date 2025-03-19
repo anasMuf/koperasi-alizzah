@@ -67,14 +67,14 @@
                                 <th>Saldo</th>
                             </tr>
                         </thead>
-                        {{-- <tfoot>
+                        <tfoot>
                             <tr>
-                                <th colspan="4" style="text-align:right !important;">Total:</th>
+                                <th colspan="5" style="text-align:right !important;">Total:</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
-                        </tfoot> --}}
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -128,52 +128,72 @@
                 {data: 'final' , name: 'final', className: 'nominal'},
                 // {data: 'action' , name: 'action', orderable: false, searchable: false},
             ],
-            // footerCallback: function(row, data, start, end, display) {
-            //     let api = this.api();
+            footerCallback: function(row, data, start, end, display) {
+                let api = this.api();
 
-            //     // Remove the formatting to get integer data for summation
-            //     let intVal = function (i) {
-            //         return typeof i === 'string'
-            //             ? i.replace(/[^\d]/g, '') * 1
-            //             : typeof i === 'number'
-            //             ? i
-            //             : 0;
-            //     };
+                // Remove the formatting to get integer data for summation
+                let intVal = function (i) {
+                    return typeof i === 'string'
+                        ? i.replace(/[^\d]/g, '') * 1
+                        : typeof i === 'number'
+                        ? i
+                        : 0;
+                };
 
-            //     // Hitung total pemasukan dan pengeluaran untuk semua halaman
-            //     let totalPemasukan = api
-            //         .rows()
-            //         .data()
-            //         .toArray()
-            //         .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.nominal) : sum, 0);
+                // Hitung total pemasukan dan pengeluaran untuk semua halaman
+                let totalPemasukan = api
+                    .rows()
+                    .data()
+                    .toArray()
+                    .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.debit) : sum, 0);
 
-            //     let totalPengeluaran = api
-            //         .rows()
-            //         .data()
-            //         .toArray()
-            //         .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.nominal) : sum, 0);
+                let totalPengeluaran = api
+                    .rows()
+                    .data()
+                    .toArray()
+                    .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.credit) : sum, 0);
 
-            //     let total = totalPemasukan - totalPengeluaran;
+                let total = totalPemasukan - totalPengeluaran;
 
-            //     // Hitung total pemasukan dan pengeluaran untuk halaman saat ini
-            //     let pagePemasukan = api
-            //         .rows({ page: 'current' })
-            //         .data()
-            //         .toArray()
-            //         .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.nominal) : sum, 0);
 
-            //     let pagePengeluaran = api
-            //         .rows({ page: 'current' })
-            //         .data()
-            //         .toArray()
-            //         .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.nominal) : sum, 0);
+                // Hitung total pemasukan dan pengeluaran untuk halaman saat ini
+                let pagePemasukan = api
+                    .rows({ page: 'current' })
+                    .data()
+                    .toArray()
+                    .reduce((sum, row) => row.type === 'pemasukan' ? sum + intVal(row.debit) : sum, 0);
 
-            //     let pageTotal = pagePemasukan - pagePengeluaran;
+                let pagePengeluaran = api
+                    .rows({ page: 'current' })
+                    .data()
+                    .toArray()
+                    .reduce((sum, row) => row.type === 'pengeluaran' ? sum + intVal(row.credit) : sum, 0);
 
-            //     // Update footer
-            //     api.column(4).footer().innerHTML =
-            //     formatRibu(pageTotal) + ' (' + formatRibu(total) + ' total)';
-            // },
+                let pageTotal = pagePemasukan - pagePengeluaran;
+
+                // Update footer
+
+                if(totalPemasukan == 0){
+                    api.column(5).footer().innerHTML = '-'
+                }else{
+                    api.column(5).footer().innerHTML =
+                    'total perhalaman ' + formatRibu(pagePemasukan) + ', total keseluruhan ' + formatRibu(totalPemasukan);
+                }
+
+                if(totalPengeluaran == 0){
+                    api.column(6).footer().innerHTML = '-'
+                }else{
+                    api.column(6).footer().innerHTML =
+                    'total perhalaman ' + formatRibu(pagePengeluaran) + ', total keseluruhan ' + formatRibu(totalPengeluaran);
+                }
+
+                if(totalPemasukan == 0 || totalPengeluaran == 0){
+                    api.column(7).footer().innerHTML = '-'
+                }else{
+                    api.column(7).footer().innerHTML =
+                    'total perhalaman ' + formatRibu(pageTotal) + ', total keseluruhan ' + formatRibu(total);
+                }
+            },
         });
 
         // $('input[name="tanggal"]').daterangepicker({

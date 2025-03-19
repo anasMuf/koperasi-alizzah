@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ledger;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Purchase;
 use App\Helpers\LogPretty;
-use App\Models\Ledger;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Models\PurchaseDetail;
@@ -124,6 +125,7 @@ class ProductController extends Controller
         ){
             $is_variants = true;
         }
+        $data['categories'] = Category::all();
         $data['is_variants'] = $is_variants;
         $data['data'] = $request->id ? Product::with('product_variants')->find($request->id) : [];
         $content = view('products.form',$data)->render();
@@ -135,6 +137,7 @@ class ProductController extends Controller
         try {
             $rules = [
                 'name_product' => 'required|unique:products,name',
+                'category_id' => 'required'
             ];
             if($request->id){
                 $rules['name_product'] = 'required';
@@ -148,6 +151,7 @@ class ProductController extends Controller
                 'name_product' => 'Nama Barang',
                 'price' => 'Harga',
                 'stock' => 'Stok',
+                'category_id' => 'Kategori Barang',
             ];
             $messages = [
                 'required' => 'Kolom :attribute harus terisi',
@@ -165,6 +169,7 @@ class ProductController extends Controller
 
             $product = ($request->id) ? Product::find($request->id) : new Product;
             $product->name = $request->name_product;
+            $product->category_id = $request->category_id;
             $product->save();
 
             if($request->is_variant){

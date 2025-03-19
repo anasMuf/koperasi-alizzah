@@ -125,7 +125,7 @@
                 @if ($data['arus_kas_operasional']['piutang'])
                 <tr>
                     <td class="keterangan">Piutang</td>
-                    <td class="total">{{ (int)$data['arus_kas_operasional']['penerimaan'] }}</td>
+                    <td class="total">{{ (int)$data['arus_kas_operasional']['piutang'] }}</td>
                 </tr>
                 @endif
                 @if ($data['arus_kas_operasional']['pengeluaran'])

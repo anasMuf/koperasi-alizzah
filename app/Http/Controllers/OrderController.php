@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Ledger;
 use App\Helpers\LogPretty;
+use App\Models\YearPeriod;
+use App\Models\MonthPeriod;
 use App\Models\OrderDetail;
 use App\Models\OrderPayment;
 use Illuminate\Http\Request;
@@ -112,13 +114,35 @@ class OrderController extends Controller
             $invoice = $request->invoice;
             $total = 0;
 
+            $purchase_date = date('Y-m-d', strtotime($request->order_at));
+            $purchase_month = date('m', strtotime($request->order_at));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             $order = Order::where('invoice',$invoice)->first();
             $order->invoice = $invoice;
             $order->student_id = $request->student_id;
             $order->user_id = Auth::getUser()->id;
             $order->total = 0;
             $order->terbayar = 0;
-            $order->order_at = $request->order_at;
+            $order->order_at = date('Y-m-d',strtotime($request->order_at)).' '.date('H:i:s');
+
+            $order->transaction_category_id = 2;
+            $order->month_period_id = $month_period_id;
+            $order->year_period_id = $year_period_id;
+
             $order->save();
 
             foreach($request->products as $product){
@@ -189,6 +213,9 @@ class OrderController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => 2,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);

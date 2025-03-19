@@ -9,6 +9,8 @@ class ReceivablesMemberPayment extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function receivables_member(){
         return $this->belongsTo(ReceivablesMember::class);
     }

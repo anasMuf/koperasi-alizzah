@@ -6,6 +6,8 @@ use App\Models\Ledger;
 use App\Models\Vendor;
 use App\Models\Purchase;
 use App\Helpers\LogPretty;
+use App\Models\YearPeriod;
+use App\Models\MonthPeriod;
 use Illuminate\Http\Request;
 use App\Models\PurchasePayment;
 use Illuminate\Support\Facades\DB;
@@ -128,10 +130,32 @@ class DebtController extends Controller
 
             // Catat pembayaran di tabel purchase_payments
 
+            $purchase_date = date('Y-m-d', strtotime($request->paid_at));
+            $purchase_month = date('m', strtotime($request->paid_at));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             $payment = new PurchasePayment;
             $payment->purchase_id = $request->id;
             $payment->amount = $amount;
             $payment->paid_at = date('Y-m-d',strtotime($request->paid_at)) ?? now();
+
+            $payment->transaction_category_id = 12;
+            $payment->month_period_id = $month_period_id;
+            $payment->year_period_id = $year_period_id;
+
             $payment->save();
 
             // Update kolom `terbayar` di tabel purchases
@@ -156,6 +180,9 @@ class DebtController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => 12,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);

@@ -75,7 +75,7 @@ class ViewLedger extends Model
 
         $saldoAkhirPeriode = $saldoAwalPeriode + $pergerakanKas;
 
-        $reports['periode'] = $request->dates;
+        $reports['periode'] = $request->start_date.' '.$request->end_date;
 
         $reports['saldo_awal_periode'] = (int)$saldoAwalPeriode;
 

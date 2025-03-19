@@ -107,11 +107,11 @@ class JurnalController extends Controller
                             $invoice = '';
                             foreach (ReceivablesMember::where('id',$row->refrence)->with(['member'])->get() as $value) {
                                 $textArr[] = $value->member->name;
-                                if(!empty($invoice)){
-                                    continue;
-                                }else{
-                                    $invoice = ', ref: '.$value->purchase->invoice;
-                                }
+                                // if(!empty($invoice)){
+                                //     continue;
+                                // }else{
+                                //     $invoice = ', ref: '.$value->purchase->invoice;
+                                // }
                             }
                             return 'Piutang Anggota: '.implode(',',$textArr).''.$invoice;
                         }elseif($row->description === 'bayar piutang'){
@@ -119,11 +119,11 @@ class JurnalController extends Controller
                             $invoice = '';
                             foreach (ReceivablesMemberPayment::where('id',$row->refrence)->with(['receivables_member.member'])->get() as $value) {
                                 $textArr[] = $value->receivables_member->member->name;
-                                if(!empty($invoice)){
-                                    continue;
-                                }else{
-                                    $invoice = ', ref: '.$value->purchase->invoice;
-                                }
+                                // if(!empty($invoice)){
+                                //     continue;
+                                // }else{
+                                //     $invoice = ', ref: '.$value->purchase->invoice;
+                                // }
                             }
                             return 'Bayar Piutang: '.implode(',',$textArr).''.$invoice;
                         }
@@ -179,6 +179,7 @@ class JurnalController extends Controller
     }
 
     public function export(Request $request){
+        $data['params'] = $request->all();
         $data['data'] = Ledger::select([
             'type',
             'description',
@@ -212,7 +213,7 @@ class JurnalController extends Controller
         })->
         orderBy('trx_date', 'ASC')->
         get();
-        $periode = Carbon::parse($request->start_date)->isoFormat('MMMM YYYY').' - '.Carbon::parse($request->start_date)->isoFormat('MMMM YYYY');
+        $periode = Carbon::parse($request->start_date)->isoFormat('MMMM YYYY').' - '.Carbon::parse($request->end_date)->isoFormat('MMMM YYYY');
         $data['periode'] = $periode;
         $namaFile = "Jurnal_Periode_$periode.xlsx";
         if($request->export == 'excel'){

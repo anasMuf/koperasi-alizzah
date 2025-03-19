@@ -23,6 +23,15 @@
                         <input type="text" name="name_product" id="name_product" class="form-control" placeholder="Masukkan Nama Barang" value="{{ $data ? $data->name : '' }}">
                     </div>
                     <div class="form-group">
+                        <label for="category_id">Kategori Barang</label>
+                        <select name="category_id" id="category_id" class="form-control" required>
+                            <option value="">.:: Pilih Kategori Barang ::.</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ $data && $data->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <input readonly type="checkbox" name="is_variant" id="is_variant" onclick="return false" {{ $is_variants ? 'checked' : '' }}>
                         <label for="is_variant">Tambahkan varian barang</label>
                     </div>

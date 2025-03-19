@@ -27,13 +27,22 @@
                         @csrf
                         {{-- <input type="text" name="dates" class="form-control filter"> --}}
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            {{-- <div class="form-group col-md-6">
                                 <label for="start_date">Tanggal Awal</label>
                                 <input type="month" name="start_date" class="form-control filter" value="{{ date('Y-m') }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="end_date">Tanggal Akhir</label>
                                 <input type="month" name="end_date" class="form-control filter" value="{{ date('Y-m') }}">
+                            </div> --}}
+                            <div class="form-group col-md-6">
+                                <label for="year_period_id">Tahun Ajaran</label>
+                                <select name="year_period_id" class="form-control filter">
+                                    <option value="">.:: Pilih Tahun Ajaran ::.</option>
+                                    @foreach ($year_periods as $year)
+                                        <option value="{{ $year->id }}" {{ ($year->is_active) ? 'selected' : '' }}>{{ $year->name_year }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -41,27 +50,13 @@
             </div>
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Laporan Arus Kas <span id="periode"></span></h3>
+                    <h3 class="card-title">Laporan Keuangan <span id="periode"></span></h3>
                     <div class="aksi">
                         <button type="submit" name="export" value="excel" form="filterForm" class="btn btn-success btn-sm">Export</button>
                         <button type="submit" name="export" value="print" form="filterForm" class="btn btn-danger btn-sm">PDF</button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th
-                                style="width: 70%; text-align:center;"
-                                >Keterangan</th>
-                                <th style="width: 30%; text-align:center;">Jumlah</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reportBody">
-                        </tbody>
-                        <tfoot id="reportFooter">
-                        </tfoot>
-                    </table>
+                <div class="card-body reports table-responsive">
                 </div>
             </div>
             <!-- /.card -->
@@ -94,17 +89,6 @@
 
     $(document).ready(function () {
         loadData({ ...dataFilter })
-        // $('input[name="dates"]').daterangepicker({
-        //     locale: {
-        //         // format: 'DD/MM/YYYY',
-        //         format: 'DD MMM YYYY',
-        //         weekLabel: "M",
-        //         daysOfWeek: ["Mg","Sen","Sel","Rab","Kam","Jum","Sab"],
-        //         monthNames: ["Januari","Februari","Maret","April","Mei","Juni","Juli","Augustus","September","Oktober","November","Desember"],
-        //     },
-        //     startDate: moment().subtract(1, 'M'),
-        //     endDate: moment()
-        // })
     });
 
     function loadData(dates){
@@ -114,83 +98,7 @@
         </tr>`)
         $.get("{{ route('report.main') }}",dates)
         .done(function(result){
-            var periode = result.periode
-            var dPenerimaan = result.arus_kas_operasional.penerimaan
-            var dPiutang = result.arus_kas_operasional.piutang
-            var dPengeluaran = result.arus_kas_operasional.pengeluaran
-            var dHutang = result.arus_kas_operasional.hutang
-            var dTotalOpr = result.arus_kas_operasional.total_operasional
-
-            $('#periode').html('Periode '+periode)
-
-
-
-            var tr = `
-            <tr>
-                <th><h5><strong>SALDO AWAL PERIODE</strong></h5></th>
-                <th class="money">${formatRibu(result.saldo_awal_periode)}</th>
-            </tr>
-            `
-            tr += `<tr>
-                <th colspan="2"><h6><strong>A. Arus Kas Kegiatan Operasional</strong></h6></th>
-            </tr>`
-            if(dPenerimaan){
-                var jumlahDpm = parseInt(dPenerimaan)
-                tr += `
-                <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penerimaan</td>
-                    <td class="money">${formatRibu(jumlahDpm)}</td>
-                </tr>
-                `
-            }
-            if(dPiutang){
-                var jumlahDpt = parseInt(dPiutang)
-                tr += `
-                <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piutang</td>
-                    <td class="money">${formatRibu(jumlahDpt)}</td>
-                </tr>
-                `
-            }
-            if(dPengeluaran){
-                var jumlahDpg = parseInt(dPengeluaran)
-                tr += `
-                <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Pengeluaran)</td>
-                    <td class="money">-${formatRibu(jumlahDpg)}</td>
-                </tr>
-                `
-            }
-            if(dHutang){
-                var jumlahDht = parseInt(dHutang)
-                tr += `
-                <tr>
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Hutang)</td>
-                    <td class="money">-${formatRibu(jumlahDht)}</td>
-                </tr>
-                `
-            }
-            var totalOpr = parseInt(dTotalOpr)
-            tr += `
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Operasional</td>
-                <td class="money">${formatRibu(totalOpr)}</td>
-            </tr>
-            `
-
-            $('#reportBody').html(tr)
-
-            var trTotal = `
-            <tr>
-                <th><h5><strong>PERGERAKAN KAS</strong></h5></th>
-                <th class="money">${formatRibu(result.pergerakan_kas)}</th>
-            </tr>
-            <tr>
-                <th><h5><strong>SALDO AKHIR PERIODE</strong></h5></th>
-                <th class="money">${formatRibu(result.saldo_akhir_periode)}</th>
-            </tr>
-            `
-            $('#reportFooter').html(trTotal)
+            return $('.reports').html(result.content).fadeIn()
         })
         .fail(function(xhr,status,error){
             Swal.fire('Error','Terjadi Kesalahan!','error')

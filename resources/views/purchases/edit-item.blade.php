@@ -69,6 +69,15 @@
                             <input type="text" name="name_product" id="name_product"
                             class="form-control" placeholder="Masukkan Nama Barang" value="{{ $data->purchase_details[0]->product_variant->product->name }}">
                         </div>
+                        <div class="form-group">
+                            <label for="category_id">Kategori Barang</label>
+                            <select name="category_id" id="category_id" class="form-control" required>
+                                <option value="">.:: Pilih Kategori Barang ::.</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $data && $data->purchase_details[0]->product_variant->product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group d-none">
                             <div class="is_variant mr-5">
                                 <input type="checkbox" name="is_variant" id="is_variant" @checked($is_variant)>
@@ -82,7 +91,7 @@
                             @foreach ($data->purchase_details as $key => $purchase_detail)
                             <div class="product_variant row" data-variant="{{ $key }}">
                                 <input type="hidden" name="purchase_detail_id[]" id="purchase_detail_id_{{ $key }}" value="{{ $purchase_detail->id }}">
-                                <input type="hidden" name="product_variant_id[]" id="product_variant_id_{{ $key }}" value="{{ $purchase_detail->product_variant->id }}">
+                                <input type="hidden" name="product_variant_id[]" id="product_variant_id_{{ $key }}" value="{{ $purchase_detail->product_variant_id }}">
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -94,13 +103,13 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="stock">Stok</label>
-                                                <input type="number" name="stock[]" id="stock_{{ $key }}" min="{{ $key }}" class="form-control" data-variant="{{ $key }}" value="{{ $purchase_detail->product_variant->stock }}" placeholder="Masukkan Stok" @disabled(!$is_variant)>
+                                                <input type="number" name="stock[]" id="stock_{{ $key }}" min="{{ $key }}" class="form-control" data-variant="{{ $key }}" value="{{ $purchase_detail->qty }}" placeholder="Masukkan Stok" @disabled(!$is_variant)>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="price">Harga Beli Satuan</label>
-                                                <input type="text" name="price[]" id="price_{{ $key }}" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" value="{{ number_format($purchase_detail->product_variant->purchase_price,0,',','.') }}" placeholder="Masukkan Harga Beli Satuan" @disabled(!$is_variant)>
+                                                <input type="text" name="price[]" id="price_{{ $key }}" class="form-control" data-variant="{{ $key }}" onkeyup="formatNumber(this)" value="{{ number_format($purchase_detail->purchase_price,0,',','.') }}" placeholder="Masukkan Harga Beli Satuan" @disabled(!$is_variant)>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +124,7 @@
                             @endphp
                         </div>
                         <div class="product" @if($is_variant) style="display: none;" @endif>
-                            <input type="hidden" name="product_variant_id" value="{{ $data->purchase_details[0]->product_variant->id }}" @disabled($is_variant)>
+                            <input type="hidden" name="product_variant_id" value="{{ $data->purchase_details[0]->product_variant_id }}" @disabled($is_variant)>
 
                             <input type="hidden" name="purchase_detail_id" value="{{ $data->purchase_details[0]->id }}" @disabled($is_variant)>
 
@@ -142,6 +151,15 @@
                         <div class="form-group">
                             <label for="purchase_at">Tanggal Pembelian</label>
                             <input type="date" name="purchase_at" id="purchase_at" class="form-control" value="{{ date('Y-m-d',strtotime($data->purchase_at)) }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_category_id">Kategori Transaksi</label>
+                            <select name="transaction_category_id" id="transaction_category_id" class="form-control" required>
+                                <option value="">.:: Pilih Kategori Transaksi ::.</option>
+                                @foreach ($transaction_categories as $transaction_category)
+                                    <option value="{{ $transaction_category->id }}" {{ $data && $data->transaction_category_id == $transaction_category->id ? 'selected' : '' }}>{{ $transaction_category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="vendor_id">Vendor</label>

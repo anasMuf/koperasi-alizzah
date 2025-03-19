@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Ledger;
 use App\Helpers\LogPretty;
+use App\Models\YearPeriod;
+use App\Models\MonthPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\TransactionCategory;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,6 +81,7 @@ class TransactionController extends Controller
     }
 
     public function form(Request $request){
+        $data['transaction_categories'] = TransactionCategory::orderBy('type')->get();
         $data['data'] = Ledger::find($request->id);
         $content = view('transactions.form',$data)->render();
 
@@ -121,6 +125,23 @@ class TransactionController extends Controller
             $amount = str_replace('.','',$request->amount);
             $trx_date = date('Y-m-d H:i:s',strtotime($request->trx_date));
 
+            $purchase_date = date('Y-m-d', strtotime($request->trx_date));
+            $purchase_month = date('m', strtotime($request->trx_date));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             //ledger
             if($request->id){
                 $request->merge([
@@ -142,6 +163,9 @@ class TransactionController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => $request->transaction_category_id,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);
@@ -220,6 +244,9 @@ class TransactionController extends Controller
         $data['data'] = Ledger::
         when($dateRange, function($q) use ($dateRange){
             $q->whereBetween('trx_date',$dateRange);
+        })->
+        when(!empty($request->type_transaksi), function($q) use ($request){
+            $q->where('type',$request->type_transaksi);
         })->
         where('refrence','transaksi umum')->
         orderBy('trx_date','asc')->

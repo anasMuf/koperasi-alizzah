@@ -65,6 +65,15 @@
                             <input type="text" name="name_product" id="name_product"
                             class="form-control" placeholder="Masukkan Nama Barang">
                         </div>
+                        <div class="form-group">
+                            <label for="category_id">Kategori Barang</label>
+                            <select name="category_id" id="category_id" class="form-control" required>
+                                <option value="">.:: Pilih Kategori Barang ::.</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group d-flex">
                             <div class="is_variant mr-5">
                                 <input type="checkbox" name="is_variant" id="is_variant">
@@ -122,6 +131,15 @@
                         <div class="form-group">
                             <label for="purchase_at">Tanggal Pembelian</label>
                             <input type="date" name="purchase_at" id="purchase_at" class="form-control" value="{{ date('Y-m-d') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="transaction_category_id">Kategori Transaksi</label>
+                            <select name="transaction_category_id" id="transaction_category_id" class="form-control" required>
+                                <option value="">.:: Pilih Kategori Transaksi ::.</option>
+                                @foreach ($transaction_categories as $transaction_category)
+                                    <option value="{{ $transaction_category->id }}">{{ $transaction_category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="vendor_id">Vendor</label>

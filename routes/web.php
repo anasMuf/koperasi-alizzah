@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\DashboardContoroller;
+use App\Http\Controllers\Maintenance\SyncController;
 use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\SIAKAD\StudentController;
@@ -33,6 +34,8 @@ Route::post('/login', [AuthContoroller::class, 'login'])->name('authenticated');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/logout/{id}', [AuthContoroller::class, 'logout'])->name('logout');
+
+    Route::get('/sync_tc_mp_yp',[SyncController::class, 'tc_mp_yp'])->name('sync_tc_mp_yp');
 
     Route::prefix('/')->controller(DashboardContoroller::class)->as('dashboard')->group(function(){
         Route::get('/','index')->name('.main');

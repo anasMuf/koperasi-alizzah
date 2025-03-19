@@ -1,7 +1,7 @@
 <table>
     <thead>
         <tr>
-            <th">Keterangan</th>
+            <th>Keterangan</th>
             <th>Jumlah</th>
         </tr>
     </thead>
@@ -26,7 +26,7 @@
         @if ($data['arus_kas_operasional']['piutang'])
         <tr>
             <td>Piutang</td>
-            <td>{{ (int)$data['arus_kas_operasional']['penerimaan'] }}</td>
+            <td>{{ (int)$data['arus_kas_operasional']['piutang'] }}</td>
         </tr>
         @endif
         @if ($data['arus_kas_operasional']['pengeluaran'])

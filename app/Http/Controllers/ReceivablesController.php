@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Ledger;
+use App\Models\Member;
 use App\Models\Teacher;
 use App\Helpers\LogPretty;
-use App\Models\Member;
+use App\Models\YearPeriod;
+use App\Models\MonthPeriod;
 use App\Models\OrderPayment;
-use App\Models\ReceivablesMember;
-use App\Models\ReceivablesMemberPayment;
 use Illuminate\Http\Request;
+use App\Models\ReceivablesMember;
 use Illuminate\Support\Facades\DB;
+use App\Models\ReceivablesMemberPayment;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -133,10 +135,32 @@ class ReceivablesController extends Controller
 
             // Catat pembayaran di tabel order_payments
 
+            $purchase_date = date('Y-m-d', strtotime($request->paid_at));
+            $purchase_month = date('m', strtotime($request->paid_at));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             $payment = new OrderPayment;
             $payment->order_id = $request->id;
             $payment->amount = $amount;
             $payment->paid_at = date('Y-m-d',strtotime($request->paid_at)) ?? date('Y-m-d');
+
+            $order->transaction_category_id = 2;#harusnya piutang murid/walimurid
+            $order->month_period_id = $month_period_id;
+            $order->year_period_id = $year_period_id;
+
             $payment->save();
 
             // Update kolom `terbayar` di tabel orders
@@ -161,6 +185,9 @@ class ReceivablesController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => 2,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);
@@ -260,6 +287,24 @@ class ReceivablesController extends Controller
             }
 
             //receivales member
+
+            $purchase_date = date('Y-m-d', strtotime($request->paid_at));
+            $purchase_month = date('m', strtotime($request->paid_at));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             $amount = str_replace('.','',$request->amount);
             $receivablesMember = new ReceivablesMember;
             $receivablesMember->member_id = $request->member;
@@ -267,6 +312,11 @@ class ReceivablesController extends Controller
             $receivablesMember->total = $amount;
             $receivablesMember->terbayar = 0;
             $receivablesMember->status = 'BELUM LUNAS';
+
+            $receivablesMember->transaction_category_id = 0;
+            $receivablesMember->month_period_id = $month_period_id;
+            $receivablesMember->year_period_id = $year_period_id;
+
             $receivablesMember->save();
 
             //ledger
@@ -287,6 +337,9 @@ class ReceivablesController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => 0,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);
@@ -368,10 +421,32 @@ class ReceivablesController extends Controller
 
             // Catat pembayaran di tabel receivables_member_payments
 
+            $purchase_date = date('Y-m-d', strtotime($request->paid_at));
+            $purchase_month = date('m', strtotime($request->paid_at));
+
+            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+            $month_period_id = $month_period ? $month_period->id : null;
+
+
+            $year_period_id = null;
+            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+                $query->where('start_date', '<=', $purchase_date)
+                    ->where('end_date', '>=', $purchase_date);
+            })->first();
+
+            if ($matching_year_period) {
+                $year_period_id = $matching_year_period->id;
+            }
+
             $payment = new ReceivablesMemberPayment;
             $payment->receivables_member_id = $request->id;
             $payment->amount = $amount;
             $payment->paid_at = date('Y-m-d',strtotime($request->paid_at)) ?? date('Y-m-d');
+
+            $payment->transaction_category_id = 4;
+            $payment->month_period_id = $month_period_id;
+            $payment->year_period_id = $year_period_id;
+
             $payment->save();
 
             // Update kolom `terbayar` di tabel receivables_members
@@ -396,6 +471,9 @@ class ReceivablesController extends Controller
                 'debit' => $debit,
                 'credit' => $credit,
                 // 'final' => $final,
+                'transaction_category_id' => 4,
+                'month_period_id' => $month_period_id,
+                'year_period_id' => $year_period_id,
             ]);
 
             Ledger::store($request);
