@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a href="{{ route('report.main') }}" class="nav-link  {{ $menu == 'laporan arus kas' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Lihat Arus Kas</p>
+                    <p>Lihat Laporan Keuangan</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -83,13 +83,13 @@
             </li>
             <li class="nav-header">MASTER DATA</li>
             <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="{{ route('category-product.main') }}" class="nav-link {{ $menu == 'kategori barang' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tags"></i>
                     <p>Data Kategori Barang</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="{{ route('transaction-category.main') }}" class="nav-link {{ $menu == 'kategori transaksi' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-hashtag"></i>
                     <p>Data Kategori Transaksi</p>
                 </a>

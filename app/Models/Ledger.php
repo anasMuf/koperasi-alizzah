@@ -70,27 +70,30 @@ class Ledger extends Model
 
         $ledgers = Ledger::selectRaw("
             transaction_category_id,
-            tc.type as type_category,
-            tc.name as name_category,
+            transaction_categories.type as type_category,
+            transaction_categories.name as name_category,
             month_period_id,
-            mp.name_month,
+            month_periods.name_month,
             year_period_id,
-            yp.name_year,
+            year_periods.name_year,
             CASE
-                WHEN tc.type = 'pemasukan' THEN sum(debit)
-                WHEN tc.type = 'pengeluaran' THEN sum(credit)
+                WHEN transaction_categories.type = 'pemasukan' THEN sum(debit)
+                WHEN transaction_categories.type = 'pengeluaran' THEN sum(credit)
                 ELSE NULL
             END as total
         ")
-        ->join('transaction_categories as tc','ledgers.transaction_category_id','tc.id')
-        ->join('month_periods as mp','ledgers.month_period_id','mp.id')
-        ->join('year_periods as yp','ledgers.year_period_id','yp.id')
+        ->join('transaction_categories','ledgers.transaction_category_id','transaction_categories.id')
+        ->join('month_periods','ledgers.month_period_id','month_periods.id')
+        ->join('year_periods','ledgers.year_period_id','year_periods.id')
         ->where('ledgers.year_period_id', $yearPeriodId)
         ->groupBy('transaction_category_id')
-        ->groupBy('tc.type')
+        ->groupBy('transaction_categories.type')
+        ->groupBy('transaction_categories.name')
         ->groupBy('month_period_id')
+        ->groupBy('month_periods.name_month')
         ->groupBy('year_period_id')
-        ->orderBy('tc.type')
+        ->groupBy('year_periods.name_year')
+        ->orderBy('transaction_categories.type')
         ->get();
 
         // Organize data by category and month

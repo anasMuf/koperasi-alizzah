@@ -11,6 +11,7 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\CashierController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\PurchaseController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Maintenance\SyncController;
 use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\SIAKAD\StudentController;
+use App\Http\Controllers\TransactionCategoryController;
 
 Route::get('/clear', function() {
     Artisan::call('cache:clear');
@@ -53,6 +55,20 @@ Route::middleware(['auth'])->group(function() {
     });
 
     Route::prefix('/user')->controller(UserController::class)->as('user')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/category-product')->controller(CategoryController::class)->as('category-product')->group(function(){
+        Route::get('/','index')->name('.main');
+        Route::get('/form','form')->name('.form');
+        Route::post('/store','store')->name('.store');
+        Route::delete('/delete','delete')->name('.delete');
+    });
+
+    Route::prefix('/transaction-category')->controller(TransactionCategoryController::class)->as('transaction-category')->group(function(){
         Route::get('/','index')->name('.main');
         Route::get('/form','form')->name('.form');
         Route::post('/store','store')->name('.store');
