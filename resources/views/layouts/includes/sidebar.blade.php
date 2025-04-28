@@ -39,7 +39,7 @@
             </li>
             @if($role == 'superadmin' || $role == 'admin')
             <li class="nav-header">TRANSAKSI</li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('purchase.new-item') }}" class="nav-link {{ $menu == 'pembelian baru' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-truck-loading"></i>
                     <p>Pembelian Barang</p>
@@ -50,9 +50,15 @@
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>Penambahan Stok</p>
                 </a>
+            </li> --}}
+            <li class="nav-item">
+                <a href="{{ route('purchase.restock') }}" class="nav-link {{ $menu == 'pembelian barang' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-boxes"></i>
+                    <p>Pembelian Barang</p>
+                </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('cashier.main') }}" class="nav-link {{ $menu == 'kasir' ? 'active' : '' }}">
+                <a href="{{ route('cashier.main') }}" class="nav-link {{ $menu == 'kasir' || $menu == 'edit penjualan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cash-register"></i>
                     <p>Kasir</p>
                 </a>

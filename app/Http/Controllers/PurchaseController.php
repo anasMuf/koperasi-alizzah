@@ -72,206 +72,222 @@ class PurchaseController extends Controller
     }
 
     public function newItem(Request $request){
-        $data['menu'] = 'pembelian baru';
-        if(!$ledger = Ledger::where([
-            'type' => 'pemasukan',
-            'refrence' => 'SALDO'
-        ])->first()){
-            return view('errors.saldo-awal',$data);
-        }
-        $data['categories'] = Category::all();
-        $data['transaction_categories'] = TransactionCategory::where('type','pengeluaran')->get();
-        $data['vendors'] = Vendor::all();
-        $data['data'] = [];
-        return view('purchases.new-item',$data);
+        // $data['menu'] = 'pembelian baru';
+        // if(!$ledger = Ledger::where([
+        //     'type' => 'pemasukan',
+        //     'refrence' => 'SALDO'
+        // ])->first()){
+        //     return view('errors.saldo-awal',$data);
+        // }
+        // $data['categories'] = Category::all();
+        // $data['transaction_categories'] = TransactionCategory::where('type','pengeluaran')->get();
+        // $data['vendors'] = Vendor::all();
+        // $data['data'] = [];
+        // return view('purchases.new-item',$data);
     }
 
     public function storeNewItem(Request $request){
-        // return $request;
-        DB::beginTransaction();
-        try {
-            $rules = [
-                'name_product' => 'required|unique:products,name',
-                'transaction_category_id' => 'required',
-                'category_id' => 'required'
-            ];
-            if($request->id){
-                $rules['name_product'] = 'required';
-            }
-            if(!$request->is_variant){
-                $rules['price'] = 'required';
-                $rules['stock'] = 'required';
-            }
+        // // return $request;
+        // DB::beginTransaction();
+        // try {
+        //     $rules = [
+        //         'name_product' => 'required|unique:products,name',
+        //         'transaction_category_id' => 'required',
+        //         'category_id' => 'required'
+        //     ];
+        //     if($request->id){
+        //         $rules['name_product'] = 'required';
+        //     }
+        //     if(!$request->is_variant){
+        //         $rules['price'] = 'required';
+        //         $rules['stock'] = 'required';
+        //     }
 
-            $attributes = [
-                'name_product' => 'Nama Barang',
-                'price' => 'Harga',
-                'stock' => 'Stok',
-                'transaction_category_id' => 'Kategori Transaksi',
-                'category_id' => 'Kategori Barang',
-            ];
-            $messages = [
-                'required' => 'Kolom :attribute harus terisi',
-                'unique' => ':attribute sudah ada',
-            ];
-            $validator = Validator::make($request->all(), $rules, $messages, $attributes);
+        //     $attributes = [
+        //         'name_product' => 'Nama Barang',
+        //         'price' => 'Harga',
+        //         'stock' => 'Stok',
+        //         'transaction_category_id' => 'Kategori Transaksi',
+        //         'category_id' => 'Kategori Barang',
+        //     ];
+        //     $messages = [
+        //         'required' => 'Kolom :attribute harus terisi',
+        //         'unique' => ':attribute sudah ada',
+        //     ];
+        //     $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Validation failed',
-                    'errors' => $validator->getMessageBag()
-                ],422);
-            }
+        //     if ($validator->fails()) {
+        //         return response()->json([
+        //             'success' => false,
+        //             'message' => 'Validation failed',
+        //             'errors' => $validator->getMessageBag()
+        //         ],422);
+        //     }
 
-            $product = new Product;
-            $product->name = $request->name_product;
-            $product->category_id = $request->category_id;
-            $product->save();
-
-
-            $id_product_variant = null;#buat non variant
-
-            if($request->is_variant){# variant
-                $id_product_variant = [];#buat variant
-                foreach($request->name_product_variant as $key => $name_product_variant){
-                    $price = str_replace('.','',$request->price[$key]);
-                    $productVariant = new ProductVariant;
-                    $productVariant->product_id = $product->id;
-                    $productVariant->name = $name_product_variant;
-                    $productVariant->stock = $request->stock[$key];
-                    $productVariant->purchase_price = $price;
-                    $productVariant->save();
-                    $id_product_variant[] = $productVariant->id;# variable(arr) variant
-                }
-            }else{# non variant
-                $price = str_replace('.','',$request->price);
-                $productVariant = new ProductVariant;
-                $productVariant->product_id = $product->id;
-                $productVariant->name = null;
-                $productVariant->stock = $request->stock;
-                $productVariant->purchase_price = $price;
-                $productVariant->save();
-                $id_product_variant = $productVariant->id;# variable(int) non variant
-            }
-
-            $total = str_replace('.','',$request->total);
-            $terbayar = str_replace('.','',$request->terbayar);
-            $invoice = Purchase::generateInvoice();//new item
+        //     $product = new Product;
+        //     $product->name = $request->name_product;
+        //     $product->category_id = $request->category_id;
+        //     $product->save();
 
 
-            $purchase_date = date('Y-m-d', strtotime($request->purchase_at));
-            $purchase_month = date('m', strtotime($request->purchase_at));
+        //     $id_product_variant = null;#buat non variant
 
-            $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
-            $month_period_id = $month_period ? $month_period->id : null;
+        //     if($request->is_variant){# variant
+        //         $id_product_variant = [];#buat variant
+        //         foreach($request->name_product_variant as $key => $name_product_variant){
+        //             $price = str_replace('.','',$request->price[$key]);
+        //             $productVariant = new ProductVariant;
+        //             $productVariant->product_id = $product->id;
+        //             $productVariant->name = $name_product_variant;
+        //             $productVariant->stock = $request->stock[$key];
+        //             $productVariant->purchase_price = $price;
+        //             $productVariant->save();
+        //             $id_product_variant[] = $productVariant->id;# variable(arr) variant
+        //         }
+        //     }else{# non variant
+        //         $price = str_replace('.','',$request->price);
+        //         $productVariant = new ProductVariant;
+        //         $productVariant->product_id = $product->id;
+        //         $productVariant->name = null;
+        //         $productVariant->stock = $request->stock;
+        //         $productVariant->purchase_price = $price;
+        //         $productVariant->save();
+        //         $id_product_variant = $productVariant->id;# variable(int) non variant
+        //     }
+
+        //     $total = str_replace('.','',$request->total);
+        //     $terbayar = str_replace('.','',$request->terbayar);
+        //     $invoice = Purchase::generateInvoice();//new item
 
 
-            $year_period_id = null;
-            $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
-                $query->where('start_date', '<=', $purchase_date)
-                    ->where('end_date', '>=', $purchase_date);
-            })->first();
+        //     $purchase_date = date('Y-m-d', strtotime($request->purchase_at));
+        //     $purchase_month = date('m', strtotime($request->purchase_at));
 
-            if ($matching_year_period) {
-                $year_period_id = $matching_year_period->id;
-            }
+        //     $month_period = MonthPeriod::where('no_month', $purchase_month)->first();
+        //     $month_period_id = $month_period ? $month_period->id : null;
 
-            $purchase = new Purchase;
-            $purchase->invoice = $invoice;
-            $purchase->user_id = Auth::id();
-            $purchase->vendor_id = $request->vendor_id;
-            $purchase->total = $total;
-            $purchase->terbayar = $terbayar;
-            $purchase->purchase_at = date('Y-m-d',strtotime($request->purchase_at)).' '.date('H:i:s');
 
-            $purchase->transaction_category_id = $request->transaction_category_id;
-            $purchase->month_period_id = $month_period_id;
-            $purchase->year_period_id = $year_period_id;
+        //     $year_period_id = null;
+        //     $matching_year_period = YearPeriod::where(function($query) use ($purchase_date) {
+        //         $query->where('start_date', '<=', $purchase_date)
+        //             ->where('end_date', '>=', $purchase_date);
+        //     })->first();
 
-            $purchase->save();
+        //     if ($matching_year_period) {
+        //         $year_period_id = $matching_year_period->id;
+        //     }
 
-            if($request->is_variant){
-                foreach($id_product_variant as $key => $item){# karena variable(arr) maka ada looping
-                    $price = str_replace('.','',$request->price[$key]);
-                    $productVariant = new PurchaseDetail;
-                    $productVariant->invoice = $invoice;
-                    $productVariant->product_variant_id = $item;
-                    $productVariant->purchase_price = $price;
-                    $productVariant->qty = $request->stock[$key];
-                    $productVariant->subtotal = $request->stock[$key]*$price;
-                    $productVariant->save();
-                }
-            }else{
-                $price = str_replace('.','',$request->price);
-                $productVariant = new PurchaseDetail;
-                $productVariant->invoice = $invoice;
-                $productVariant->product_variant_id = $id_product_variant;#variable bukan arr maka langsung pakai
-                $productVariant->purchase_price = $price;
-                $productVariant->qty = $request->stock;
-                $productVariant->subtotal = $request->stock*$price;
-                $productVariant->save();
-            }
+        //     $purchase = new Purchase;
+        //     $purchase->invoice = $invoice;
+        //     $purchase->user_id = Auth::id();
+        //     $purchase->vendor_id = $request->vendor_id;
+        //     $purchase->total = $total;
+        //     $purchase->terbayar = $terbayar;
+        //     $purchase->purchase_at = date('Y-m-d',strtotime($request->purchase_at)).' '.date('H:i:s');
 
-            $nominalTotalAkhir = $total;
-            if($terbayar < $total){
-                $nominalTotalAkhir = $terbayar;
-            }
+        //     $purchase->transaction_category_id = $request->transaction_category_id;
+        //     $purchase->month_period_id = $month_period_id;
+        //     $purchase->year_period_id = $year_period_id;
 
-            // $lastLedgerEntry = Ledger::latest()->first();
-            // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
+        //     $purchase->save();
 
-            $trx_date = date('Y-m-d',strtotime($request->purchase_at)).' '.date('H:i:s');
+        //     if($request->is_variant){
+        //         foreach($id_product_variant as $key => $item){# karena variable(arr) maka ada looping
+        //             $price = str_replace('.','',$request->price[$key]);
+        //             $productVariant = new PurchaseDetail;
+        //             $productVariant->invoice = $invoice;
+        //             $productVariant->product_variant_id = $item;
+        //             $productVariant->purchase_price = $price;
+        //             $productVariant->qty = $request->stock[$key];
+        //             $productVariant->subtotal = $request->stock[$key]*$price;
+        //             $productVariant->save();
+        //         }
+        //     }else{
+        //         $price = str_replace('.','',$request->price);
+        //         $productVariant = new PurchaseDetail;
+        //         $productVariant->invoice = $invoice;
+        //         $productVariant->product_variant_id = $id_product_variant;#variable bukan arr maka langsung pakai
+        //         $productVariant->purchase_price = $price;
+        //         $productVariant->qty = $request->stock;
+        //         $productVariant->subtotal = $request->stock*$price;
+        //         $productVariant->save();
+        //     }
 
-            $debit = 0;
-            $credit = $nominalTotalAkhir;
-            // $final = $current + $debit - $credit;
-            $request->merge([
-                'type' => 'pengeluaran',
-                'description' => null,
-                'refrence' => $invoice,
-                // 'current' => $current,
-                'trx_date' => $trx_date,
-                'debit' => $debit,
-                'credit' => $credit,
-                // 'final' => $final,
-                'transaction_category_id' => $request->transaction_category_id,
-                'month_period_id' => $month_period_id,
-                'year_period_id' => $year_period_id,
-            ]);
+        //     $nominalTotalAkhir = $total;
+        //     if($terbayar < $total){
+        //         $nominalTotalAkhir = $terbayar;
+        //     }
 
-            Ledger::store($request);
+        //     // $lastLedgerEntry = Ledger::latest()->first();
+        //     // $current = $lastLedgerEntry ? $lastLedgerEntry->final : 0;
 
-            DB::commit();
-            return response()->json([
-                'success' => true,
-                'message' => 'Product stored successfully',
-            ],200);
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            LogPretty::error($th);
-            return response()->json([
-                'success'=> false,
-                'message'=> 'Internal Server Error!',
-            ],500);
-        }
+        //     $trx_date = date('Y-m-d',strtotime($request->purchase_at)).' '.date('H:i:s');
+
+        //     $debit = 0;
+        //     $credit = $nominalTotalAkhir;
+        //     // $final = $current + $debit - $credit;
+        //     $request->merge([
+        //         'type' => 'pengeluaran',
+        //         'description' => null,
+        //         'refrence' => $invoice,
+        //         // 'current' => $current,
+        //         'trx_date' => $trx_date,
+        //         'debit' => $debit,
+        //         'credit' => $credit,
+        //         // 'final' => $final,
+        //         'transaction_category_id' => $request->transaction_category_id,
+        //         'month_period_id' => $month_period_id,
+        //         'year_period_id' => $year_period_id,
+        //     ]);
+
+        //     Ledger::store($request);
+
+        //     DB::commit();
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => 'Product stored successfully',
+        //     ],200);
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     LogPretty::error($th);
+        //     return response()->json([
+        //         'success'=> false,
+        //         'message'=> 'Internal Server Error!',
+        //     ],500);
+        // }
     }
 
     public function edit(Request $request){
         $vendors = Vendor::all();
         $purchase = Purchase::with(['purchase_details.product_variant.product'])->where('invoice',$request->invoice)->first();
+        $dataProduct = [];
+        foreach($purchase->purchase_details as $key => $purchase_detail){
+            $dataProduct[$key]['product_name'] = $purchase_detail->product_variant->product->name;
+            $dataProduct[$key]['product_variant_id'] = (string)$purchase_detail->product_variant_id;
+            $dataProduct[$key]['price'] = (int)$purchase_detail->product_variant->price;
+            $dataProduct[$key]['product_variant_name'] = $purchase_detail->product_variant->name;
+            $dataProduct[$key]['qty'] = $purchase_detail->qty;
+        }
         $data['categories'] = Category::all();
         $data['transaction_categories'] = TransactionCategory::where('type','pengeluaran')->get();
         $data['menu'] = 'edit pembelian';
         $data['vendors'] = $vendors;
         $data['data'] = $purchase;
+        $data['dataProduct'] = $dataProduct;
         $data['is_variant'] = count($purchase->purchase_details) > 1 ? true : false;
 
         $data['from'] = null;
         if(isset($request->from) && $request->from === 'jurnal'){
             $data['from'] = 'jurnal';
         }
-        return view('purchases.edit-item',$data);
+        if(ctype_alpha(substr($request->invoice, 0, 1))){
+            $prefix = substr($request->invoice, 0, 2);
+            if($prefix === 'PN'){
+                return view('purchases.edit-item',$data);
+            }elseif($prefix === 'PS'){
+                return view('purchases.restock.edit-restock',$data);
+            }
+        }
     }
 
 
@@ -441,7 +457,7 @@ class PurchaseController extends Controller
     }
 
     public function restock(Request $request){
-        $data['menu'] = 'penambahan stok';
+        $data['menu'] = 'pembelian barang';
         if(!$ledger = Ledger::where([
             'type' => 'pemasukan',
             'refrence' => 'SALDO'

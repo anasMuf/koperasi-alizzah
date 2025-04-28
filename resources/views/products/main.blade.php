@@ -26,9 +26,9 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Data</h3>
-                    {{-- <div class="aksi">
+                    <div class="aksi">
                         <button type="button" class="btn btn-primary btn-xs" onclick="openData()">Tambah</button>
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="card-body">
                     <table id="table" class="table table-bordered table-striped table-hover" style="width: 100%">

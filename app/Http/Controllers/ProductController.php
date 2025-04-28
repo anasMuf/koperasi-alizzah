@@ -127,9 +127,15 @@ class ProductController extends Controller
         }
         $data['categories'] = Category::all();
         $data['is_variants'] = $is_variants;
-        $data['data'] = $request->id ? Product::with('product_variants')->find($request->id) : [];
-        $content = view('products.form',$data)->render();
-        return response()->json(['message' => 'oke', 'content' => $content],200);
+        if($request->id){
+            $data['data'] = Product::with('product_variants')->find($request->id);
+            $content = view('products.form',$data)->render();
+            return response()->json(['message' => 'oke', 'content' => $content],200);
+        }else{
+            $data['data'] = [];
+            $content = view('products.new-item',$data)->render();
+            return response()->json(['message' => 'oke', 'content' => $content],200);
+        }
     }
 
     public function store(Request $request){
@@ -174,8 +180,8 @@ class ProductController extends Controller
 
             if($request->is_variant){
                 foreach($request->name_product_variant as $key => $name_product_variant){
-                    $price = str_replace('.','',$request->price[$key]);
-                    $purchase_price = str_replace('.','',$request->purchase_price[$key]);
+                    $price = isset($request->price) ? str_replace('.','',$request->price[$key]) : 0;
+                    $purchase_price = isset($request->purchase_price) ? str_replace('.','',$request->purchase_price[$key]) : 0;
                     $productVariant = isset($request->product_variant_id) ? ProductVariant::find($request->product_variant_id[$key]) : new ProductVariant;
                     $productVariant->product_id = $product->id;
                     $productVariant->name = $name_product_variant;
@@ -185,8 +191,8 @@ class ProductController extends Controller
                     $productVariant->save();
                 }
             }else{
-                $price = str_replace('.','',$request->price);
-                $purchase_price = str_replace('.','',$request->purchase_price);
+                $price = isset($request->price) ? str_replace('.','',$request->price) : 0;
+                $purchase_price = isset($request->purchase_price) ? str_replace('.','',$request->purchase_price) : 0;
                 $productVariant = !empty($request->product_variant_id) ? ProductVariant::find($request->product_variant_id) : new ProductVariant;
                 $productVariant->product_id = $product->id;
                 $productVariant->name = ($request->is_variant) ? $request->name_product_variant : null ;
